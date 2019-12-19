@@ -1,18 +1,16 @@
-# Project name 
+**THIS PACKAGE IS IN DEVELOPMENT, DO NOT USE YET**
 
-[![GitHub contributors](https://img.shields.io/github/contributors/code4romania/standard-repo-template.svg?style=for-the-badge)](https://github.com/code4romania/standard-repo-template/graphs/contributors) [![GitHub last commit](https://img.shields.io/github/last-commit/code4romania/standard-repo-template.svg?style=for-the-badge)](https://github.com/code4romania/standard-repo-template/commits/master) [![License: MPL 2.0](https://img.shields.io/badge/license-MPL%202.0-brightgreen.svg?style=for-the-badge)](https://opensource.org/licenses/MPL-2.0)
+# cms
 
-Insert bullets description of the project if available.
+[![GitHub contributors](https://img.shields.io/github/contributors/code4romania/cms.svg?style=for-the-badge)](https://github.com/code4romania/cms/graphs/contributors) [![GitHub last commit](https://img.shields.io/github/last-commit/code4romania/cms.svg?style=for-the-badge)](https://github.com/code4romania/cms/commits/master) [![License: MPL 2.0](https://img.shields.io/badge/license-MPL%202.0-brightgreen.svg?style=for-the-badge)](https://opensource.org/licenses/MPL-2.0)
 
-[See the project live](insert_link_here)
-
-Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+This project aims to provide a (mostly) preconfigured CMS and a modular layout.
 
 [Contributing](#contributing) | [Built with](#built-with) | [Repos and projects](#repos-and-projects) | [Deployment](#deployment) | [Feedback](#feedback) | [License](#license) | [About Code4Ro](#about-code4ro)
 
 ## Contributing
 
-This project is built by amazing volunteers and you can be one of them! Here's a list of ways in [which you can contribute to this project](.github/CONTRIBUTING.MD).
+This project is built by amazing volunteers and you can be one of them! Here's a list of ways in [which you can contribute to this project](.github/CONTRIBUTING.md).
 
 You can also list any pending features and planned improvements for the project here.
 
@@ -40,7 +38,7 @@ Guide users through getting your code up and running on their own system. In thi
 3. Latest releases
 4. API references
 
-Describe and show how to build your code and run the tests. 
+Describe and show how to build your code and run the tests.
 
 ## Feedback
 
@@ -49,7 +47,7 @@ Describe and show how to build your code and run the tests.
 * File a bug in GitHub Issues.
 * Email us with other feedback contact@code4.ro
 
-## License 
+## License
 
 This project is licensed under the MPL 2.0 License - see the [LICENSE](LICENSE) file for details
 

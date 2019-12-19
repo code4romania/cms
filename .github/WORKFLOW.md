@@ -17,7 +17,7 @@ While this isn't an absolutely necessary step, if you plan on doing anything mor
 
 ```shell
 # Add 'upstream' repo to list of remotes
-git remote add upstream https://github.com/UPSTREAM-USER/ORIGINAL-PROJECT.git
+git remote add upstream https://github.com/code4romania/cms.git
 
 # Verify the new remote named 'upstream'
 git remote -v
@@ -88,7 +88,7 @@ Now, it may be desirable to squash some of your smaller commits down into a smal
 
 ```shell
 # Rebase all commits on your development branch
-git checkout 
+git checkout
 git rebase -i master
 ```
 
@@ -154,7 +154,7 @@ git branch -d newfeature
 Copyright 2017, Chase Pettit
 
 MIT License, http://www.opensource.org/licenses/mit-license.php
- 
+
 **Additional Reading**
 * [Atlassian - Merging vs. Rebasing](https://www.atlassian.com/git/tutorials/merging-vs-rebasing)
 
