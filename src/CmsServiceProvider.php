@@ -7,15 +7,6 @@ use Illuminate\Support\ServiceProvider;
 class CmsServiceProvider extends ServiceProvider
 {
     /**
-     * Service providers to be registered.
-     *
-     * @var string[]
-     */
-    protected $providers = [
-        //
-    ];
-
-    /**
      * Register services.
      *
      * @return void
@@ -32,8 +23,8 @@ class CmsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        foreach ($this->providers as $provider) {
-            $this->app->register($provider);
-        }
+        $this->publishes([
+            __DIR__ . '/../config/cms.php' => config_path('cms.php'),
+        ], 'config');
     }
 }
