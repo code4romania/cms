@@ -1,0 +1,48 @@
+{
+    "name": "code4romania/cms",
+    "description": "Preconfigured Twill CMS with a modular layout",
+    "homepage": "https://github.com/code4romania/cms",
+    "type": "library",
+    "license": "MPL-2.0",
+    "authors": [
+        {
+            "name": "Andrei Ioniță",
+            "email": "andrei.ionita@code4.ro",
+            "homepage": "https://code4.ro",
+            "role": "Developer"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": "^7.3"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^4.0",
+        "phpunit/phpunit": "^8.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Code4Romania\\Cms\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Code4Romania\\Cms\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Code4Romania\\Cms\\CmsServiceProvider"
+            ]
+        }
+    }
+}
