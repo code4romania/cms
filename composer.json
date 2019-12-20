@@ -13,8 +13,15 @@
         }
     ],
     "minimum-stability": "dev",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/area17/twill"
+        }
+    ],
     "require": {
-        "php": "^7.3"
+        "php": "^7.3",
+        "area17/twill": "dev-master"
     },
     "require-dev": {
         "orchestra/testbench": "^4.0",
