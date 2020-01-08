@@ -21,9 +21,12 @@
     ],
     "require": {
         "php": "^7.3",
-        "area17/twill": "dev-master"
+        "area17/twill": "dev-master#8867a0e2f2fecee5e8fa9b452c4ac11c08850558",
+        "kalnoy/nestedset": "^5.0"
     },
     "require-dev": {
+        "nunomaduro/larastan": "^0.5",
+        "nunomaduro/phpinsights": "^1.11",
         "orchestra/testbench": "^4.0",
         "phpunit/phpunit": "^8.5"
     },
@@ -34,13 +37,15 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Code4Romania\\Cms\\Tests\\": "tests"
+            "Code4Romania\\Cms\\": "src",
+            "Code4Romania\\Cms\\Tests\\": "tests",
+            "App\\": "vendor/orchestra/testbench-core/laravel/app"
         }
     },
     "scripts": {
-        "test": "vendor/bin/phpunit",
-        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
-
+        "test": "vendor/bin/phpunit --colors=always",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage",
+        "analyse": "php -d memory_limit=-1 vendor/bin/phpstan analyse src tests --ansi"
     },
     "config": {
         "sort-packages": true
