@@ -2,6 +2,7 @@
 
 @section('content')
     <article>
+        {{ $item->title }}
         {!! $item->renderBlocks(false) !!}
     </article>
 @stop

@@ -13,7 +13,7 @@ class CmsServiceProvider extends ServiceProvider
     /**
      * Service providers to be registered.
      *
-     * @var string[]
+     * @var array<string>
      */
     protected $providers = [
         LocaleServiceProvider::class,
@@ -60,7 +60,7 @@ class CmsServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    private function mergeConfigs()
+    private function mergeConfigs(): void
     {
         $this->mergeConfigFrom(__DIR__ . '/../config/cms.php', 'cms');
         $this->mergeConfigFrom(__DIR__ . '/../config/twill.php', 'twill');
@@ -162,7 +162,7 @@ class CmsServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    private function registerAndPublishViews()
+    private function registerAndPublishViews(): void
     {
         $views = [
             'twill' => __DIR__ . '/../resources/views/admin',
@@ -182,7 +182,7 @@ class CmsServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    private function registerAndPublishTranslations()
+    private function registerAndPublishTranslations(): void
     {
         $translationPath = __DIR__ . '/../resources/lang';
         $this->loadTranslationsFrom($translationPath, 'cms');

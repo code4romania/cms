@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Code4Romania\Cms\Http\Controllers\Admin;
 
 use A17\Twill\Http\Controllers\Admin\ModuleController;
+use A17\Twill\Http\Requests\Admin\Request;
 use Illuminate\Database\Eloquent\Collection;
 
 class PageController extends ModuleController
@@ -34,6 +35,7 @@ class PageController extends ModuleController
     ];
 
     /**
+     * @param Request $request
      * @return array<string|bool|int>
      */
     protected function indexData($request): array
@@ -47,8 +49,8 @@ class PageController extends ModuleController
     }
 
     /**
-     * @param \Kalnoy\Nestedset\Collection $items
-     * @return \Illuminate\Database\Eloquent\Collection
+     * @param Collection $items
+     * @return Collection
      */
     protected function transformIndexItems($items): Collection
     {
@@ -57,7 +59,7 @@ class PageController extends ModuleController
 
     /**
      * @param \A17\Twill\Models\Model $item
-     * @return array
+     * @return array<string, array>
      */
     protected function indexItemData($item): array
     {
@@ -71,7 +73,7 @@ class PageController extends ModuleController
     }
 
     /**
-     * @param array $scopes
+     * @param array<string> $scopes
      * @return \Illuminate\Database\Eloquent\Collection
      */
     protected function getBrowserItems($scopes = []): Collection

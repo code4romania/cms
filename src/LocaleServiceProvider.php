@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Code4Romania\Cms;
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
 use Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRedirectFilter;
 use Mcamara\LaravelLocalization\Middleware\LaravelLocalizationViewPath;
@@ -18,9 +17,9 @@ class LocaleServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
-        $this->registerRouteMiddlewares($this->app->get('router'));
+        $this->registerRouteMiddlewares();
     }
 
     /**
@@ -34,18 +33,22 @@ class LocaleServiceProvider extends ServiceProvider
     }
 
     /**
+     * Infers laravellocalization config from translatable
+     *
      * @return void
      */
     public function setupLocalizationConfig(): void
     {
         $config = [
-            'useAcceptLanguageHeader' => false,
+            'useAcceptLanguageHeader' => config('translatable.useAcceptLanguageHeader', false),
             'hideDefaultLocaleInURL' => false,
             'supportedLocales' => [],
             'localesOrder' => config('translatable.locales'),
         ];
 
-        foreach (config('translatable.languages') as $locale => $name) {
+        $languages = config('translatable.languages', []);
+
+        foreach ($languages as $locale => $name) {
             if (in_array($locale, config('translatable.disabled'))) {
                 continue;
             }
@@ -67,10 +70,9 @@ class LocaleServiceProvider extends ServiceProvider
     /**
      * Register Route middleware.
      *
-     * @param Router $router
      * @return void
      */
-    private function registerRouteMiddlewares(Router $router)
+    private function registerRouteMiddlewares(): void
     {
         Route::aliasMiddleware('localeRedirectFilter', LaravelLocalizationRedirectFilter::class);
         Route::aliasMiddleware('localeViewPath', LaravelLocalizationViewPath::class);

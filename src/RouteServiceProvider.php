@@ -12,6 +12,9 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class RouteServiceProvider extends ServiceProvider
 {
+    /**
+     * @var string
+     */
     protected $namespace = 'Code4Romania\Cms\Http\Controllers';
 
     /**
@@ -19,7 +22,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         $this->registerRouteMiddlewares($this->app->get('router'));
 
@@ -32,15 +35,11 @@ class RouteServiceProvider extends ServiceProvider
      * @param Router $router
      * @return void
      */
-    private function registerRouteMiddlewares(Router $router)
+    private function registerRouteMiddlewares(Router $router): void
     {
         Route::aliasMiddleware('redirectTrailingSlash', RedirectTrailingSlash::class);
     }
 
-
-    /**
-     * @return void
-     */
     public function map(): void
     {
         $this->registerAdminRoutes(base_path('routes/admin.php'));
@@ -50,10 +49,6 @@ class RouteServiceProvider extends ServiceProvider
         $this->registerFrontRoutes(__DIR__ . '/../routes/web.php');
     }
 
-    /**
-     * @param string $routeFile
-     * @return void
-     */
     protected function registerAdminRoutes(string $routeFile): void
     {
         if (!file_exists($routeFile)) {
@@ -71,15 +66,11 @@ class RouteServiceProvider extends ServiceProvider
                 'validateBackHistory'
             ],
             'prefix' => trim(config('twill.admin_app_path', ''), '/'),
-        ], function () use ($routeFile) {
-            require_once($routeFile);
+        ], static function () use ($routeFile): void {
+            require_once $routeFile;
         });
     }
 
-    /**
-     * @param string $routeFile
-     * @return void
-     */
     protected function registerFrontRoutes(string $routeFile): void
     {
         if (!file_exists($routeFile)) {
@@ -98,8 +89,8 @@ class RouteServiceProvider extends ServiceProvider
                 'localeViewPath',
                 'localeSessionRedirect',
             ],
-        ], function () use ($routeFile) {
-            require_once($routeFile);
+        ], static function () use ($routeFile): void {
+            require_once $routeFile;
         });
     }
 }
