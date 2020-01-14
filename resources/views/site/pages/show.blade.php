@@ -2,8 +2,6 @@
 
 @section('content')
     <article>
-        <div class="section is-slim">
-            {!! $item->renderBlocks(false) !!}
-        </div>
+        {!! $item->renderBlocks(false) !!}
     </article>
 @stop
