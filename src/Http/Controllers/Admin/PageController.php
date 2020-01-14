@@ -22,7 +22,7 @@ class PageController extends ModuleController
     /**
      * @var string
      */
-    protected $previewView = 'cms.site.pages.show';
+    protected $previewView = 'cms::pages.show';
 
     /**
      * Options of the index view.
@@ -39,10 +39,10 @@ class PageController extends ModuleController
     protected function indexData($request): array
     {
         return [
-            'nested'      => true,
+            'nested' => true,
             // this should control the allowed depth in UI
             // but doesn't seem to actually do anything
-            // 'nestedDepth' => 2,
+            'nestedDepth' => config('cms.nestedDepth', 2),
         ];
     }
 
@@ -61,13 +61,13 @@ class PageController extends ModuleController
      */
     protected function indexItemData($item): array
     {
-        if (property_exists($item, 'children') && $item->children) {
-            return [
-                'children' => $this->getIndexTableData($item->children),
-            ];
+        if (!isset($item->children) || !$item->children) {
+            return [];
         }
 
-        return [];
+        return [
+            'children' => $this->getIndexTableData($item->children),
+        ];
     }
 
     /**

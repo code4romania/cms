@@ -2,4 +2,6 @@
 
 declare(strict_types=1);
 
-Route::module('pages');
+if (Route::hasMacro('module')) {
+    Route::module('pages');
+}

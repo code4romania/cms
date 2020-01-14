@@ -11,6 +11,15 @@ use Illuminate\Support\Str;
 class CmsServiceProvider extends ServiceProvider
 {
     /**
+     * Service providers to be registered.
+     *
+     * @var string[]
+     */
+    protected $providers = [
+        RouteServiceProvider::class,
+    ];
+
+    /**
      * @var int
      */
     private $migrationsCounter = 0;
@@ -22,6 +31,12 @@ class CmsServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+        $this->mergeConfigs();
+
+        // Register providers
+        foreach ($this->providers as $provider) {
+            $this->app->register($provider);
+        }
     }
 
     /**
@@ -37,6 +52,19 @@ class CmsServiceProvider extends ServiceProvider
 
         $this->registerAndPublishViews();
         $this->registerAndPublishTranslations();
+    }
+
+    /**
+     * Merges the package configuration files into the given configuration namespaces.
+     *
+     * @return void
+     */
+    private function mergeConfigs()
+    {
+        $this->mergeConfigFrom(__DIR__ . '/../config/cms.php', 'cms');
+        $this->mergeConfigFrom(__DIR__ . '/../config/twill.php', 'twill');
+        $this->mergeConfigFrom(__DIR__ . '/../config/twill-navigation.php', 'twill-navigation');
+        $this->mergeConfigFrom(__DIR__ . '/../config/translatable.php', 'translatable');
     }
 
     /**
@@ -72,6 +100,7 @@ class CmsServiceProvider extends ServiceProvider
     {
         $this->publishes([
             __DIR__ . '/../routes/admin.php' => base_path('routes/admin.php'),
+            __DIR__ . '/../routes/web.php' => base_path('routes/web.php'),
         ], 'routes');
     }
 
