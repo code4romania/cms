@@ -16,6 +16,7 @@ class CmsServiceProvider extends ServiceProvider
      * @var string[]
      */
     protected $providers = [
+        LocaleServiceProvider::class,
         RouteServiceProvider::class,
     ];
 

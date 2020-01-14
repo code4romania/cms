@@ -39,7 +39,7 @@ class PageController extends ModuleController
     protected function indexData($request): array
     {
         return [
-            'nested' => true,
+            'nested' => false,
             // this should control the allowed depth in UI
             // but doesn't seem to actually do anything
             'nestedDepth' => config('cms.nestedDepth', 2),

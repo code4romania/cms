@@ -18,9 +18,9 @@ class PageController extends Controller
      */
     public function index(): View
     {
-        dd('index');
-
-        return view('welcome');
+        return view('cms::pages.show', [
+            'item' => Page::first(),
+        ]);
     }
 
     /**

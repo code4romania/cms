@@ -8,6 +8,7 @@ use Code4Romania\Cms\Http\Middleware\RedirectTrailingSlash;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -45,9 +46,6 @@ class RouteServiceProvider extends ServiceProvider
         $this->registerAdminRoutes(base_path('routes/admin.php'));
         $this->registerAdminRoutes(__DIR__ . '/../routes/admin.php');
 
-        $this->registerPreviewRoutes(base_path('routes/admin-preview.php'));
-        $this->registerPreviewRoutes(__DIR__ . '/../routes/admin-preview.php');
-
         $this->registerFrontRoutes(base_path('routes/web.php'));
         $this->registerFrontRoutes(__DIR__ . '/../routes/web.php');
     }
@@ -82,30 +80,6 @@ class RouteServiceProvider extends ServiceProvider
      * @param string $routeFile
      * @return void
      */
-    protected function registerPreviewRoutes(string $routeFile): void
-    {
-        if (!file_exists($routeFile)) {
-            return;
-        }
-
-        Route::group([
-            'namespace' => $this->namespace . '\Front',
-            'domain' => config('twill.admin_app_url'),
-            'middleware' => [
-                config('twill.admin_middleware_group', 'web'),
-                'twill_auth:twill_users',
-                'impersonate',
-                'validateBackHistory'
-            ],
-        ], function () use ($routeFile) {
-            require_once($routeFile);
-        });
-    }
-
-    /**
-     * @param string $routeFile
-     * @return void
-     */
     protected function registerFrontRoutes(string $routeFile): void
     {
         if (!file_exists($routeFile)) {
@@ -113,13 +87,16 @@ class RouteServiceProvider extends ServiceProvider
         }
 
         Route::group([
-            'namespace'  => $this->namespace . '\Front',
-            'domain'     => config('app.url'),
-            // 'as'         => 'front.',
-            // 'prefix'     => {locale},
+            'namespace' => $this->namespace . '\Front',
+            'domain' => config('app.url'),
+            'as' => 'front.',
+            'prefix' => LaravelLocalization::setLocale(),
             'middleware' => [
-                'web',
+                config('twill.admin_middleware_group', 'web'),
                 'redirectTrailingSlash',
+                'localeRedirectFilter',
+                'localeViewPath',
+                'localeSessionRedirect',
             ],
         ], function () use ($routeFile) {
             require_once($routeFile);

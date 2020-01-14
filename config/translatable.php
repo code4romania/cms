@@ -17,6 +17,22 @@ return [
         'en',
     ],
 
+
+    'languages' => [
+        'ro' => 'Română',
+        'en' => 'English',
+    ],
+
+    'languageCodes' => [
+        'ro' => 'ro_RO',
+        'en' => 'en_GB',
+    ],
+
+    'disabled' => [
+        // 'en'
+    ],
+
+
     /*
     |--------------------------------------------------------------------------
     | Locale separator
@@ -76,7 +92,7 @@ return [
     | set it to false.
     |
      */
-    'fallback_locale' => 'en',
+    'fallback_locale' => 'ro',
 
     /*
     |--------------------------------------------------------------------------
