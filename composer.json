@@ -22,7 +22,7 @@
     ],
     "require": {
         "php": "^7.3",
-        "area17/twill": "dev-master#8867a0e2f2fecee5e8fa9b452c4ac11c08850558",
+        "area17/twill": "dev-master",
         "kalnoy/nestedset": "^5.0",
         "mcamara/laravel-localization": "^1.4",
         "nothingworks/blade-svg": "^0.3.2"

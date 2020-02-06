@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="font-sans">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,7 +9,6 @@
 
     {{-- {!! SEO::generate() !!} --}}
 
-    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Titillium+Web:400,600,700&subset=latin-ext">
     <link rel="stylesheet" href="{{ asset(mix('app.css', 'assets/cms')) }}">
 
     {{-- Favicons --}}
@@ -22,7 +21,7 @@
     <div id="app">
         @include('cms::partials.header')
 
-        <main>
+        <main class="container px-5 mx-auto lg:grid lg:grid-cols-12 lg:gap-6">
             @yield('content')
         </main>
 
@@ -30,7 +29,5 @@
     </div>
 
     @include('cms::partials.scripts')
-
-    @include('cms::partials.analytics')
 </body>
 </html>
