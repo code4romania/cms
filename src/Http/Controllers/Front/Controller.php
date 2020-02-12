@@ -17,24 +17,11 @@ class Controller extends TwillFrontControler
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    /**
-     * Fetch
-     *
-     * @param string $key
-     * @param string|null $section
-     * @return string
-     */
     public function getStoredValue(string $key, ?string $section = null): string
     {
         return app(SettingRepository::class)->byKey($key, $section);
     }
 
-    /**
-     *
-     * @param string $routeName
-     * @param mixed $item
-     * @return array
-     */
     public function getAlternateLocaleUrls(string $routeName, $item = null): array
     {
         $alternateUrls = [];
@@ -48,13 +35,12 @@ class Controller extends TwillFrontControler
                 continue;
             }
 
-
-            if (!is_null($item) && $item->hasActiveTranslation($locale)) {
+            if (is_null($item)) {
+                $alternateUrls[$locale] = LaravelLocalization::getLocalizedURL($locale, route($routeName));
+            } elseif ($item->hasActiveTranslation($locale)) {
                 $alternateUrls[$locale] = LaravelLocalization::getLocalizedURL($locale, route($routeName, [
                     'slug' => $item->getSlug($locale),
                 ]));
-            } else {
-                $alternateUrls[$locale] = LaravelLocalization::getLocalizedURL($locale, route($routeName));
             }
         }
 
@@ -63,11 +49,6 @@ class Controller extends TwillFrontControler
 
     public function isPreview()
     {
-        /**
-         * @var string
-         */
-        $routeName = Route::currentRouteName();
-
-        return Str::endsWith($routeName, '.preview');
+        return Str::endsWith(Route::currentRouteName(), '.preview');
     }
 }

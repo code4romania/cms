@@ -23,7 +23,7 @@ class PageController extends ModuleController
     /**
      * @var string
      */
-    protected $previewView = 'cms::pages.show';
+    protected $previewView = 'site.pages.show';
 
     /**
      * Options of the index view.

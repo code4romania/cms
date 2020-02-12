@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Code4Romania\Cms;
 
+use Code4Romania\Cms\Commands\Install;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
@@ -26,7 +27,7 @@ class CmsServiceProvider extends ServiceProvider
     private $migrationsCounter = 0;
 
     /**
-     * Register services.
+     * Register providers
      *
      * @return void
      */
@@ -49,10 +50,11 @@ class CmsServiceProvider extends ServiceProvider
     {
         $this->publishConfigs();
         $this->publishMigrations();
-        $this->publishRoutes();
+        $this->publishAssets();
+        $this->publishViews();
+        $this->publishTranslations();
 
-        $this->registerAndPublishViews();
-        $this->registerAndPublishTranslations();
+        $this->registerCommands();
     }
 
     /**
@@ -62,6 +64,7 @@ class CmsServiceProvider extends ServiceProvider
      */
     private function mergeConfigs(): void
     {
+        $this->mergeConfigFrom(__DIR__ . '/../config/blade-svg.php', 'blade-svg');
         $this->mergeConfigFrom(__DIR__ . '/../config/cms.php', 'cms');
         $this->mergeConfigFrom(__DIR__ . '/../config/twill.php', 'twill');
         $this->mergeConfigFrom(__DIR__ . '/../config/twill-navigation.php', 'twill-navigation');
@@ -76,7 +79,9 @@ class CmsServiceProvider extends ServiceProvider
     private function publishConfigs(): void
     {
         $configs = [
+            'blade-svg',
             'cms',
+            'seotools',
             'twill',
             'twill-navigation',
             'translatable',
@@ -92,19 +97,6 @@ class CmsServiceProvider extends ServiceProvider
         }
     }
 
-    /**
-     * Defines the package routes files for publishing.
-     *
-     * @return void
-     */
-    private function publishRoutes(): void
-    {
-        $this->publishes([
-            __DIR__ . '/../routes/admin.php' => base_path('routes/admin.php'),
-            __DIR__ . '/../routes/web.php' => base_path('routes/web.php'),
-        ], 'routes');
-    }
-
     private function publishMigrations(): void
     {
         $migrations = [
@@ -116,6 +108,13 @@ class CmsServiceProvider extends ServiceProvider
                 $this->publishMigration($migration);
             }
         }
+    }
+
+    protected function registerCommands(): void
+    {
+        $this->commands([
+            Install::class,
+        ]);
     }
 
     /**
@@ -158,23 +157,27 @@ class CmsServiceProvider extends ServiceProvider
     }
 
     /**
+     * Registers and publishes the package assets.
+     *
+     * @return void
+     */
+    private function publishAssets(): void
+    {
+        $this->publishes([
+            __DIR__ . '/../resources/svg' => resource_path('svg'),
+        ], 'assets');
+    }
+
+    /**
      * Registers and publishes the package views.
      *
      * @return void
      */
-    private function registerAndPublishViews(): void
+    private function publishViews(): void
     {
-        $views = [
-            'twill' => __DIR__ . '/../resources/views/admin',
-            'cms' => __DIR__ . '/../resources/views/site',
-        ];
-
-        foreach ($views as $namespace => $viewPath) {
-            $this->loadViewsFrom($viewPath, $namespace);
-            $this->publishes([
-                $viewPath => resource_path('views/vendor/' . $namespace)
-            ], 'views');
-        }
+        $this->publishes([
+            __DIR__ . '/../resources/views' => resource_path('views'),
+        ], 'views');
     }
 
     /**
@@ -182,10 +185,13 @@ class CmsServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    private function registerAndPublishTranslations(): void
+    private function publishTranslations(): void
     {
         $translationPath = __DIR__ . '/../resources/lang';
+
         $this->loadTranslationsFrom($translationPath, 'cms');
-        $this->publishes([$translationPath => resource_path('lang/vendor/cms')], 'translations');
+        $this->publishes([
+            $translationPath => resource_path('lang')
+        ], 'translations');
     }
 }

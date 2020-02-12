@@ -9,7 +9,6 @@ jobs:
       fail-fast: true
       matrix:
         php-version:
-          - 7.3
           - 7.4
         dependency-version:
           - prefer-lowest

@@ -2,12 +2,11 @@
 
 declare(strict_types=1);
 
-Route::get('/', 'PageController@index')->name('pages.index');
-Route::name('pages.show')->get('{slug}', 'PageController@show');
+use Code4Romania\Cms\Http\Controllers\Front\PageController;
 
+Route::get('/', [PageController::class, 'index'])->name('pages.index');
+Route::get('{slug}', [PageController::class, 'show'])->name('pages.show');
 
-Route::group([
-    'middleware' => ['web', 'twill_auth:twill_users', 'can:list'],
-], static function (): void {
-    Route::name('pages.preview')->get('/admin-preview/{slug}', 'PageController@show');
+Route::middleware(['web', 'twill_auth:twill_users', 'can:list'])->group(static function (): void {
+    Route::get('/admin-preview/{slug}', [PageController::class, 'show'])->name('pages.preview');
 });

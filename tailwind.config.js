@@ -1,15 +1,21 @@
 module.exports = {
     theme: {
-        fontFamily: {
-            sans: [
-                'Titillium Web',
-                'Helvetica Neue',
-                'Helvetica',
-                'Arial',
-                'sans-serif',
-            ],
+        container: {
+            padding: '1.5rem',
+            center: true,
         },
-        extend: {},
+        extend: {
+            fontFamily: {
+                sans: [
+                    'Titillium Web',
+                    'Helvetica Neue',
+                    'Helvetica',
+                    'Arial',
+                    'sans-serif',
+                ],
+                mono: ['Courier', 'monospace'],
+            },
+        },
     },
     variants: {},
     plugins: [],

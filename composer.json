@@ -21,8 +21,9 @@
         }
     ],
     "require": {
-        "php": "^7.3",
+        "php": "^7.4",
         "area17/twill": "dev-master",
+        "artesaos/seotools": "^0.16.0",
         "kalnoy/nestedset": "^5.0",
         "mcamara/laravel-localization": "^1.4",
         "nothingworks/blade-svg": "^0.3.2"
@@ -57,7 +58,10 @@
         "laravel": {
             "providers": [
                 "Code4Romania\\Cms\\CmsServiceProvider"
-            ]
+            ],
+            "aliases": {
+                "SEO": "Artesaos\\SEOTools\\Facades\\SEOTools"
+            }
         }
     }
 }

@@ -16,8 +16,11 @@ class PageController extends Controller
      */
     public function index(): View
     {
-        return view('cms::pages.show', [
-            'item' => Page::first(),
+        $item = Page::findOrFail($this->getStoredValue('frontPage', 'site'));
+
+        return view('site.pages.show', [
+            'alternateUrls' => $this->getAlternateLocaleUrls('front.pages.index'),
+            'item' => $item,
         ]);
     }
 
@@ -39,7 +42,8 @@ class PageController extends Controller
                 ->firstOrFail();
         }
 
-        return view('cms::pages.show', [
+        return view('site.pages.show', [
+            'alternateUrls' => $this->getAlternateLocaleUrls('front.pages.show', $item),
             'item' => $item,
         ]);
     }
