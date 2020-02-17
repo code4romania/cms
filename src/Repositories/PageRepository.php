@@ -11,7 +11,6 @@ use A17\Twill\Repositories\Behaviors\HandleSlugs;
 use A17\Twill\Repositories\Behaviors\HandleTranslations;
 use A17\Twill\Repositories\ModuleRepository;
 use Code4Romania\Cms\Models\Page;
-use Illuminate\Support\Facades\DB;
 
 class PageRepository extends ModuleRepository
 {
@@ -20,16 +19,5 @@ class PageRepository extends ModuleRepository
     public function __construct(Page $model)
     {
         $this->model = $model;
-    }
-
-    /**
-     * @param array<int,string> $ids
-     * @return void
-     */
-    public function setNewOrder($ids): void
-    {
-        DB::transaction(static function () use ($ids): void {
-            Page::saveTreeFromIds($ids);
-        }, 3);
     }
 }

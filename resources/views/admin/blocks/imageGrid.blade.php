@@ -14,8 +14,8 @@
 @formField('medias', [
     'name'         => 'image',
     'label'        => 'Images',
-    'max'          => 8,
-    'note'         => 'Add up to 8 images',
+    'max'          => 12,
+    'note'         => 'Add up to 12 images',
     'required'     => true,
     'withVideoUrl' => false,
 ])

@@ -1,4 +1,5 @@
 const mix = require('laravel-mix');
+require('laravel-mix-purgecss');
 
 mix.config.fileLoaderDirs.fonts = 'fonts';
 
@@ -27,7 +28,10 @@ mix.setPublicPath('public/assets/cms')
     .js('resources/js/app.js', 'public/assets/cms')
     .postCss('resources/css/app.pcss', 'public/assets/cms', [
         require('postcss-import'),
-        require('postcss-nested'),
         require('tailwindcss')('./tailwind.config.js'),
+        require('postcss-nested')({
+            bubble: ['screen'],
+        }),
     ])
+    .purgeCss()
     .extract();

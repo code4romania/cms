@@ -3,20 +3,12 @@
     'label'      => 'Columns',
     'default'    => 1,
     'unpack'     => true,
-    'options'    => [
-        [
-            'value' => 1,
-            'label' => 1,
-        ],
-        [
-            'value' => 2,
-            'label' => 2,
-        ],
-        [
-            'value' => 3,
-            'label' => 3,
-        ],
-    ],
+    'options'    => collect([1, 2, 3])->map(function($i) {
+        return [
+            'value' => $i,
+            'label' => $i,
+        ];
+    })->toArray(),
 ])
 
 @formField('wysiwyg', [

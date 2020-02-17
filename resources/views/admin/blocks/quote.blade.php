@@ -4,7 +4,6 @@
     'label'      => 'Quote',
     'required'   => true,
     'translated' => true,
-    'maxlength'  => 250,
     'rows'       => 4,
 ])
 

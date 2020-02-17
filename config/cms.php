@@ -26,6 +26,16 @@ return [
             'name' => 'LinkedIn',
             'baseUrl' => 'https://www.linkedin.com/',
         ],
-    ]
+    ],
+
+    'embeds' => [
+        'expiry' => 60 * 60 * 12,
+
+        'args' => [
+            // When set to true, this chooses the bigger image as the main image
+            // instead the first found, that usually is the most relevant.
+            'choose_bigger_image' => true,
+        ],
+    ],
 
 ];

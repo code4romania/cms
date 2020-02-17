@@ -43,10 +43,10 @@ class RouteServiceProvider extends ServiceProvider
     public function map(): void
     {
         $this->registerAdminRoutes(base_path('routes/admin.php'));
-        $this->registerAdminRoutes(__DIR__ . '/../routes/admin.php');
+        $this->registerAdminRoutes(realpath(__DIR__ . '/../routes/admin.php'));
 
         $this->registerFrontRoutes(base_path('routes/web.php'));
-        $this->registerFrontRoutes(__DIR__ . '/../routes/web.php');
+        $this->registerFrontRoutes(realpath(__DIR__ . '/../routes/web.php'));
     }
 
     protected function registerAdminRoutes(string $routeFile): void

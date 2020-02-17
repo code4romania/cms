@@ -16,6 +16,12 @@
         'editSource'     => true,
         'translated'     => true,
     ])
+
+    @formField('checkbox', [
+        'name'    => 'show_header',
+        'label'   => 'Show header',
+        'default' => true,
+    ])
 @stop
 
 

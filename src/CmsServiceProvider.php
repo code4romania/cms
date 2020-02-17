@@ -5,9 +5,8 @@ declare(strict_types=1);
 namespace Code4Romania\Cms;
 
 use Code4Romania\Cms\Commands\Install;
-use Illuminate\Filesystem\Filesystem;
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Str;
 
 class CmsServiceProvider extends ServiceProvider
 {
@@ -20,11 +19,6 @@ class CmsServiceProvider extends ServiceProvider
         LocaleServiceProvider::class,
         RouteServiceProvider::class,
     ];
-
-    /**
-     * @var int
-     */
-    private $migrationsCounter = 0;
 
     /**
      * Register providers
@@ -55,6 +49,7 @@ class CmsServiceProvider extends ServiceProvider
         $this->publishTranslations();
 
         $this->registerCommands();
+        $this->registerRelationMorphMap();
     }
 
     /**
@@ -64,11 +59,11 @@ class CmsServiceProvider extends ServiceProvider
      */
     private function mergeConfigs(): void
     {
-        $this->mergeConfigFrom(__DIR__ . '/../config/blade-svg.php', 'blade-svg');
         $this->mergeConfigFrom(__DIR__ . '/../config/cms.php', 'cms');
-        $this->mergeConfigFrom(__DIR__ . '/../config/twill.php', 'twill');
-        $this->mergeConfigFrom(__DIR__ . '/../config/twill-navigation.php', 'twill-navigation');
         $this->mergeConfigFrom(__DIR__ . '/../config/translatable.php', 'translatable');
+        $this->mergeConfigFrom(__DIR__ . '/../config/twill.php', 'twill');
+        $this->mergeConfigFrom(__DIR__ . '/../config/twill/block_editor.php', 'twill.block_editor');
+        $this->mergeConfigFrom(__DIR__ . '/../config/twill/dashboard.php', 'twill.dashboard');
     }
 
     /**
@@ -84,12 +79,14 @@ class CmsServiceProvider extends ServiceProvider
             'seotools',
             'twill',
             'twill-navigation',
+            'twill/block_editor',
+            'twill/dashboard',
             'translatable',
         ];
 
         foreach ($configs as $config) {
             $configSourcePath = __DIR__ . '/../config/' . $config . '.php';
-            $configOutputPath = config_path("{$config}.php");
+            $configOutputPath = config_path($config . '.php');
 
             $this->publishes([
                 $configSourcePath => $configOutputPath,
@@ -99,15 +96,11 @@ class CmsServiceProvider extends ServiceProvider
 
     private function publishMigrations(): void
     {
-        $migrations = [
-            'CreatePagesTables',
-        ];
+        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
 
-        if ($this->app->runningInConsole()) {
-            foreach ($migrations as $migration) {
-                $this->publishMigration($migration);
-            }
-        }
+        $this->publishes([
+            __DIR__ . '/../database/migrations' => database_path('migrations'),
+        ], 'migrations');
     }
 
     protected function registerCommands(): void
@@ -117,43 +110,20 @@ class CmsServiceProvider extends ServiceProvider
         ]);
     }
 
-    /**
-     * Based on twill's own publishMigration
-     *
-     * @see A17\Twill\TwillServiceProvider::publishMigration()
-     *
-     * @param string $migration
-     * @return void
-     */
-    private function publishMigration(string $migration, ?string $publishKey = null): void
+    protected function registerRelationMorphMap(): void
     {
-        $files = new Filesystem();
-        $this->migrationsCounter += 1;
-
-        if (class_exists($migration)) {
-            return;
-        }
-
-        // Verify that migration doesn't exist
-        $migration_file = database_path(sprintf('database/migrations/*_%s.php', Str::snake($migration)));
-
-        if (count($files->glob($migration_file))) {
-            return;
-        }
-
-        $timestamp = date('Y_m_d_', time()) . (40000 + $this->migrationsCounter);
-        $migrationSourcePath = sprintf('%s/../database/migrations/%s.php', __DIR__, Str::snake($migration));
-        $migrationOutputPath = database_path(sprintf('migrations/%s_%s.php', $timestamp, Str::snake($migration)));
-
-        $this->publishes([
-            $migrationSourcePath => $migrationOutputPath,
-        ], 'migrations');
-
-        if ($publishKey) {
-            $this->publishes([
-                $migrationSourcePath => $migrationOutputPath,
-            ], $publishKey);
-        }
+        Relation::morphMap([
+            // 'applicationForm' => '\Models\ApplicationForm',
+            // 'byproduct'       => '\Models\Byproduct',
+            // 'domain'          => '\Models\Domain',
+            'page'            => 'Code4Romania\Cms\Models\Page',
+            // 'partner'         => '\Models\Partner',
+            // 'financer'        => '\Models\Partner',
+            // 'implementer'     => '\Models\Partner',
+            // 'person'          => '\Models\Person',
+            // 'post'            => '\Models\Post',
+            // 'solution'        => '\Models\Solution',
+        ]);
     }
 
     /**
