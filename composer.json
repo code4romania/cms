@@ -14,12 +14,6 @@
     ],
     "minimum-stability": "dev",
     "prefer-stable": true,
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/area17/twill"
-        }
-    ],
     "require": {
         "php": "^7.4",
         "area17/twill": "dev-master",

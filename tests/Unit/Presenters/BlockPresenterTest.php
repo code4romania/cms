@@ -49,13 +49,13 @@ class BlockPresenterTest extends TestCase
     public function itPresentsEmbedBlock()
     {
         $blockEmbed = $this->createBlockWithContent('embed', [
-            'url' => 'https://avatars0.githubusercontent.com/u/18010308?s=1',
+            'url' => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
         ]);
 
         $blockEmpty = $this->createBlockWithContent('embed', []);
 
-        $this->assertEquals(
-            '<img src="https://avatars0.githubusercontent.com/u/18010308?s=1" alt="Remote file" width="1" height="1">',
+        $this->assertStringContainsString(
+            'https://www.youtube.com/embed/dQw4w9WgXcQ?feature=oembed',
             $blockEmbed->present()->embedCode
         );
 
