@@ -67,7 +67,7 @@ class RouteServiceProvider extends ServiceProvider
             ],
             'prefix' => trim(config('twill.admin_app_path', ''), '/'),
         ], static function () use ($routeFile): void {
-            require_once $routeFile;
+            require $routeFile;
         });
     }
 
@@ -90,7 +90,7 @@ class RouteServiceProvider extends ServiceProvider
                 'localeSessionRedirect',
             ],
         ], static function () use ($routeFile): void {
-            require_once $routeFile;
+            require $routeFile;
         });
     }
 }

@@ -4,6 +4,7 @@ namespace Code4Romania\Cms\Tests;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Collection;
 use Mcamara\LaravelLocalization\LaravelLocalization;
 use Orchestra\Testbench\BrowserKit\TestCase as BaseTestCase;
 use Orchestra\Testbench\Concerns\WithLoadMigrationsFrom;
@@ -14,9 +15,6 @@ class TestCase extends BaseTestCase
 
     /** @var string */
     public $baseUrl = 'http://localhost';
-
-    /** @var string */
-    public $defaultLocale = 'en';
 
     protected function getPackageProviders($app)
     {
@@ -44,5 +42,22 @@ class TestCase extends BaseTestCase
     {
         putenv(LaravelLocalization::ENV_ROUTE_KEY);
         parent::tearDown();
+    }
+
+    protected function getAvailableLocales(): Collection
+    {
+        return collect(config('translatable.locales', []));
+    }
+
+    protected function getLocalesExceptCurrent(): Collection
+    {
+        return $this
+            ->getAvailableLocales()
+            ->reject(fn ($locale) => $locale === app()->getLocale());
+    }
+
+    protected function isCurrentLocale(string $locale): bool
+    {
+        return $locale === app()->getLocale();
     }
 }

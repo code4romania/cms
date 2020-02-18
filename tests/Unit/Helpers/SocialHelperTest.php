@@ -2,7 +2,6 @@
 
 namespace Code4Romania\Cms\Tests\Helpers;
 
-use A17\Twill\Repositories\SettingRepository;
 use Code4Romania\Cms\Helpers\SettingsHelper;
 use Code4Romania\Cms\Helpers\SocialHelper;
 use Code4Romania\Cms\Tests\TestCase;

@@ -26,9 +26,8 @@ class UrlHelper
         return true;
     }
 
-    public static function getAlternateLocaleUrls(?Model $item = null): array
+    public static function getAlternateLocaleUrls(string $routeName, ?Model $item = null): array
     {
-        $routeName = Route::currentRouteName();
         $disabled = collect(config('translatable.disabled', []));
 
         return collect(config('translatable.locales', []))

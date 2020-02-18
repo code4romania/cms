@@ -10,6 +10,7 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 class UrlHelperTest extends TestCase
 {
     use WithoutMiddleware;
+
     /** @test */
     public function itDetectsExternalUrls()
     {
@@ -20,22 +21,59 @@ class UrlHelperTest extends TestCase
     }
 
     /** @test */
-    /*public function itGeneratesAlternateLocaleUrls()
+    public function itGeneratesLocaleUrlsForIndex()
     {
-        $locales = collect(config('translatable.locales', []));
+        $alternateLocaleUrls = $this
+            ->getLocalesExceptCurrent()
+            ->mapWithKeys(fn ($locale) => [$locale => url($locale)])
+            ->toArray();
 
-        $pageAttributes = [
-            'active' => $locales
-                ->mapWithKeys(fn ($locale) => [$locale => true])
-                ->toArray(),
+        $this->assertEquals($alternateLocaleUrls, UrlHelper::getAlternateLocaleUrls('front.pages.index'));
+    }
+
+    /** @test */
+    public function itGeneratesLocaleUrlsForPublishedPage()
+    {
+        $locales = $this->getLocalesExceptCurrent();
+
+        $attributes = collect([
+            'languages' => $locales
+                ->map(fn ($locale) => ['value' => $locale, 'published' => true]),
+
             'title' => $locales
-                ->mapWithKeys(fn ($locale) => [$locale => $this->faker->sentence])
-                ->toArray(),
-            'slug' => $locales
-                ->mapWithKeys(fn ($locale) => [$locale => $this->faker->slug])
-                ->toArray(),
-        ];
+                ->mapWithKeys(fn ($locale) => [$locale => $this->faker->sentence]),
 
-        $page = app(PageRepository::class)->create($pageAttributes);
-    }*/
+            'slug' => $locales
+                ->mapWithKeys(fn ($locale) => [$locale => $this->faker->slug]),
+        ])->toArray();
+
+        $page = app(PageRepository::class)->create($attributes);
+
+        $alternateLocaleUrls = $locales
+            ->mapWithKeys(fn ($locale) => [$locale => url($locale . '/' . $attributes['slug'][$locale])])
+            ->toArray();
+
+        $this->assertEquals($alternateLocaleUrls, UrlHelper::getAlternateLocaleUrls('front.pages.show', $page));
+    }
+
+    /** @test */
+    public function itDoesntGenerateLocaleUrlsForUnpublishedTranslation()
+    {
+        $locales = $this->getAvailableLocales();
+
+        $attributes = collect([
+            'languages' => $locales
+                ->map(fn ($locale) => ['value' => $locale, 'published' => $locale === app()->getLocale()]),
+
+            'title' => $locales
+                ->mapWithKeys(fn ($locale) => [$locale => $this->faker->sentence]),
+
+            'slug' => $locales
+                ->mapWithKeys(fn ($locale) => [$locale => $this->faker->slug]),
+        ])->toArray();
+
+        $page = app(PageRepository::class)->create($attributes);
+
+        $this->assertEmpty(UrlHelper::getAlternateLocaleUrls('front.pages.show', $page));
+    }
 }
