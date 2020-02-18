@@ -1,7 +1,7 @@
 @inject('url', 'Code4Romania\Cms\Helpers\UrlHelper')
 
 @php
-    $alternateUrls = $url->getAlternateLocaleUrls($item ?? null);
+    $alternateUrls = $url->getAlternateLocaleUrls(Route::currentRouteName(), $item ?? null);
 @endphp
 
 <nav class="lg:shadow-none" x-data="{ open: false }" :class="{ 'shadow-lg': open }">

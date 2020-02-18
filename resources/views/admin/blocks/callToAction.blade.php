@@ -20,7 +20,7 @@
     'label'      => 'Button color',
     'required'   => true,
     'default'    => 'primary',
-    'options'    => collect(['primary', 'secondary', 'danger'])->map(function($key) {
+    'options'    => collect(config('cms.colorGroups'))->map(function($key) {
         return [
             'value' => $key,
             'label' => ucfirst($key),

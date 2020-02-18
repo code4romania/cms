@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Code4Romania\Cms\Helpers;
 
 use A17\Twill\Models\Model;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 

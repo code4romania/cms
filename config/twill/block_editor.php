@@ -25,6 +25,11 @@ return [
             'icon'       => 'media-list',
             'component'  => 'a17-block-accordion',
         ],
+        'counter' => [
+            'title'      => 'Counter',
+            'icon'       => 'star-feature',
+            'component'  => 'a17-block-counter',
+        ],
         'embed' => [
             'title'      => 'Embed',
             'icon'       => 'revision-single',
@@ -34,6 +39,11 @@ return [
             'title'      => 'Quote',
             'icon'       => 'quote',
             'component'  => 'a17-block-quote',
+        ],
+        'hero' => [
+            'title'      => 'Hero section',
+            'icon'       => 'website',
+            'component'  => 'a17-block-hero',
         ],
         'imageGrid' => [
             'title'      => 'Image grid',
@@ -66,6 +76,12 @@ return [
             'title'      => 'Item',
             'trigger'    => 'Add accordion item',
             'component'  => 'a17-block-accordionitem',
+            'max'        => 20,
+        ],
+        'counterItem' => [
+            'title'      => 'Item',
+            'trigger'    => 'Add counter item',
+            'component'  => 'a17-block-counteritem',
             'max'        => 20,
         ],
     ],

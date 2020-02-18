@@ -41,7 +41,7 @@ class UrlHelperTest extends TestCase
                 ->map(fn ($locale) => ['value' => $locale, 'published' => true]),
 
             'title' => $locales
-                ->mapWithKeys(fn ($locale) => [$locale => $this->faker->sentence]),
+                ->mapWithKeys(fn ($locale) => [$locale => $this->faker->word]),
 
             'slug' => $locales
                 ->mapWithKeys(fn ($locale) => [$locale => $this->faker->slug]),
@@ -66,7 +66,7 @@ class UrlHelperTest extends TestCase
                 ->map(fn ($locale) => ['value' => $locale, 'published' => $locale === app()->getLocale()]),
 
             'title' => $locales
-                ->mapWithKeys(fn ($locale) => [$locale => $this->faker->sentence]),
+                ->mapWithKeys(fn ($locale) => [$locale => $this->faker->word]),
 
             'slug' => $locales
                 ->mapWithKeys(fn ($locale) => [$locale => $this->faker->slug]),

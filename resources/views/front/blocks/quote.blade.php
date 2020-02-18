@@ -1,4 +1,4 @@
-<section class="container leading-relaxed block-content">
+<section class="container leading-relaxed rich-content">
     <blockquote>
         <p>{{ $block->translatedinput('quote') }}</p>
     </blockquote>

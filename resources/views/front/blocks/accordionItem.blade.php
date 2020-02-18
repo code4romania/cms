@@ -18,6 +18,6 @@
         </h4>
     <div
         x-show="selected === {{ $index }}"
-        class="px-6 py-4 border block-content"
+        class="px-6 py-4 border rich-content"
     >{!! $block->translatedInput('description') !!}</div>
 </div>

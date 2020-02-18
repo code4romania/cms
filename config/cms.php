@@ -38,4 +38,12 @@ return [
         ],
     ],
 
+    'colorGroups' => [
+        'primary',
+        'secondary',
+        'danger',
+        'gray',
+        'none',
+    ]
+
 ];

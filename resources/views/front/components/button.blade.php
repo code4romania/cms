@@ -10,33 +10,42 @@
 
     switch ($color) {
         case 'primary':
-        default:
-            $buttonColor = 'text-primary-100 bg-primary-500 focus:bg-primary-600';
+            $buttonColor = 'text-white bg-primary-500 focus:bg-primary-600';
             break;
 
         case 'secondary':
-            $buttonColor = 'text-secondary-900 bg-secondary-500 focus:bg-secondary-600';
+            $buttonColor = 'text-black bg-secondary-500 focus:bg-secondary-600';
             break;
 
         case 'danger':
-            $buttonColor = 'text-danger-100 bg-danger-500 focus:bg-danger-600';
+            $buttonColor = 'text-white bg-danger-500 focus:bg-danger-600';
+            break;
+
+        case 'gray':
+            $buttonColor = 'text-white bg-gray-500 focus:bg-gray-600';
+            break;
+
+        default:
+            $buttonColor = 'border focus:bg-gray-100';
             break;
     }
 @endphp
 
-@if ($href !== false)
-    <a
-        href="{{ $href }}"
-        class="{{ $buttonBase }} {{ $buttonColor }}"
+@if ($label)
+    @if ($href !== false)
+        <a
+            href="{{ $href }}"
+            class="{{ $buttonBase }} {{ $buttonColor }}"
 
-        @if ($url->isExternal($href))
-            rel="noopener noreferrer"
-            target="_blank"
-        @endif
-    >{{ $label }}</a>
-@else
-    <button
-        type="{{ $type }}"
-        class="{{ $buttonBase }} {{ $buttonColor }}"
-    >{{ $label }}</button>
+            @if ($url->isExternal($href))
+                rel="noopener noreferrer"
+                target="_blank"
+            @endif
+        >{{ $label }}</a>
+    @else
+        <button
+            type="{{ $type }}"
+            class="{{ $buttonBase }} {{ $buttonColor }}"
+        >{{ $label }}</button>
+    @endif
 @endif

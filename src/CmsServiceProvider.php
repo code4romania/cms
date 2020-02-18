@@ -64,6 +64,8 @@ class CmsServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__ . '/../config/twill.php', 'twill');
         $this->mergeConfigFrom(__DIR__ . '/../config/twill/block_editor.php', 'twill.block_editor');
         $this->mergeConfigFrom(__DIR__ . '/../config/twill/dashboard.php', 'twill.dashboard');
+        $this->mergeConfigFrom(__DIR__ . '/../config/twill/file_library.php', 'twill.file_library');
+        $this->mergeConfigFrom(__DIR__ . '/../config/twill/media_library.php', 'twill.media_library');
     }
 
     /**
@@ -81,6 +83,8 @@ class CmsServiceProvider extends ServiceProvider
             'twill-navigation',
             'twill/block_editor',
             'twill/dashboard',
+            'twill/file_library',
+            'twill/media_library',
             'translatable',
         ];
 

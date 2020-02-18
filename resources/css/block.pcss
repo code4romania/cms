@@ -1,8 +1,4 @@
-.block-content {
-    p:not(:last-child) {
-        @apply mb-5;
-    }
-
+.rich-content {
     .ql-align-center {
         @apply text-center;
     }
@@ -13,36 +9,6 @@
 
     .ql-align-justify {
         @apply text-justify;
-    }
-
-    a {
-        @apply text-primary-500 underline;
-
-        &:hover {
-            @apply no-underline;
-        }
-    }
-
-    ol {
-        @apply list-decimal;
-    }
-
-    ul {
-        @apply list-disc;
-    }
-
-    ol,
-    ul {
-        @apply my-5 ml-10;
-
-        li {
-            @apply mt-1;
-        }
-    }
-
-    b,
-    strong {
-        @apply font-bold;
     }
 
     blockquote {
