@@ -134,7 +134,7 @@ class BlockPresenter extends Presenter
      */
     public function imageTextContentClass(): string
     {
-        $classes = collect();
+        $classes = collect('rich-text');
 
         switch ($this->model->input('width')) {
             case '1/4':

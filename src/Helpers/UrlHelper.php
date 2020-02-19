@@ -25,6 +25,14 @@ class UrlHelper
         return true;
     }
 
+    public static function isAdminUrl(?string $url = null): bool
+    {
+        $currentUrl = $url ?? request()->url();
+        $adminUrl   = route('admin.dashboard');
+
+        return Str::startsWith($currentUrl, $adminUrl);
+    }
+
     public static function getAlternateLocaleUrls(string $routeName, ?Model $item = null): array
     {
         $disabled = collect(config('translatable.disabled', []));

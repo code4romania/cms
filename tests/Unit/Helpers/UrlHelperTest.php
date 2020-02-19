@@ -21,6 +21,15 @@ class UrlHelperTest extends TestCase
     }
 
     /** @test */
+    public function itDetectsAdminUrl()
+    {
+        $this->assertFalse(UrlHelper::isAdminUrl());
+        $this->assertTrue(UrlHelper::isAdminUrl(
+            route('admin.blocks.preview')
+        ));
+    }
+
+    /** @test */
     public function itGeneratesLocaleUrlsForIndex()
     {
         $alternateLocaleUrls = $this

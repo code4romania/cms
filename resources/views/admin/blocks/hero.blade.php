@@ -17,13 +17,6 @@
     'translated'     => true,
     'editSource'     => true,
 ])
-@formField('wysiwyg', [
-    'name'           => 'description',
-    'label'          => 'Description',
-    'toolbarOptions' => config('twill.toolbar_options'),
-    'editSource'     => true,
-    'translated'     => true,
-])
 
 @formField('select', [
     'name'       => 'button_color',

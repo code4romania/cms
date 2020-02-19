@@ -144,17 +144,17 @@ class BlockPresenterTest extends TestCase
         $this->assertEquals('col-span-1 md:col-start-3', $blockThirdRight->present()->imageTextImageClass);
         $this->assertEquals('col-span-1 md:col-start-2', $blockHalfRight->present()->imageTextImageClass);
 
-        $this->assertEmpty($blockLeft->present()->imageTextContentClass);
-        $this->assertEmpty($blockRight->present()->imageTextContentClass);
-        $this->assertEmpty($blockTop->present()->imageTextContentClass);
-        $this->assertEmpty($blockCenter->present()->imageTextContentClass);
-        $this->assertEmpty($blockBottom->present()->imageTextContentClass);
-        $this->assertEquals('md:col-span-3', $blockQuarter->present()->imageTextContentClass);
-        $this->assertEquals('md:col-span-2', $blockThird->present()->imageTextContentClass);
-        $this->assertEquals('md:col-span-1', $blockHalf->present()->imageTextContentClass);
-        $this->assertEquals('md:col-span-3', $blockQuarterRight->present()->imageTextContentClass);
-        $this->assertEquals('md:col-span-2', $blockThirdRight->present()->imageTextContentClass);
-        $this->assertEquals('md:col-span-1', $blockHalfRight->present()->imageTextContentClass);
+        $this->assertEquals('rich-text', $blockLeft->present()->imageTextContentClass);
+        $this->assertEquals('rich-text', $blockRight->present()->imageTextContentClass);
+        $this->assertEquals('rich-text', $blockTop->present()->imageTextContentClass);
+        $this->assertEquals('rich-text', $blockCenter->present()->imageTextContentClass);
+        $this->assertEquals('rich-text', $blockBottom->present()->imageTextContentClass);
+        $this->assertEquals('rich-text md:col-span-3', $blockQuarter->present()->imageTextContentClass);
+        $this->assertEquals('rich-text md:col-span-2', $blockThird->present()->imageTextContentClass);
+        $this->assertEquals('rich-text md:col-span-1', $blockHalf->present()->imageTextContentClass);
+        $this->assertEquals('rich-text md:col-span-3', $blockQuarterRight->present()->imageTextContentClass);
+        $this->assertEquals('rich-text md:col-span-2', $blockThirdRight->present()->imageTextContentClass);
+        $this->assertEquals('rich-text md:col-span-1', $blockHalfRight->present()->imageTextContentClass);
     }
 
     /** @test */
