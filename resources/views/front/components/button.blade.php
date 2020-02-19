@@ -4,7 +4,7 @@
     $href = $href ?? false;
     $type = $type ?? 'button';
     $color = $color ?? 'primary';
-    $label = $label ?? '';
+    $label = $label ?? null;
 
     $buttonBase = 'relative inline-block w-full px-6 py-2 font-semibold leading-snug tracking-wide text-center shadow-md sm:w-auto hover:shadow-lg focus:outline-none focus:shadow-md';
 
@@ -31,7 +31,7 @@
     }
 @endphp
 
-@if ($label)
+@if (!is_null($label))
     @if ($href !== false)
         <a
             href="{{ $href }}"

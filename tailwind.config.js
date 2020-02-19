@@ -1,7 +1,7 @@
 module.exports = {
     theme: {
         container: {
-            padding: '1.5rem',
+            padding: '1.25rem',
             center: true,
         },
         extend: {
@@ -86,26 +86,33 @@ module.exports = {
             },
             h2: {
                 extends: 'heading',
-                fontSize: theme('fontSize.4xl'),
-                '@screen sm': {
-                    fontSize: theme('fontSize.5xl'),
+                fontSize: theme('fontSize.2xl'),
+                '@screen md': {
+                    fontSize: theme('fontSize.3xl'),
+                },
+                '@screen lg': {
+                    fontSize: theme('fontSize.4xl'),
                 },
             },
             h3: {
                 extends: 'heading',
-                fontSize: theme('fontSize.4xl'),
+                fontSize: theme('fontSize.xl'),
+                '@screen md': {
+                    fontSize: theme('fontSize.2xl'),
+                },
+                '@screen lg': {
+                    fontSize: theme('fontSize.3xl'),
+                },
             },
             h4: {
                 extends: 'heading',
-                fontSize: theme('fontSize.3xl'),
-            },
-            h5: {
-                extends: 'heading',
-                fontSize: theme('fontSize.2xl'),
-            },
-            h6: {
-                extends: 'heading',
-                fontSize: theme('fontSize.xl'),
+                fontSize: theme('fontSize.lg'),
+                '@screen md': {
+                    fontSize: theme('fontSize.xl'),
+                },
+                '@screen lg': {
+                    fontSize: theme('fontSize.2xl'),
+                },
             },
             list: {
                 output: false,
