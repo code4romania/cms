@@ -95,7 +95,10 @@ class Install extends Command
         collect(CmsServiceProvider::$configFiles)
             ->each(fn ($fileName) => $this->files->delete(config_path($fileName)));
 
-        $this->files->delete(app()->basePath('.gitignore'));
+        $this->files->delete([
+            app()->basePath('.gitignore'),
+            app()->basePath('.env.example'),
+        ]);
 
         $this->info('Deleting previous asset files');
         collect(CmsServiceProvider::$assetFiles)

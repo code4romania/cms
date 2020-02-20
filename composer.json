@@ -20,6 +20,7 @@
         "artesaos/seotools": "^0.16.0",
         "kalnoy/nestedset": "^5.0",
         "leewillis77/cached-embed": "^0.7.1",
+        "lorisleiva/laravel-deployer": "^0.2.17",
         "mcamara/laravel-localization": "^1.4",
         "nothingworks/blade-svg": "^0.3.2"
     },

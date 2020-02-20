@@ -24,6 +24,7 @@ class CmsServiceProvider extends ServiceProvider
     public static $configFiles = [
         'blade-svg.php',
         'cms.php',
+        'deploy.php',
         'seotools.php',
         'twill.php',
         'twill-navigation.php',
@@ -36,6 +37,7 @@ class CmsServiceProvider extends ServiceProvider
 
     /** @var array<string> */
     public static $assetFiles = [
+        'deploy/assets.php',
         'package.json',
         'tailwind.config.js',
         'webpack.mix.js',
@@ -96,6 +98,11 @@ class CmsServiceProvider extends ServiceProvider
      */
     private function publishConfigs(): void
     {
+        $this->publishes([
+            __DIR__ . '/../.gitignore.dist' => app()->basePath('.gitignore'),
+            __DIR__ . '/../.env.example' => app()->basePath('.env.example'),
+        ], 'config');
+
         collect(self::$configFiles)
             ->each(function ($fileName) {
                 $configSourcePath = __DIR__ . '/../config/' . $fileName;
@@ -105,10 +112,6 @@ class CmsServiceProvider extends ServiceProvider
                     $configSourcePath => $configOutputPath,
                 ], 'config');
             });
-
-        $this->publishes([
-            __DIR__ . '/../.gitignore.dist' => app()->basePath('.gitignore'),
-        ], 'config');
     }
 
     private function publishMigrations(): void
