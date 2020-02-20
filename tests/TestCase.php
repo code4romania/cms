@@ -19,7 +19,7 @@ class TestCase extends BaseTestCase
     /** @var string */
     public $baseUrl = 'http://localhost';
 
-    protected function getPackageProviders($app)
+    protected function getPackageProviders($app): array
     {
         return [
             RouteServiceProvider::class,
@@ -28,7 +28,7 @@ class TestCase extends BaseTestCase
         ];
     }
 
-    protected function getPackageAliases($app)
+    protected function getPackageAliases($app): array
     {
         return [
             'laravellocalization' => LaravelLocalization::class,
