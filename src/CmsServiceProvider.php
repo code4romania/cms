@@ -20,6 +20,27 @@ class CmsServiceProvider extends ServiceProvider
         RouteServiceProvider::class,
     ];
 
+    /** @var array<string> */
+    public static $configFiles = [
+        'blade-svg.php',
+        'cms.php',
+        'seotools.php',
+        'twill.php',
+        'twill-navigation.php',
+        'twill/block_editor.php',
+        'twill/dashboard.php',
+        'twill/file_library.php',
+        'twill/media_library.php',
+        'translatable.php',
+    ];
+
+    /** @var array<string> */
+    public static $assetFiles = [
+        'package.json',
+        'tailwind.config.js',
+        'webpack.mix.js',
+    ];
+
     /**
      * Register providers
      *
@@ -44,9 +65,9 @@ class CmsServiceProvider extends ServiceProvider
     {
         $this->publishConfigs();
         $this->publishMigrations();
-        $this->publishAssets();
-        $this->publishViews();
         $this->publishTranslations();
+        $this->publishResources();
+        $this->publishAssets();
 
         $this->registerCommands();
         $this->registerRelationMorphMap();
@@ -75,27 +96,19 @@ class CmsServiceProvider extends ServiceProvider
      */
     private function publishConfigs(): void
     {
-        $configs = [
-            'blade-svg',
-            'cms',
-            'seotools',
-            'twill',
-            'twill-navigation',
-            'twill/block_editor',
-            'twill/dashboard',
-            'twill/file_library',
-            'twill/media_library',
-            'translatable',
-        ];
+        collect(self::$configFiles)
+            ->each(function ($fileName) {
+                $configSourcePath = __DIR__ . '/../config/' . $fileName;
+                $configOutputPath = config_path($fileName);
 
-        foreach ($configs as $config) {
-            $configSourcePath = __DIR__ . '/../config/' . $config . '.php';
-            $configOutputPath = config_path($config . '.php');
+                $this->publishes([
+                    $configSourcePath => $configOutputPath,
+                ], 'config');
+            });
 
-            $this->publishes([
-                $configSourcePath => $configOutputPath,
-            ], 'config');
-        }
+        $this->publishes([
+            __DIR__ . '/../.gitignore.dist' => app()->basePath('.gitignore'),
+        ], 'config');
     }
 
     private function publishMigrations(): void
@@ -131,27 +144,34 @@ class CmsServiceProvider extends ServiceProvider
     }
 
     /**
-     * Registers and publishes the package assets.
+     * Publishes the package resources.
+     *
+     * @return void
+     */
+    private function publishResources(): void
+    {
+        $this->publishes([
+            __DIR__ . '/../resources' => resource_path(),
+        ], 'resources');
+    }
+
+    /**
+     * Publishes the package assets.
      *
      * @return void
      */
     private function publishAssets(): void
     {
-        $this->publishes([
-            __DIR__ . '/../resources/svg' => resource_path('svg'),
-        ], 'assets');
-    }
 
-    /**
-     * Registers and publishes the package views.
-     *
-     * @return void
-     */
-    private function publishViews(): void
-    {
-        $this->publishes([
-            __DIR__ . '/../resources/views' => resource_path('views'),
-        ], 'views');
+        collect(self::$assetFiles)
+            ->each(function ($fileName) {
+                $sourcePath = __DIR__ . '/../' . $fileName;
+                $outputPath = app()->basePath($fileName);
+
+                $this->publishes([
+                    $sourcePath => $outputPath,
+                ], 'assets');
+            });
     }
 
     /**
