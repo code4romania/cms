@@ -2,6 +2,7 @@
 
 namespace Code4Romania\Cms\Commands;
 
+use A17\Twill\TwillServiceProvider;
 use Code4Romania\Cms\CmsServiceProvider;
 use Illuminate\Console\Command;
 use Illuminate\Database\DatabaseManager;
@@ -97,6 +98,9 @@ class Install extends Command
         $filesToDelete = [
             app()->basePath('.gitignore'),
             app()->basePath('.env.example'),
+            database_path('migrations/2014_10_12_000000_create_users_table.php'),
+            database_path('migrations/2014_10_12_100000_create_password_resets_table.php'),
+            database_path('migrations/2019_08_19_000000_create_failed_jobs_table.php'),
         ];
 
         $assetFiles = collect(CmsServiceProvider::$assetFiles)
@@ -124,6 +128,11 @@ class Install extends Command
         $this->call('twill:blocks');
 
         if ($this->confirm('Do you also want to run the Twill install process?')) {
+            $this->call('vendor:publish', [
+                '--provider' => TwillServiceProvider::class,
+                '--tag' => 'migrations',
+            ]);
+
             if ($this->checkDatabaseConnection()) {
                 $this->call('twill:install');
             } else {

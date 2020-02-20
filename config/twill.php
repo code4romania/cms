@@ -10,7 +10,7 @@ return [
     'admin_app_path' => env('ADMIN_APP_PATH', 'admin'),
 
     'migrations_use_big_integers' => true,
-    'load_default_migrations_from_twill' => true,
+    'load_default_migrations_from_twill' => false,
 
     'enabled' => [
 
