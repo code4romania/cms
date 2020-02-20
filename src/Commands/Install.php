@@ -14,7 +14,7 @@ class Install extends Command
      *
      * @var string
      */
-    protected $signature = 'cms:install';
+    protected $signature = 'cms:install {--y|yes : Automatic yes to initial prompt}';
 
     /**
      * The console command description.
@@ -52,7 +52,7 @@ class Install extends Command
         $this->warn('This is a potentially destructive action!');
         $this->warn('It will (re)publish and overwrite all the files provided by this package.');
 
-        if (!$this->confirm('Are you sure you want to continue?')) {
+        if (!$this->option('yes') && !$this->confirm('Are you sure you want to continue?')) {
             return;
         }
 
@@ -90,20 +90,30 @@ class Install extends Command
                 );
             });
 
-        $this->info('Deleting previous config files');
+        $this->info('Deleting previously copied files.');
 
-        collect(CmsServiceProvider::$configFiles)
-            ->each(fn ($fileName) => $this->files->delete(config_path($fileName)));
-
-        $this->files->delete([
+        $filesToDelete = [
             app()->basePath('.gitignore'),
             app()->basePath('.env.example'),
-        ]);
+        ];
 
-        $this->info('Deleting previous asset files');
-        collect(CmsServiceProvider::$assetFiles)
-            ->each(fn ($fileName) => $this->files->delete(app()->basePath($fileName)));
+        $assetFiles = collect(CmsServiceProvider::$assetFiles)
+            ->map(fn ($fileName) => app()->basePath($fileName));
 
+        $configFiles = collect(CmsServiceProvider::$configFiles)
+            ->map(fn ($fileName) => config_path($fileName));
+
+        collect($filesToDelete)
+            ->merge($configFiles)
+            ->merge($assetFiles)
+            ->each(function ($filePath) {
+                $this->info(
+                    "Removed File <warning>[{$filePath}]</warning>"
+                );
+                $this->files->delete($filePath);
+            });
+
+        $this->info('Deleting complete.');
         $this->line('');
     }
 
@@ -139,5 +149,6 @@ class Install extends Command
 
         $this->info('Publishing vendor files.');
         $this->call('vendor:publish', $arguments);
+        $this->line('');
     }
 }
