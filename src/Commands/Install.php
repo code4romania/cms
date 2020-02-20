@@ -61,6 +61,8 @@ class Install extends Command
         $this->removeFiles();
         $this->publish();
         $this->installTwill();
+
+        $this->buildFrontend();
     }
 
     public function checkDatabaseConnection(): bool
@@ -129,6 +131,12 @@ class Install extends Command
                 $this->warn('After configuring the database access, you still need to run `php artisan twill:install`');
             }
         }
+    }
+
+    private function buildFrontend(): void
+    {
+        $this->line('');
+        $this->info('Don\'t forget to build the frontend with <warning>npm run cms:install</warning>');
     }
 
     /**
