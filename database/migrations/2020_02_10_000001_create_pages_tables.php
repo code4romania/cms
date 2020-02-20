@@ -19,7 +19,7 @@ class CreatePagesTables extends Migration
             $table->timestamp('publish_start_date')->nullable();
             $table->timestamp('publish_end_date')->nullable();
 
-            $table->boolean('show_header', 7)->default(true);
+            $table->boolean('show_header')->default(true);
         });
 
         Schema::create('page_translations', static function (Blueprint $table): void {

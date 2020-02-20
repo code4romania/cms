@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Code4Romania\Cms\Helpers;
 
 use A17\Twill\Repositories\SettingRepository;
-use Illuminate\Support\Collection;
 
 class SettingsHelper
 {

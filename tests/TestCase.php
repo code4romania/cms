@@ -2,6 +2,9 @@
 
 namespace Code4Romania\Cms\Tests;
 
+use A17\Twill\RouteServiceProvider;
+use A17\Twill\TwillServiceProvider;
+use Code4Romania\Cms\CmsServiceProvider;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Collection;
@@ -19,8 +22,9 @@ class TestCase extends BaseTestCase
     protected function getPackageProviders($app)
     {
         return [
-            'Code4Romania\Cms\CmsServiceProvider',
-            'A17\Twill\TwillServiceProvider',
+            RouteServiceProvider::class,
+            CmsServiceProvider::class,
+            TwillServiceProvider::class,
         ];
     }
 

@@ -5,9 +5,7 @@ declare(strict_types=1);
 namespace Code4Romania\Cms\Http\Controllers\Front;
 
 use Code4Romania\Cms\Helpers\SettingsHelper;
-use Code4Romania\Cms\Helpers\UrlHelper;
 use Code4Romania\Cms\Models\Page;
-use Illuminate\Support\Facades\Route;
 use Illuminate\View\View;
 
 class PageController extends Controller

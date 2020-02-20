@@ -2,7 +2,7 @@
 
 @php
     $view = sprintf('%s.%s', config('twill.block_editor.block_views_path'), 'accordionItem');
-    $isBlockPreview = $url->isBlockPreview();
+    $isBlockPreview = $url->isAdminUrl();
 @endphp
 
 <section class="container" x-data="{ selected: 0 }">

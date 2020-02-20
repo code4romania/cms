@@ -22,7 +22,6 @@ class Page extends Model implements Sortable
     protected $fillable = [
         'published',
         'title',
-        // 'subtitle',
         'description',
         'position',
         'show_header',
@@ -44,7 +43,6 @@ class Page extends Model implements Sortable
      */
     public $translatedAttributes = [
         'title',
-        'subtitle',
         'description',
         'active',
     ];
