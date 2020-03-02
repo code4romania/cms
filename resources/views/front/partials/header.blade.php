@@ -1,9 +1,3 @@
-@inject('url', 'Code4Romania\Cms\Helpers\UrlHelper')
-
-@php
-    $alternateUrls = $url->getAlternateLocaleUrls(Route::currentRouteName(), $item ?? null);
-@endphp
-
 <nav class="lg:shadow-none" x-data="{ open: false }" :class="{ 'shadow-lg': open }">
     <div class="container flex flex-wrap items-center justify-between py-5">
         <a href="{{ route('front.pages.index') }}" class="inline-block">
@@ -20,28 +14,6 @@
             </button>
         </div>
 
-        <ul id="header-menu" class="items-center justify-end w-full col-span-4 text-center lg:w-auto lg:flex lg:col-span-9 lg:col-start-4"
-            :class="{ 'hidden' : !open }" x-on:click.away="open = false">
-
-            @for ($i = 0; $i < 5; $i++)
-                <li class="py-2 lg:ml-6">
-                    <a
-                        class="inline-flex px-3 py-2 rounded hover:text-primary-500 hover:bg-gray-100 focus:bg-gray-200 focus:outline-none"
-                        href="#"
-                    >Menu item</a>
-                </li>
-            @endfor
-
-            @foreach ($alternateUrls as $locale => $url)
-                <li class="py-2 lg:ml-6">
-                    <a
-                        class="inline-flex px-3 py-2 rounded hover:text-primary-500 hover:bg-gray-100 focus:bg-gray-200 focus:outline-none"
-                        title="{{ config("translatable.languages.$locale") }}"
-                        hreflang="{{ $locale }}"
-                        href="{{ $url }}"
-                    >{{ strtoupper($locale) }}</a>
-                </li>
-            @endforeach
-        </ul>
+        @include('front.partials.headerMenu')
     </div>
 </nav>

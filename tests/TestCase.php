@@ -8,6 +8,7 @@ use Code4Romania\Cms\CmsServiceProvider;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Collection;
+use Kalnoy\Nestedset\NestedSetServiceProvider;
 use Mcamara\LaravelLocalization\LaravelLocalization;
 use Orchestra\Testbench\BrowserKit\TestCase as BaseTestCase;
 use Orchestra\Testbench\Concerns\WithLoadMigrationsFrom;
@@ -25,6 +26,7 @@ class TestCase extends BaseTestCase
             RouteServiceProvider::class,
             CmsServiceProvider::class,
             TwillServiceProvider::class,
+            NestedSetServiceProvider::class,
         ];
     }
 

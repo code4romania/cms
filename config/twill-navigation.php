@@ -38,4 +38,8 @@ return [
             ],
         ],
     ],
+    'menuItems' => [
+        'title' => 'Menus',
+        'module' => true,
+    ],
 ];

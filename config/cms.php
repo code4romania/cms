@@ -38,6 +38,19 @@ return [
         ],
     ],
 
+    'menu' => [
+        'locations' => [
+            'header',
+            'footer',
+        ],
+
+        'itemTypes' => [
+            'external',
+            'page',
+        ],
+    ],
+
+
     'colorGroups' => [
         'primary',
         'secondary',
