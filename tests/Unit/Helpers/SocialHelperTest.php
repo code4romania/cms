@@ -8,7 +8,6 @@ use Code4Romania\Cms\Tests\TestCase;
 
 class SocialHelperTest extends TestCase
 {
-
     /** @test */
     public function itFetchesFormattedNetworks()
     {

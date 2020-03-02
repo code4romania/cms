@@ -60,6 +60,7 @@ class Install extends Command
         $this->warn('You have been warned.');
 
         $this->removeFiles();
+        $this->publish('migrations', true);
         $this->publish();
         $this->installTwill();
 
@@ -89,7 +90,7 @@ class Install extends Command
             ->each(function ($file) {
                 $this->files->replace(
                     $file->getPathname(),
-                    "<?php // this file is intentionally left blank"
+                    '<?php // this file is intentionally left blank'
                 );
             });
 
@@ -154,7 +155,8 @@ class Install extends Command
      * @param null|string $tag
      * @return void
      */
-    private function publish(?string $tag = null): void
+
+    private function publish(?string $tag = null, bool $force = false): void
     {
         $arguments = [
             '--provider' => CmsServiceProvider::class,
@@ -162,6 +164,10 @@ class Install extends Command
 
         if (!is_null($tag)) {
             $arguments['--tag'] = $tag;
+        }
+
+        if ($force) {
+            $arguments['--force'] = true;
         }
 
         $this->info('Publishing vendor files.');
