@@ -48,17 +48,17 @@ return [
         'imageGrid' => [
             'title'      => 'Image grid',
             'icon'       => 'fix-grid',
-            'component'  => 'a17-block-imagegrid',
+            'component'  => 'a17-block-imageGrid',
         ],
         'imageText' => [
             'title'      => 'Image with text',
             'icon'       => 'image-text',
-            'component'  => 'a17-block-imagetext',
+            'component'  => 'a17-block-imageText',
         ],
         'callToAction' => [
             'title'      => 'Call to action',
             'icon'       => 'colors',
-            'component'  => 'a17-block-calltoaction',
+            'component'  => 'a17-block-callToAction',
         ],
         'newsletter' => [
             'title'      => 'Subscribe to newsletter',
@@ -75,13 +75,13 @@ return [
         'accordionItem' => [
             'title'      => 'Item',
             'trigger'    => 'Add accordion item',
-            'component'  => 'a17-block-accordionitem',
+            'component'  => 'a17-block-accordionItem',
             'max'        => 20,
         ],
         'counterItem' => [
             'title'      => 'Item',
             'trigger'    => 'Add counter item',
-            'component'  => 'a17-block-counteritem',
+            'component'  => 'a17-block-counterItem',
             'max'        => 20,
         ],
     ],
