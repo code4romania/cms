@@ -12,16 +12,13 @@ class CmsServiceProvider extends ServiceProvider
 {
     /**
      * Service providers to be registered.
-     *
-     * @var array<string>
      */
-    protected $providers = [
+    protected array $providers = [
         LocaleServiceProvider::class,
         RouteServiceProvider::class,
     ];
 
-    /** @var array<string> */
-    public static $configFiles = [
+    public static array $configFiles = [
         'blade-svg.php',
         'cms.php',
         'deploy.php',
@@ -35,8 +32,7 @@ class CmsServiceProvider extends ServiceProvider
         'translatable.php',
     ];
 
-    /** @var array<string> */
-    public static $assetFiles = [
+    public static array $assetFiles = [
         'deploy/assets.php',
         'package.json',
         'tailwind.config.js',
@@ -45,8 +41,6 @@ class CmsServiceProvider extends ServiceProvider
 
     /**
      * Register providers
-     *
-     * @return void
      */
     public function register(): void
     {
@@ -60,8 +54,6 @@ class CmsServiceProvider extends ServiceProvider
 
     /**
      * Bootstrap services.
-     *
-     * @return void
      */
     public function boot(): void
     {
@@ -77,8 +69,6 @@ class CmsServiceProvider extends ServiceProvider
 
     /**
      * Merges the package configuration files into the given configuration namespaces.
-     *
-     * @return void
      */
     private function mergeConfigs(): void
     {
@@ -93,8 +83,6 @@ class CmsServiceProvider extends ServiceProvider
 
     /**
      * Defines the package configuration files for publishing.
-     *
-     * @return void
      */
     private function publishConfigs(): void
     {
@@ -104,7 +92,7 @@ class CmsServiceProvider extends ServiceProvider
         ], 'config');
 
         collect(self::$configFiles)
-            ->each(function ($fileName) {
+            ->each(function ($fileName): void {
                 $configSourcePath = __DIR__ . '/../config/' . $fileName;
                 $configOutputPath = config_path($fileName);
 
@@ -136,7 +124,7 @@ class CmsServiceProvider extends ServiceProvider
             // 'applicationForm' => '\Models\ApplicationForm',
             // 'byproduct'       => '\Models\Byproduct',
             // 'domain'          => '\Models\Domain',
-            'page'            => 'Code4Romania\Cms\Models\Page',
+            'page'               => 'Code4Romania\Cms\Models\Page',
             // 'partner'         => '\Models\Partner',
             // 'financer'        => '\Models\Partner',
             // 'implementer'     => '\Models\Partner',
@@ -148,8 +136,6 @@ class CmsServiceProvider extends ServiceProvider
 
     /**
      * Publishes the package resources.
-     *
-     * @return void
      */
     private function publishResources(): void
     {
@@ -160,14 +146,12 @@ class CmsServiceProvider extends ServiceProvider
 
     /**
      * Publishes the package assets.
-     *
-     * @return void
      */
     private function publishAssets(): void
     {
 
         collect(self::$assetFiles)
-            ->each(function ($fileName) {
+            ->each(function ($fileName): void {
                 $sourcePath = __DIR__ . '/../' . $fileName;
                 $outputPath = app()->basePath($fileName);
 
@@ -179,8 +163,6 @@ class CmsServiceProvider extends ServiceProvider
 
     /**
      * Registers and publishes the package translations.
-     *
-     * @return void
      */
     private function publishTranslations(): void
     {

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Code4Romania\Cms\Presenters;
 
-use Code4Romania\Cms\Presenters\Presenter;
 use Leewillis77\CachedEmbed\CachedEmbed;
 
 /**
@@ -17,8 +16,6 @@ class BlockPresenter extends Presenter
 
     /**
      * Block: callToAction
-     *
-     * @return string
      */
     public function callToActionStyle(): string
     {
@@ -42,8 +39,6 @@ class BlockPresenter extends Presenter
 
     /**
      * Block: embed
-     *
-     * @return null|string
      */
     public function embedCode(): ?string
     {
@@ -54,15 +49,13 @@ class BlockPresenter extends Presenter
                 config('cms.embeds.expiry')
             );
             return $embed->code;
-        } catch (\Exception $e) {
+        } catch (\Exception $exception) {
             return null;
         }
     }
 
     /**
      * Block: imageText
-     *
-     * @return string
      */
     public function imageTextContainerClass(): string
     {
@@ -101,8 +94,6 @@ class BlockPresenter extends Presenter
 
     /**
      * Block: imageText
-     *
-     * @return string
      */
     public function imageTextImageClass(): string
     {
@@ -129,8 +120,6 @@ class BlockPresenter extends Presenter
 
     /**
      * Block: imageText
-     *
-     * @return string
      */
     public function imageTextContentClass(): string
     {
@@ -155,8 +144,6 @@ class BlockPresenter extends Presenter
 
     /**
      * Block: counter
-     *
-     * @return string
      */
     public function counterContainerClass(): string
     {
@@ -192,8 +179,6 @@ class BlockPresenter extends Presenter
 
     /**
      * Block: counter
-     *
-     * @return string
      */
     public function counterColumnsClass(): string
     {
@@ -221,8 +206,6 @@ class BlockPresenter extends Presenter
 
     /**
      * Block: counter
-     *
-     * @return string
      */
     public function counterBadgeBackgroundClass(): string
     {
@@ -253,8 +236,6 @@ class BlockPresenter extends Presenter
     }
     /**
      * Block: counter
-     *
-     * @return string
      */
     public function counterBadgeTextClass(): string
     {

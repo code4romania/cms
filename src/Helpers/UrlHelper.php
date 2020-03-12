@@ -10,7 +10,7 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class UrlHelper
 {
-    public static function isExternal($url): bool
+    public static function isExternal(string $url): bool
     {
         $parts = parse_url($url);
 

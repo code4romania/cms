@@ -10,11 +10,6 @@ use Illuminate\View\View;
 
 class PageController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return View
-     */
     public function index(): View
     {
         $item = Page::findOrFail(
@@ -24,12 +19,6 @@ class PageController extends Controller
         return view('front.pages.show')->withItem($item);
     }
 
-    /**
-     * Display the specified published resource that has an active translation.
-     *
-     * @param string $slug
-     * @return View
-     */
     public function show(string $slug): View
     {
         $item = Page::forSlug($slug)
@@ -40,12 +29,6 @@ class PageController extends Controller
         return view('front.pages.show')->withItem($item);
     }
 
-    /**
-     * Preview the specified resource.
-     *
-     * @param string $slug
-     * @return View
-     */
     public function preview(string $slug): View
     {
         $item = Page::forSlug($slug)

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Code4Romania\Cms\Commands;
 
 use A17\Twill\TwillServiceProvider;
@@ -24,31 +26,25 @@ class Install extends Command
      */
     protected $description = 'Install CMS features';
 
-    /** @var Filesystem */
-    protected $files;
+    protected Filesystem $files;
 
-    /** @var DatabaseManager */
-    protected $db;
+    protected DatabaseManager $database;
 
     /**
      * Create a new command instance.
-     *
-     * @return void
      */
-    public function __construct(Filesystem $files, DatabaseManager $db)
+    public function __construct(Filesystem $files, DatabaseManager $database)
     {
         parent::__construct();
 
         $this->files = $files;
-        $this->db = $db;
+        $this->database = $database;
     }
 
     /**
      * Execute the console command.
-     *
-     * @return mixed
      */
-    public function handle()
+    public function handle(): void
     {
         $this->warn('This is a potentially destructive action!');
         $this->warn('It will (re)publish and overwrite all the files provided by this package.');
@@ -70,8 +66,8 @@ class Install extends Command
     public function checkDatabaseConnection(): bool
     {
         try {
-            $this->db->connection()->getPdo();
-        } catch (\Exception $e) {
+            $this->database->connection()->getPdo();
+        } catch (\Exception $exception) {
             return false;
         }
 
@@ -105,15 +101,15 @@ class Install extends Command
         ];
 
         $assetFiles = collect(CmsServiceProvider::$assetFiles)
-            ->map(fn ($fileName) => app()->basePath($fileName));
+            ->map(fn ($fileName): string => app()->basePath($fileName));
 
         $configFiles = collect(CmsServiceProvider::$configFiles)
-            ->map(fn ($fileName) => config_path($fileName));
+            ->map(fn ($fileName): string => config_path($fileName));
 
         collect($filesToDelete)
             ->merge($configFiles)
             ->merge($assetFiles)
-            ->each(function ($filePath) {
+            ->each(function ($filePath): void {
                 $this->info(
                     "Removed File <warning>[{$filePath}]</warning>"
                 );
@@ -151,11 +147,7 @@ class Install extends Command
 
     /**
      * Publishes a specific tag
-     *
-     * @param null|string $tag
-     * @return void
      */
-
     private function publish(?string $tag = null, bool $force = false): void
     {
         $arguments = [

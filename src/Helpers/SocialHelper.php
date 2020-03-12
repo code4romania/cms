@@ -10,8 +10,6 @@ class SocialHelper
 {
     /**
      * Retrieve social media profile settings, filter and format for footer display
-     *
-     * @return Collection
      */
     public static function getNetworks(): Collection
     {

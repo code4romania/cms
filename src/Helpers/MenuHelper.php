@@ -6,6 +6,7 @@ namespace Code4Romania\Cms\Helpers;
 
 use Code4Romania\Cms\Models\MenuItem;
 use Code4Romania\Cms\Models\Page;
+use Illuminate\Support\Collection;
 
 class MenuHelper
 {
@@ -25,7 +26,7 @@ class MenuHelper
         return self::traverseTree($items);
     }
 
-    protected static function traverseTree($items): array
+    protected static function traverseTree(Collection $items): array
     {
         $tree = [];
 

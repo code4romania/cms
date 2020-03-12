@@ -14,7 +14,7 @@ class SettingsHelper
             ->byKey($key, $section);
     }
 
-    public static function set($fields, ?string $section = null): void
+    public static function set(array $fields, ?string $section = null): void
     {
         app(SettingRepository::class)
             ->saveAll($fields, $section);

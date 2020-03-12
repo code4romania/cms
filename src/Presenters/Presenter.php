@@ -19,7 +19,6 @@ abstract class Presenter
     /**
      * Allow for property-style retrieval
      *
-     * @param string $property
      * @return mixed
      */
     public function __get(string $property)

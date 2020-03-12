@@ -15,7 +15,7 @@ class Controller extends TwillFrontControler
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function isPreview()
+    public function isPreview(): bool
     {
         return Str::endsWith(Route::currentRouteName(), '.preview');
     }

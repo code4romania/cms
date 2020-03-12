@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Code4Romania\Cms\Http\Requests\Admin;
 
 use A17\Twill\Http\Requests\Admin\Request;

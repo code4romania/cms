@@ -1,8 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Code4Romania\Cms\Http\Controllers\Admin;
 
 use A17\Twill\Http\Controllers\Admin\ModuleController;
+use Illuminate\Support\Collection;
 
 class MenuItemController extends ModuleController
 {
@@ -34,24 +37,28 @@ class MenuItemController extends ModuleController
         'location'  => 'location',
     ];
 
-    protected function indexData($request)
+    protected function indexData($request): array
     {
         return [
             'nested' => true,
             'nestedDepth' => 1,
-            'locationList'  => config('cms.menu_locations'),
+            'locationList'  => config('cms.menu.locations'),
         ];
     }
 
-    protected function transformIndexItems($items)
+    protected function transformIndexItems($items): Collection
     {
         return $items->toTree();
     }
 
-    protected function indexItemData($item)
+    protected function indexItemData($item): array
     {
-        return ($item->children ? [
+        if (!$item->children) {
+            return [];
+        }
+
+        return [
             'children' => $this->getIndexTableData($item->children),
-        ] : []);
+        ];
     }
 }

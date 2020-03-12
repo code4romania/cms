@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Code4Romania\Cms\Repositories;
 
 use A17\Twill\Repositories\Behaviors\HandleTranslations;
@@ -16,9 +18,9 @@ class MenuItemRepository extends ModuleRepository
         $this->model = $model;
     }
 
-    public function setNewOrder($ids)
+    public function setNewOrder($ids): void
     {
-        DB::transaction(function () use ($ids) {
+        DB::transaction(function () use ($ids): void {
             MenuItem::saveTreeFromIds($ids);
         }, 3);
     }

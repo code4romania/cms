@@ -12,7 +12,6 @@ use A17\Twill\Models\Behaviors\HasSlug;
 use A17\Twill\Models\Behaviors\HasTranslation;
 use A17\Twill\Models\Behaviors\Sortable;
 use A17\Twill\Models\Model;
-use Illuminate\Support\Arr;
 
 class Page extends Model implements Sortable
 {
