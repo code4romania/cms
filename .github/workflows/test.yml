@@ -6,12 +6,12 @@ jobs:
   test:
     runs-on: ubuntu-latest
     strategy:
-      fail-fast: true
+      fail-fast: false
       matrix:
         php-version:
           - 7.4
         dependency-version:
-          - prefer-lowest
+          # - prefer-lowest
           - prefer-stable
 
     name: PHP ${{ matrix.php-version }} - ${{ matrix.dependency-version }}
