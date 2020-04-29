@@ -3,37 +3,38 @@ name: Test
 on: [push]
 
 jobs:
-    test:
-        runs-on: ubuntu-latest
-        strategy:
-            fail-fast: true
-            matrix:
-                php-version:
-                    - 7.4
-                dependency-version:
-                    # - prefer-lowest
-                    - prefer-stable
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+      matrix:
+        php-version:
+          - 7.4
+        dependency-version:
+          - prefer-lowest
+          - prefer-stable
 
         name: PHP ${{ matrix.php-version }} - ${{ matrix.dependency-version }}
 
         steps:
-            - name: Checkout code
-              uses: actions/checkout@v2
-            - name: Setup PHP
-              uses: shivammathur/setup-php@v2
-              with:
-                  php-version: ${{ matrix.php-version }}
-                  extensions: mbstring, sqlite, pdo_sqlite
-                  coverage: none
+          - name: Checkout code
+            uses: actions/checkout@v2
 
-            - name: Cache dependencies
-              uses: actions/cache@v1
-              with:
-                  path: ~/.composer/cache/files
-                  key: dependencies-php-${{ matrix.php-version }}-composer-${{ hashFiles('composer.lock') }}
+          - name: Setup PHP
+            uses: shivammathur/setup-php@v2
+            with:
+              php-version: ${{ matrix.php-version }}
+              extensions: mbstring, sqlite, pdo_sqlite
+              coverage: none
 
-            - name: Install dependencies
-              run: composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction --no-suggest
+          - name: Cache dependencies
+            uses: actions/cache@v1
+            with:
+              path: ~/.composer/cache/files
+              key: dependencies-php-${{ matrix.php-version }}-composer-${{ hashFiles('composer.json') }}
 
-            - name: Run tests
-              run: composer test
+          - name: Install dependencies
+            run: composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction --no-suggest
+
+          - name: Run tests
+            run: composer test
