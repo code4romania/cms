@@ -15,7 +15,7 @@ class SocialHelperTest extends TestCase
         $socialNetworks = collect(config('cms.socialNetworks'));
 
         SettingsHelper::set(
-            $socialNetworks->map(fn (): string => $user),
+            $socialNetworks->map(fn (): string => $user)->toArray(),
             'social'
         );
 
