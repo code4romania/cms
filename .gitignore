@@ -3,3 +3,5 @@
 /node_modules
 /coverage
 .phpunit.result.cache
+package-lock.json
+composer.lock

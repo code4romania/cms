@@ -19,14 +19,14 @@
         "area17/twill": "^2.0",
         "artesaos/seotools": "^0.17",
         "kalnoy/nestedset": "^5.0",
-        "laravel/framework": "^7.0",
+        "laravel/framework": "^7.9",
         "leewillis77/cached-embed": "^0.8",
         "lorisleiva/laravel-deployer": "^0.3",
-        "mcamara/laravel-localization": "^1.4",
+        "mcamara/laravel-localization": "^1.5",
         "nothingworks/blade-svg": "^0.3"
     },
     "require-dev": {
-        "nunomaduro/larastan": "^0.5.2",
+        "nunomaduro/larastan": "^0.5",
         "nunomaduro/phpinsights": "^1.14",
         "orchestra/testbench-browser-kit": "^5.0",
         "phpunit/phpunit": "^9.0"
@@ -56,11 +56,7 @@
         "laravel": {
             "providers": [
                 "Code4Romania\\Cms\\CmsServiceProvider"
-            ],
-            "aliases": {
-                "LaravelLocalization": "Mcamara\\LaravelLocalization\\Facades\\LaravelLocalization",
-                "SEO": "Artesaos\\SEOTools\\Facades\\SEOTools"
-            }
+            ]
         }
     }
 }
