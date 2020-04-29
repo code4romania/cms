@@ -1,0 +1,3 @@
+@formField('repeater', [
+    'type' => 'accordionItem'
+])

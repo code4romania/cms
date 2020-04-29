@@ -1,0 +1,52 @@
+.rich-text {
+    .ql-align-center {
+        @apply text-center;
+    }
+
+    .ql-align-right {
+        @apply text-right;
+    }
+
+    .ql-align-justify {
+        @apply text-justify;
+    }
+
+    blockquote {
+        @apply relative py-4 text-left;
+
+        &::before {
+            @apply font-serif font-semibold leading-none text-primary-100;
+            @apply absolute top-0 left-0;
+
+            @screen md {
+                @apply -ml-5;
+            }
+
+            @screen lg {
+                @apply -ml-10;
+            }
+
+            content: open-quote;
+            font-size: 11em;
+            z-index: -1;
+        }
+
+        &::after {
+            content: no-close-quote;
+        }
+
+        p {
+            @apply p-0 m-0;
+        }
+
+        + cite {
+            @apply not-italic;
+        }
+
+        @at-root {
+            html[lang='ro'] .block-content blockquote::before {
+                @apply bottom-0 top-auto;
+            }
+        }
+    }
+}

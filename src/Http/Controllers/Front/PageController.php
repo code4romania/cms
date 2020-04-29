@@ -4,43 +4,36 @@ declare(strict_types=1);
 
 namespace Code4Romania\Cms\Http\Controllers\Front;
 
+use Code4Romania\Cms\Helpers\SettingsHelper;
 use Code4Romania\Cms\Models\Page;
 use Illuminate\View\View;
 
 class PageController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\View\View
-     */
     public function index(): View
     {
-        return view('cms::pages.show', [
-            'item' => Page::first(),
-        ]);
+        $item = Page::findOrFail(
+            SettingsHelper::get('frontPage', 'site')
+        );
+
+        return view('front.pages.show')->withItem($item);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  string  $slug
-     * @return \Illuminate\View\View
-     */
     public function show(string $slug): View
     {
-        if ($this->isPreview()) {
-            $item = Page::forSlug($slug)
-                ->firstOrFail();
-        } else {
-            $item = Page::forSlug($slug)
-                ->publishedInListings()
-                ->withActiveTranslations()
-                ->firstOrFail();
-        }
+        $item = Page::forSlug($slug)
+            ->publishedInListings()
+            ->withActiveTranslations()
+            ->firstOrFail();
 
-        return view('cms::pages.show', [
-            'item' => $item,
-        ]);
+        return view('front.pages.show')->withItem($item);
+    }
+
+    public function preview(string $slug): View
+    {
+        $item = Page::forSlug($slug)
+            ->firstOrFail();
+
+        return view('front.pages.show')->withItem($item);
     }
 }

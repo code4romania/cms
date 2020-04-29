@@ -14,8 +14,6 @@ class LocaleServiceProvider extends ServiceProvider
 {
     /**
      * Bootstraps the package services.
-     *
-     * @return void
      */
     public function boot(): void
     {
@@ -24,8 +22,6 @@ class LocaleServiceProvider extends ServiceProvider
 
     /**
      * Register services.
-     *
-     * @return void
      */
     public function register(): void
     {
@@ -34,8 +30,6 @@ class LocaleServiceProvider extends ServiceProvider
 
     /**
      * Infers laravellocalization config from translatable
-     *
-     * @return void
      */
     public function setupLocalizationConfig(): void
     {
@@ -69,8 +63,6 @@ class LocaleServiceProvider extends ServiceProvider
 
     /**
      * Register Route middleware.
-     *
-     * @return void
      */
     private function registerRouteMiddlewares(): void
     {

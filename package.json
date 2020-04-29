@@ -8,21 +8,24 @@
         "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
         "prod": "npm run production",
         "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-        "cms-install": "cd vendor/code4romania/cms && npm ci",
-        "cms-build": "rm -f public/hot & cd vendor/code4romania/cms && npm run dev && cp -R public/* ${INIT_CWD}/public"
+        "twill:install": "cd vendor/area17/twill && npm ci",
+        "twill:build": "rm -f public/hot && npm run twill:copy-blocks && cd vendor/area17/twill && npm run prod && cp -R public/* ${INIT_CWD}/public",
+        "twill:build-dev": "rm -f public/hot && npm run twill:copy-blocks && cd vendor/area17/twill && npm run dev && cp -R public/* ${INIT_CWD}/public",
+        "twill:copy-blocks": "npm run twill:clean-blocks && mkdir -p resources/assets/js/blocks/ && cp -R resources/assets/js/blocks/ vendor/area17/twill/frontend/js/components/blocks/customs/",
+        "twill:clean-blocks": "rm -rf vendor/area17/twill/frontend/js/components/blocks/customs",
+        "cms:install": "npm install && npm run twill:install && npm run prod && npm run twill:build"
     },
     "devDependencies": {
-        "axios": "^0.19",
-        "cross-env": "^5.1",
-        "laravel-mix": "^4.0.7",
-        "lodash": "^4.17.13",
-        "resolve-url-loader": "^2.3.1",
-        "sass": "^1.15.2",
-        "sass-loader": "^7.1.0",
-        "vue": "^2.5.17",
+        "@tailwindcss/custom-forms": "^0.2.1",
+        "alpinejs": "^2.0.0",
+        "cross-env": "^7.0.0",
+        "laravel-mix": "^5.0.1",
+        "laravel-mix-purgecss": "^5.0.0-rc.1",
+        "postcss-import": "^12.0.1",
+        "postcss-nested": "^4.2.1",
+        "resolve-url-loader": "^3.1.1",
+        "tailwindcss": "^1.2.0",
+        "tailwindcss-typography": "^3.0.1",
         "vue-template-compiler": "^2.6.11"
-    },
-    "dependencies": {
-        "tailwindcss": "^1.1.4"
     }
 }

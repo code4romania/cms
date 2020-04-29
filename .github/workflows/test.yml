@@ -6,13 +6,12 @@ jobs:
   test:
     runs-on: ubuntu-latest
     strategy:
-      fail-fast: true
+      fail-fast: false
       matrix:
         php-version:
-          - 7.3
           - 7.4
         dependency-version:
-          - prefer-lowest
+          # - prefer-lowest
           - prefer-stable
 
     name: PHP ${{ matrix.php-version }} - ${{ matrix.dependency-version }}
@@ -20,8 +19,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+
       - name: Setup PHP
-        uses: shivammathur/setup-php@v1
+        uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php-version }}
           extensions: mbstring, sqlite, pdo_sqlite
@@ -31,7 +31,7 @@ jobs:
         uses: actions/cache@v1
         with:
           path: ~/.composer/cache/files
-          key: dependencies-php-${{ matrix.php-version }}-composer-${{ hashFiles('composer.lock') }}
+          key: dependencies-php-${{ matrix.php-version }}-composer-${{ hashFiles('composer.json') }}
 
       - name: Install dependencies
         run: composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction --no-suggest

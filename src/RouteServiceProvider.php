@@ -6,21 +6,16 @@ namespace Code4Romania\Cms;
 
 use Code4Romania\Cms\Http\Middleware\RedirectTrailingSlash;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
-use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class RouteServiceProvider extends ServiceProvider
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $namespace = 'Code4Romania\Cms\Http\Controllers';
 
     /**
      * Bootstraps the package services.
-     *
-     * @return void
      */
     public function boot(): void
     {
@@ -29,13 +24,7 @@ class RouteServiceProvider extends ServiceProvider
         parent::boot();
     }
 
-    /**
-     * Register Route middleware.
-     *
-     * @param Router $router
-     * @return void
-     */
-    private function registerRouteMiddlewares(Router $router): void
+    private function registerRouteMiddlewares(): void
     {
         Route::aliasMiddleware('redirectTrailingSlash', RedirectTrailingSlash::class);
     }
@@ -43,10 +32,10 @@ class RouteServiceProvider extends ServiceProvider
     public function map(): void
     {
         $this->registerAdminRoutes(base_path('routes/admin.php'));
-        $this->registerAdminRoutes(__DIR__ . '/../routes/admin.php');
+        $this->registerAdminRoutes(realpath(__DIR__ . '/../routes/admin.php'));
 
         $this->registerFrontRoutes(base_path('routes/web.php'));
-        $this->registerFrontRoutes(__DIR__ . '/../routes/web.php');
+        $this->registerFrontRoutes(realpath(__DIR__ . '/../routes/web.php'));
     }
 
     protected function registerAdminRoutes(string $routeFile): void
@@ -63,11 +52,11 @@ class RouteServiceProvider extends ServiceProvider
                 config('twill.admin_middleware_group', 'web'),
                 'twill_auth:twill_users',
                 'impersonate',
-                'validateBackHistory'
+                'validateBackHistory',
             ],
             'prefix' => trim(config('twill.admin_app_path', ''), '/'),
         ], static function () use ($routeFile): void {
-            require_once $routeFile;
+            require $routeFile;
         });
     }
 
@@ -90,7 +79,7 @@ class RouteServiceProvider extends ServiceProvider
                 'localeSessionRedirect',
             ],
         ], static function () use ($routeFile): void {
-            require_once $routeFile;
+            require $routeFile;
         });
     }
 }

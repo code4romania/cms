@@ -4,31 +4,43 @@ declare(strict_types=1);
 
 namespace Code4Romania\Cms;
 
-use Illuminate\Filesystem\Filesystem;
+use Code4Romania\Cms\Commands\Install;
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Str;
 
 class CmsServiceProvider extends ServiceProvider
 {
     /**
      * Service providers to be registered.
-     *
-     * @var array<string>
      */
-    protected $providers = [
+    protected array $providers = [
         LocaleServiceProvider::class,
         RouteServiceProvider::class,
     ];
 
-    /**
-     * @var int
-     */
-    private $migrationsCounter = 0;
+    public static array $configFiles = [
+        'blade-svg.php',
+        'cms.php',
+        'deploy.php',
+        'seotools.php',
+        'twill.php',
+        'twill-navigation.php',
+        'twill/block_editor.php',
+        'twill/dashboard.php',
+        'twill/file_library.php',
+        'twill/media_library.php',
+        'translatable.php',
+    ];
+
+    public static array $assetFiles = [
+        'deploy/assets.php',
+        'package.json',
+        'tailwind.config.js',
+        'webpack.mix.js',
+    ];
 
     /**
-     * Register services.
-     *
-     * @return void
+     * Register providers
      */
     public function register(): void
     {
@@ -42,150 +54,123 @@ class CmsServiceProvider extends ServiceProvider
 
     /**
      * Bootstrap services.
-     *
-     * @return void
      */
     public function boot(): void
     {
         $this->publishConfigs();
         $this->publishMigrations();
-        $this->publishRoutes();
+        $this->publishTranslations();
+        $this->publishResources();
+        $this->publishAssets();
 
-        $this->registerAndPublishViews();
-        $this->registerAndPublishTranslations();
+        $this->registerCommands();
+        $this->registerRelationMorphMap();
     }
 
     /**
      * Merges the package configuration files into the given configuration namespaces.
-     *
-     * @return void
      */
     private function mergeConfigs(): void
     {
         $this->mergeConfigFrom(__DIR__ . '/../config/cms.php', 'cms');
-        $this->mergeConfigFrom(__DIR__ . '/../config/twill.php', 'twill');
-        $this->mergeConfigFrom(__DIR__ . '/../config/twill-navigation.php', 'twill-navigation');
         $this->mergeConfigFrom(__DIR__ . '/../config/translatable.php', 'translatable');
+        $this->mergeConfigFrom(__DIR__ . '/../config/twill.php', 'twill');
+        $this->mergeConfigFrom(__DIR__ . '/../config/twill/block_editor.php', 'twill.block_editor');
+        $this->mergeConfigFrom(__DIR__ . '/../config/twill/dashboard.php', 'twill.dashboard');
+        $this->mergeConfigFrom(__DIR__ . '/../config/twill/file_library.php', 'twill.file_library');
+        $this->mergeConfigFrom(__DIR__ . '/../config/twill/media_library.php', 'twill.media_library');
     }
 
     /**
      * Defines the package configuration files for publishing.
-     *
-     * @return void
      */
     private function publishConfigs(): void
     {
-        $configs = [
-            'cms',
-            'twill',
-            'twill-navigation',
-            'translatable',
-        ];
-
-        foreach ($configs as $config) {
-            $configSourcePath = __DIR__ . '/../config/' . $config . '.php';
-            $configOutputPath = config_path("{$config}.php");
-
-            $this->publishes([
-                $configSourcePath => $configOutputPath,
-            ], 'config');
-        }
-    }
-
-    /**
-     * Defines the package routes files for publishing.
-     *
-     * @return void
-     */
-    private function publishRoutes(): void
-    {
         $this->publishes([
-            __DIR__ . '/../routes/admin.php' => base_path('routes/admin.php'),
-            __DIR__ . '/../routes/web.php' => base_path('routes/web.php'),
-        ], 'routes');
+            __DIR__ . '/../.gitignore.dist' => app()->basePath('.gitignore'),
+            __DIR__ . '/../.env.example' => app()->basePath('.env.example'),
+        ], 'config');
+
+        collect(self::$configFiles)
+            ->each(function ($fileName): void {
+                $configSourcePath = __DIR__ . '/../config/' . $fileName;
+                $configOutputPath = config_path($fileName);
+
+                $this->publishes([
+                    $configSourcePath => $configOutputPath,
+                ], 'config');
+            });
     }
 
     private function publishMigrations(): void
     {
-        $migrations = [
-            'CreatePagesTables',
-        ];
-
-        if ($this->app->runningInConsole()) {
-            foreach ($migrations as $migration) {
-                $this->publishMigration($migration);
-            }
-        }
-    }
-
-    /**
-     * Based on twill's own publishMigration
-     *
-     * @see A17\Twill\TwillServiceProvider::publishMigration()
-     *
-     * @param string $migration
-     * @return void
-     */
-    private function publishMigration(string $migration, ?string $publishKey = null): void
-    {
-        $files = new Filesystem();
-        $this->migrationsCounter += 1;
-
-        if (class_exists($migration)) {
-            return;
-        }
-
-        // Verify that migration doesn't exist
-        $migration_file = database_path(sprintf('database/migrations/*_%s.php', Str::snake($migration)));
-
-        if (count($files->glob($migration_file))) {
-            return;
-        }
-
-        $timestamp = date('Y_m_d_', time()) . (40000 + $this->migrationsCounter);
-        $migrationSourcePath = sprintf('%s/../database/migrations/%s.php', __DIR__, Str::snake($migration));
-        $migrationOutputPath = database_path(sprintf('migrations/%s_%s.php', $timestamp, Str::snake($migration)));
+        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
 
         $this->publishes([
-            $migrationSourcePath => $migrationOutputPath,
+            __DIR__ . '/../database/migrations' => database_path('migrations'),
         ], 'migrations');
+    }
 
-        if ($publishKey) {
-            $this->publishes([
-                $migrationSourcePath => $migrationOutputPath,
-            ], $publishKey);
-        }
+    protected function registerCommands(): void
+    {
+        $this->commands([
+            Install::class,
+        ]);
+    }
+
+    protected function registerRelationMorphMap(): void
+    {
+        Relation::morphMap([
+            // 'applicationForm' => '\Models\ApplicationForm',
+            // 'byproduct'       => '\Models\Byproduct',
+            // 'domain'          => '\Models\Domain',
+            'page'               => 'Code4Romania\Cms\Models\Page',
+            // 'partner'         => '\Models\Partner',
+            // 'financer'        => '\Models\Partner',
+            // 'implementer'     => '\Models\Partner',
+            // 'person'          => '\Models\Person',
+            // 'post'            => '\Models\Post',
+            // 'solution'        => '\Models\Solution',
+        ]);
     }
 
     /**
-     * Registers and publishes the package views.
-     *
-     * @return void
+     * Publishes the package resources.
      */
-    private function registerAndPublishViews(): void
+    private function publishResources(): void
     {
-        $views = [
-            'twill' => __DIR__ . '/../resources/views/admin',
-            'cms' => __DIR__ . '/../resources/views/site',
-        ];
+        $this->publishes([
+            __DIR__ . '/../resources' => resource_path(),
+        ], 'resources');
+    }
 
-        foreach ($views as $namespace => $viewPath) {
-            $this->loadViewsFrom($viewPath, $namespace);
-            $this->publishes([
-                $viewPath => resource_path('views/vendor/' . $namespace)
-            ], 'views');
-        }
+    /**
+     * Publishes the package assets.
+     */
+    private function publishAssets(): void
+    {
+
+        collect(self::$assetFiles)
+            ->each(function ($fileName): void {
+                $sourcePath = __DIR__ . '/../' . $fileName;
+                $outputPath = app()->basePath($fileName);
+
+                $this->publishes([
+                    $sourcePath => $outputPath,
+                ], 'assets');
+            });
     }
 
     /**
      * Registers and publishes the package translations.
-     *
-     * @return void
      */
-    private function registerAndPublishTranslations(): void
+    private function publishTranslations(): void
     {
         $translationPath = __DIR__ . '/../resources/lang';
+
         $this->loadTranslationsFrom($translationPath, 'cms');
-        $this->publishes([$translationPath => resource_path('lang/vendor/cms')], 'translations');
+        $this->publishes([
+            $translationPath => resource_path('lang')
+        ], 'translations');
     }
 }

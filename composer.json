@@ -14,24 +14,22 @@
     ],
     "minimum-stability": "dev",
     "prefer-stable": true,
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/area17/twill"
-        }
-    ],
     "require": {
-        "php": "^7.3",
-        "area17/twill": "dev-master#8867a0e2f2fecee5e8fa9b452c4ac11c08850558",
+        "php": "^7.4",
+        "area17/twill": "^2.0",
+        "artesaos/seotools": "^0.17",
         "kalnoy/nestedset": "^5.0",
+        "laravel/framework": "^7.0",
+        "leewillis77/cached-embed": "^0.8",
+        "lorisleiva/laravel-deployer": "^0.3",
         "mcamara/laravel-localization": "^1.4",
-        "nothingworks/blade-svg": "^0.3.2"
+        "nothingworks/blade-svg": "^0.3"
     },
     "require-dev": {
-        "nunomaduro/larastan": "^0.5",
-        "nunomaduro/phpinsights": "^1.11",
-        "orchestra/testbench-browser-kit": "^4.5",
-        "phpunit/phpunit": "^8.5"
+        "nunomaduro/larastan": "^0.5.2",
+        "nunomaduro/phpinsights": "^1.14",
+        "orchestra/testbench-browser-kit": "^5.0",
+        "phpunit/phpunit": "^9.0"
     },
     "autoload": {
         "psr-4": {
@@ -51,13 +49,18 @@
         "analyse": "php -d memory_limit=-1 vendor/bin/phpstan analyse --ansi"
     },
     "config": {
+        "lock": false,
         "sort-packages": true
     },
     "extra": {
         "laravel": {
             "providers": [
                 "Code4Romania\\Cms\\CmsServiceProvider"
-            ]
+            ],
+            "aliases": {
+                "LaravelLocalization": "Mcamara\\LaravelLocalization\\Facades\\LaravelLocalization",
+                "SEO": "Artesaos\\SEOTools\\Facades\\SEOTools"
+            }
         }
     }
 }
