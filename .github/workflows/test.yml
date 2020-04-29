@@ -14,27 +14,27 @@ jobs:
           - prefer-lowest
           - prefer-stable
 
-        name: PHP ${{ matrix.php-version }} - ${{ matrix.dependency-version }}
+    name: PHP ${{ matrix.php-version }} - ${{ matrix.dependency-version }}
 
-        steps:
-          - name: Checkout code
-            uses: actions/checkout@v2
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-          - name: Setup PHP
-            uses: shivammathur/setup-php@v2
-            with:
-              php-version: ${{ matrix.php-version }}
-              extensions: mbstring, sqlite, pdo_sqlite
-              coverage: none
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+          extensions: mbstring, sqlite, pdo_sqlite
+          coverage: none
 
-          - name: Cache dependencies
-            uses: actions/cache@v1
-            with:
-              path: ~/.composer/cache/files
-              key: dependencies-php-${{ matrix.php-version }}-composer-${{ hashFiles('composer.json') }}
+      - name: Cache dependencies
+        uses: actions/cache@v1
+        with:
+          path: ~/.composer/cache/files
+          key: dependencies-php-${{ matrix.php-version }}-composer-${{ hashFiles('composer.json') }}
 
-          - name: Install dependencies
-            run: composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction --no-suggest
+      - name: Install dependencies
+        run: composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction --no-suggest
 
-          - name: Run tests
-            run: composer test
+      - name: Run tests
+        run: composer test
