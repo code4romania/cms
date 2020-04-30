@@ -38,7 +38,7 @@ return [
             ],
         ],
     ],
-    'menuItems' => [
+    'menus' => [
         'title' => 'Menus',
         'module' => true,
     ],

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Code4Romania\Cms\Helpers;
 
-use Code4Romania\Cms\Models\MenuItem;
-use Code4Romania\Cms\Models\Page;
+use A17\Twill\Models\Block;
+use Code4Romania\Cms\Models\Menu;
 use Illuminate\Support\Collection;
 
 class MenuHelper
@@ -17,48 +17,71 @@ class MenuHelper
             return [];
         }
 
-        $items = MenuItem::where('location', $menuLocation)
-            ->with(['translations', 'children.translations'])
-            ->ordered()
-            ->get()
-            ->toTree();
+        $menu = Menu::with('blocks')
+            ->where('location', $menuLocation)
+            ->publishedInListings()
+            ->first();
 
-        return self::traverseTree($items);
+        return self::buildTree($menu->blocks ?? collect());
     }
 
-    protected static function traverseTree(Collection $items): array
+    public static function buildTree(Collection $items): array
     {
-        $tree = [];
+        $parents = [];
 
         foreach ($items as $item) {
-            array_push($tree, [
-                'type'     => $item->type,
-                'label'    => $item->label,
-                'url'      => self::getItemUrl($item),
-                'children' => !$item->isLeaf() ? self::traverseTree($item->children) : [],
-            ]);
+            $parents[(string) (int) $item->parent_id][] = [
+                'id'        => $item->id,
+                'parent_id' => $item->parent_id,
+                'type'      => $item->input('type'),
+                'label'     => $item->translatedInput('label'),
+                'url'       => self::getItemUrl($item),
+                'children'  => [],
+            ];
         }
 
-        return $tree;
+        return self::walk($parents[0] ?? [], $parents);
     }
 
-    public static function getItemUrl(MenuItem $item): ?string
+    protected static function walk($items, $parents)
     {
-        switch ($item->type) {
+        foreach ($items as $position => $item) {
+            $id = $item['id'];
+
+            if (isset($parents[$id])) {
+                $item['children'] = self::walk($parents[$id], $parents);
+            }
+
+            $items[$position] = $item;
+        }
+
+        return $items;
+    }
+
+    public static function getItemUrl(Block $item): ?string
+    {
+        switch ($item->input('type')) {
             default:
                 return null;
                 break;
 
             case 'external':
-                return $item->target;
+                return $item->input('target');
                 break;
 
             case 'page':
-                $model = Page::find($item->target);
-                $route = 'front.pages.show';
+                return self::getModelUrl('Page', 'front.pages.show', $item->input('target'));
                 break;
         }
+    }
 
-        return !is_null($model) ? route($route, $model->slug) : null;
+    public static function getModelUrl(string $modelName, string $routeName, $target): string
+    {
+        $item = app(config('twill.namespace') . '\\Models\\' . ucfirst($modelName))
+            ->publishedInListings()
+            ->withActiveTranslations()
+            ->find($target);
+
+        return route($routeName, $item->slug);
     }
 }

@@ -2,36 +2,68 @@
 
 namespace Code4Romania\Cms\Tests\Helpers;
 
+use A17\Twill\Models\Block;
 use Code4Romania\Cms\Helpers\MenuHelper;
-use Code4Romania\Cms\Repositories\MenuItemRepository;
+use Code4Romania\Cms\Models\Menu;
+use Code4Romania\Cms\Repositories\MenuRepository;
 use Code4Romania\Cms\Repositories\PageRepository;
 use Code4Romania\Cms\Tests\TestCase;
 
 class MenuHelperTest extends TestCase
 {
 
-    protected function createMenuItem(string $location, string $type, string $target, ?int $parent_id = null): array
+    protected function createMenu(string $location)
     {
         $locales = $this->getAvailableLocales();
 
         $attributes = collect([
-            'position'  => $this->faker->randomDigitNotNull,
-            'location'  => $location,
-            'type'      => $type,
-            'target'    => $target,
-            'parent_id' => $parent_id,
-
-            'label' => $locales
-                ->mapWithKeys(fn ($locale) => [$locale => $this->faker->word]),
-
+            'published' => true,
             'languages' => $locales
-                ->map(fn ($locale) => ['value' => $locale, 'published' => true]),
+                ->map(fn ($locale) => ['value' => $locale, 'active' => true, 'published' => true]),
+
+            'location' => $location,
         ])->toArray();
+
 
         return [
             'attributes' => $attributes,
-            'model'      => app(MenuItemRepository::class)->create($attributes),
+            'model'      => app(MenuRepository::class)->create($attributes),
         ];
+    }
+
+    protected function addMenuItem(Menu $menu, string $type, string $target, ?int $parent_id = null): Block
+    {
+        $locales = $this->getAvailableLocales();
+
+        if ($menu->blocks->count()) {
+            $position = $menu->blocks->last()->position + 1;
+        } else {
+            $position = 1;
+        }
+
+        $attributes = collect([
+            'parent_id' => $parent_id,
+            'child_key' => !is_null($parent_id) ? 'menuItem' : null,
+
+            'position' => $position,
+            'type'     => 'menuItem',
+            'target'   => $target,
+            'content'  => [
+                'type'   => $type,
+                'target' => $target,
+
+                'label'  => $locales
+                    ->mapWithKeys(fn ($locale) => [$locale => $this->faker->word]),
+            ],
+        ]);
+
+        $attributes = $attributes->toArray();
+
+        $item = Block::create($attributes);
+
+        $menu->blocks()->save($item);
+
+        return $item;
     }
 
     protected function createPage()
@@ -39,8 +71,9 @@ class MenuHelperTest extends TestCase
         $locales = $this->getAvailableLocales();
 
         $attributes = collect([
+            'published' => true,
             'languages' => $locales
-                ->map(fn ($locale) => ['value' => $locale, 'published' => true]),
+                ->map(fn ($locale) => ['value' => $locale, 'active' => true, 'published' => true]),
 
             'title' => $locales
                 ->mapWithKeys(fn ($locale) => [$locale => $this->faker->word]),
@@ -64,39 +97,47 @@ class MenuHelperTest extends TestCase
     /** @test */
     public function itReturnsAnArrayForAKownMenuLocation()
     {
-        $externalMenuItem = $this->createMenuItem('header', 'external', $this->faker->url);
-
+        $menu = $this->createMenu('header')['model'];
         $page = $this->createPage();
 
-        $pageMenuItem = $this->createMenuItem('header', 'page', $page['model']->id);
-        $subMenuItem = $this->createMenuItem('header', 'external', $this->faker->url, $externalMenuItem['model']->id);
-        $invalidMenuItem = $this->createMenuItem('header', 'doesNotExist', '#');
+        $externalMenuItem = $this->addMenuItem($menu, 'external', $this->faker->url);
+        $subMenuItem = $this->addMenuItem($menu, 'external', $this->faker->url, $externalMenuItem->id);
+        $pageMenuItem = $this->addMenuItem($menu, 'page', $page['model']->id);
+        $invalidMenuItem = $this->addMenuItem($menu, 'doesNotExist', '#');
 
         $expectedTree = [
             [
-                'type'     => 'external',
-                'label'    => $externalMenuItem['model']->label,
-                'url'      => $externalMenuItem['attributes']['target'],
-                'children' => [
+                'id'        => $externalMenuItem->id,
+                'parent_id' => $externalMenuItem->parent_id,
+                'type'      => 'external',
+                'label'     => $externalMenuItem->translatedInput('label'),
+                'url'       => $externalMenuItem->input('target'),
+                'children'  => [
                     [
-                        'type'     => 'external',
-                        'label'    => $subMenuItem['model']->label,
-                        'url'      => $subMenuItem['attributes']['target'],
-                        'children' => [],
+                        'id'        => $subMenuItem->id,
+                        'parent_id' => $subMenuItem->parent_id,
+                        'type'      => 'external',
+                        'label'     => $subMenuItem->translatedInput('label'),
+                        'url'       => $subMenuItem->input('target'),
+                        'children'  => [],
                     ],
                 ],
             ],
             [
-                'type'     => 'page',
-                'label'    => $pageMenuItem['model']->label,
-                'url'      => route('front.pages.show', $page['model']->slug),
-                'children' => [],
+                'id'        => $pageMenuItem->id,
+                'parent_id' => $pageMenuItem->parent_id,
+                'type'      => 'page',
+                'label'     => $pageMenuItem->translatedInput('label'),
+                'url'       => route('front.pages.show', $page['model']->slug),
+                'children'  => [],
             ],
             [
-                'type'     => 'doesNotExist',
-                'label'    => $invalidMenuItem['model']->label,
-                'url'      => null,
-                'children' => [],
+                'id'        => $invalidMenuItem->id,
+                'parent_id' => $invalidMenuItem->parent_id,
+                'type'      => 'doesNotExist',
+                'label'     => $invalidMenuItem->translatedInput('label'),
+                'url'       => null,
+                'children'  => [],
             ],
         ];
 

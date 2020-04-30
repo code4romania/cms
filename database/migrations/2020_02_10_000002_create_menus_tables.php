@@ -9,27 +9,21 @@ class CreateMenusTables extends Migration
 {
     public function up(): void
     {
-        Schema::create('menu_items', static function (Blueprint $table): void {
+        Schema::create('menus', static function (Blueprint $table): void {
             // this will create an id, a "published" column, and soft delete and timestamps columns
             createDefaultTableFields($table);
-
-            $table->string('location', 200);
-            $table->integer('position')->unsigned()->nullable();
-            $table->string('type', 200)->nullable();
-            $table->string('target', 200)->nullable();
-            $table->nestedSet();
+            $table->string('location')->nullable();
         });
 
-        Schema::create('menu_item_translations', static function (Blueprint $table): void {
-            createDefaultTranslationsTableFields($table, 'menu_item');
-            $table->string('label', 200)->nullable();
-            $table->text('description')->nullable();
+        Schema::create('menu_translations', static function (Blueprint $table): void {
+            createDefaultTranslationsTableFields($table, 'menu');
+            $table->string('title')->nullable();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('menu_item_translations');
-        Schema::dropIfExists('menu_items');
+        Schema::dropIfExists('menu_translations');
+        Schema::dropIfExists('menus');
     }
 }

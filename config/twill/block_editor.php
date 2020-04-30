@@ -70,6 +70,11 @@ return [
             'icon'       => 'text',
             'component'  => 'a17-block-text',
         ],
+        'menuItem' => [
+            'title'      => 'Menu Item',
+            'icon'       => 'info',
+            'component'  => 'a17-block-menuItem',
+        ],
     ],
     'repeaters' => [
         'accordionItem' => [
@@ -82,6 +87,12 @@ return [
             'title'      => 'Item',
             'trigger'    => 'Add counter item',
             'component'  => 'a17-block-counterItem',
+            'max'        => 20,
+        ],
+        'menuItem' => [
+            'title'      => 'Menu Item',
+            'trigger'    => 'Add menu item',
+            'component'  => 'a17-block-menuItem',
             'max'        => 20,
         ],
     ],

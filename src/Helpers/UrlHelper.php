@@ -43,10 +43,14 @@ class UrlHelper
                     return [];
                 }
 
-                if (is_null($item) || Str::endsWith($routeName, '.index')) {
+                if (Str::endsWith($routeName, '.index')) {
                     return [
                         $locale => LaravelLocalization::getLocalizedURL($locale, route($routeName))
                     ];
+                }
+
+                if (is_null($item)) {
+                    return [];
                 }
 
                 if ($item->hasActiveTranslation($locale)) {

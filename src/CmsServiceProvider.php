@@ -121,10 +121,8 @@ class CmsServiceProvider extends ServiceProvider
     protected function registerRelationMorphMap(): void
     {
         Relation::morphMap([
-            // 'applicationForm' => '\Models\ApplicationForm',
-            // 'byproduct'       => '\Models\Byproduct',
-            // 'domain'          => '\Models\Domain',
             'page'               => 'Code4Romania\Cms\Models\Page',
+            'menu'               => 'Code4Romania\Cms\Models\Menu',
             // 'partner'         => '\Models\Partner',
             // 'financer'        => '\Models\Partner',
             // 'implementer'     => '\Models\Partner',
