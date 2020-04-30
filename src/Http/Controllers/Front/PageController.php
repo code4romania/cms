@@ -16,7 +16,9 @@ class PageController extends Controller
             SettingsHelper::get('frontPage', 'site')
         );
 
-        return view('front.pages.show')->withItem($item);
+        return view('front.pages.show')->with([
+            'item' => $item,
+        ]);
     }
 
     public function show(string $slug): View
@@ -26,7 +28,9 @@ class PageController extends Controller
             ->withActiveTranslations()
             ->firstOrFail();
 
-        return view('front.pages.show')->withItem($item);
+        return view('front.pages.show')->with([
+            'item' => $item,
+        ]);
     }
 
     public function preview(string $slug): View
@@ -34,6 +38,8 @@ class PageController extends Controller
         $item = Page::forSlug($slug)
             ->firstOrFail();
 
-        return view('front.pages.show')->withItem($item);
+        return view('front.pages.show')->with([
+            'item' => $item,
+        ]);
     }
 }

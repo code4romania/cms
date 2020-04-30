@@ -16,6 +16,5 @@
         class="form-input"
         @if ($required) required @endif
         @if ($placeholder) placeholder="{{ $placeholder }}" @endif
-
     >
 </div>
