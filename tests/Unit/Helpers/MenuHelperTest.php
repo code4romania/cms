@@ -66,28 +66,6 @@ class MenuHelperTest extends TestCase
         return $item;
     }
 
-    protected function createPage()
-    {
-        $locales = $this->getAvailableLocales();
-
-        $attributes = collect([
-            'published' => true,
-            'languages' => $locales
-                ->map(fn ($locale) => ['value' => $locale, 'active' => true, 'published' => true]),
-
-            'title' => $locales
-                ->mapWithKeys(fn ($locale) => [$locale => $this->faker->word]),
-
-            'slug' => $locales
-                ->mapWithKeys(fn ($locale) => [$locale => $this->faker->slug]),
-        ])->toArray();
-
-        return [
-            'attributes' => $attributes,
-            'model'      => app(PageRepository::class)->create($attributes),
-        ];
-    }
-
     /** @test */
     public function itReturnsAnEmptyArrayForAnUnkownMenuLocation()
     {
@@ -95,7 +73,7 @@ class MenuHelperTest extends TestCase
     }
 
     /** @test */
-    public function itReturnsAnArrayForAKownMenuLocation()
+    public function itReturnsAnArrayForAKnownMenuLocation()
     {
         $menu = $this->createMenu('header')['model'];
         $page = $this->createPage();

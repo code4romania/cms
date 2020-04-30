@@ -6,7 +6,7 @@
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    {!! SEO::generate() !!}
+    {!! \Artesaos\SEOTools\Facades\SEOTools::generate() !!}
 
     <link rel="stylesheet" href="{{ asset(mix('app.css', 'assets/cms')) }}">
 
