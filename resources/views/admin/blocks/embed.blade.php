@@ -1,7 +1,7 @@
 @formField('input', [
     'name'         => 'url',
-    'label'        => 'URL',
-    'note'         => 'The embed is generated automatically from this url',
+    'label'        => __('admin.field.url'),
+    'note'         => __('admin.fieldNote.embedUrl'),
     'placeholder'  => 'https://',
     'required'     => true,
 ])

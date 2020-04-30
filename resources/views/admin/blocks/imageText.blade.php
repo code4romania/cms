@@ -1,6 +1,6 @@
 @formField('medias', [
     'name'         => 'image',
-    'label'        => 'Image',
+    'label'        => __('admin.field.image'),
     'max'          => 1,
     'required'     => true,
     'withVideoUrl' => false,
@@ -10,38 +10,38 @@
 
 @formField('select', [
     'name'       => 'position',
-    'label'      => 'Image position',
+    'label'      => __('admin.field.imagePosition'),
     'default'    => 'left',
     'unpack'     => true,
     'options'    => [
         [
             'value' => 'left',
-            'label' => 'Left',
+            'label' => __('admin.position.left'),
         ],
         [
             'value' => 'right',
-            'label' => 'Right',
+            'label' => __('admin.position.right'),
         ],
     ],
 ])
 
 @formField('select', [
     'name'       => 'valign',
-    'label'      => 'Vertical alignment',
+    'label'      =>  __('admin.field.verticalAlignment'),
     'default'    => 'top',
     'unpack'     => true,
     'options'    => [
         [
             'value' => 'top',
-            'label' => 'Top',
+            'label' => __('admin.position.top'),
         ],
         [
             'value' => 'center',
-            'label' => 'Center',
+            'label' => __('admin.position.center'),
         ],
         [
             'value' => 'bottom',
-            'label' => 'Bottom',
+            'label' => __('admin.position.bottom'),
         ],
     ],
 ])

@@ -1,6 +1,6 @@
 @formField('select', [
     'name'       => 'columns',
-    'label'      => 'Columns',
+    'label'      => __('admin.field.columns'),
     'default'    => 1,
     'unpack'     => true,
     'options'    => collect([1, 2, 3, 4])->map(function($i) {
@@ -13,9 +13,9 @@
 
 @formField('medias', [
     'name'         => 'image',
-    'label'        => 'Images',
+    'label'        => __('admin.field.images'),
     'max'          => 12,
-    'note'         => 'Add up to 12 images',
+    'note'         => __('admin.fieldNote.imagesUpTo', ['count' => 12]),
     'required'     => true,
     'withVideoUrl' => false,
 ])

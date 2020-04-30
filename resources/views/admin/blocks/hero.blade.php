@@ -1,18 +1,18 @@
 @formField('input', [
     'name'           => 'title',
-    'label'          => 'Title',
+    'label'          => __('admin.field.title'),
     'translated'     => true,
 ])
 
 @formField('input', [
     'name'           => 'subtitle',
-    'label'          => 'Subtitle',
+    'label'          => __('admin.field.subtitle'),
     'translated'     => true,
 ])
 
 @formField('wysiwyg', [
     'name'           => 'content',
-    'label'          => 'Content',
+    'label'          => __('admin.field.content'),
     'toolbarOptions' => config('twill.toolbar_options'),
     'translated'     => true,
     'editSource'     => true,
@@ -20,7 +20,7 @@
 
 @formField('select', [
     'name'       => 'button_color',
-    'label'      => 'Button color',
+    'label'      => __('admin.field.buttonColor'),
     'required'   => true,
     'default'    => 'primary',
     'options'    => collect(config('cms.colorGroups'))->map(function($key) {
@@ -33,8 +33,8 @@
 
 @formField('input', [
     'name'       => 'button_text',
+    'label'      => __('admin.field.buttonText'),
     'type'       => 'text',
-    'label'      => 'Button text',
     'required'   => true,
     'translated' => true,
     'maxlength'  => 100,
@@ -42,8 +42,8 @@
 
 @formField('input', [
     'name'       => 'button_url',
+    'label'      => __('admin.field.buttonUrl'),
     'type'       => 'text',
-    'label'      => 'Button link',
     'required'   => true,
     'translated' => true,
     'maxlength'  => 100,
@@ -51,7 +51,7 @@
 
 @formField('medias', [
     'name'         => 'image',
-    'label'        => 'Image',
+    'label'        => __('admin.field.image'),
     'max'          => 1,
     'required'     => true,
     'withVideoUrl' => false,
@@ -61,17 +61,17 @@
 
 @formField('select', [
     'name'       => 'position',
-    'label'      => 'Image position',
+    'label'      => __('admin.field.imagePosition'),
     'default'    => 'left',
     'unpack'     => true,
     'options'    => [
         [
             'value' => 'left',
-            'label' => 'Left',
+            'label' => __('admin.position.left'),
         ],
         [
             'value' => 'right',
-            'label' => 'Right',
+            'label' => __('admin.position.right'),
         ],
     ],
 ])

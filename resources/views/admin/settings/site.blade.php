@@ -15,7 +15,7 @@
 @section('contentFields')
     @formField('select', [
         'name'         => 'frontPage',
-        'label'        => 'Front page',
+        'label'        => __('admin.field.frontPage'),
         'native'       => true,
         'max'          => 1,
         'options'      => $allPages,

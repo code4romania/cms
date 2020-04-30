@@ -1,7 +1,7 @@
 @formField('input', [
     'name'       => 'quote',
+    'label'      => __('admin.field.quote'),
     'type'       => 'textarea',
-    'label'      => 'Quote',
     'required'   => true,
     'translated' => true,
     'rows'       => 4,
@@ -9,8 +9,8 @@
 
 @formField('input', [
     'name'       => 'author',
+    'label'      => __('admin.field.author'),
     'type'       => 'text',
-    'label'      => 'Author',
     'required'   => true,
     'translated' => true,
     'maxlength'  => 100,
@@ -18,8 +18,8 @@
 
 @formField('input', [
     'name'       => 'affiliation',
+    'label'      => __('admin.field.affiliation'),
     'type'       => 'text',
-    'label'      => 'Affiliation',
     'translated' => true,
     'maxlength'  => 100,
 ])

@@ -1,9 +1,9 @@
 @extends('twill::layouts.form', [
-    'contentFieldsetLabel' => 'Summary',
+    'contentFieldsetLabel' => __('admin.field.summary'),
     'additionalFieldsets' => [
         [
             'fieldset' => 'content-blocks',
-            'label'    => 'Content',
+            'label'    => __('admin.field.content'),
         ],
     ],
 ])
@@ -11,7 +11,7 @@
 @section('contentFields')
     @formField('wysiwyg', [
         'name'           => 'description',
-        'label'          => 'Description',
+        'label'          => __('admin.field.description'),
         'toolbarOptions' => config('twill.toolbar_options'),
         'editSource'     => true,
         'translated'     => true,
@@ -19,14 +19,14 @@
 
     @formField('checkbox', [
         'name'    => 'show_header',
-        'label'   => 'Show header',
+        'label'   => __('admin.field.showHeader'),
         'default' => true,
     ])
 @stop
 
 
 @section('fieldsets')
-    <a17-fieldset title="Content" id="content-blocks">
+    <a17-fieldset title="{{ __('admin.field.content') }}" id="content-blocks">
         @formField('block_editor', [
             'withoutSeparator' => true,
         ])

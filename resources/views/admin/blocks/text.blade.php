@@ -1,6 +1,6 @@
 @formField('select', [
     'name'       => 'columns',
-    'label'      => 'Columns',
+    'label'      => __('admin.field.columns'),
     'default'    => 1,
     'unpack'     => true,
     'options'    => collect([1, 2, 3])->map(function($i) {
@@ -13,7 +13,7 @@
 
 @formField('wysiwyg', [
     'name'           => 'text',
-    'label'          => 'Text',
+    'label'          => __('admin.field.text'),
     'toolbarOptions' => config('twill.toolbar_options'),
     'translated'     => true,
     'editSource'     => true,

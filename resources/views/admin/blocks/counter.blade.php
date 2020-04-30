@@ -1,12 +1,12 @@
 @formField('input', [
     'name'       => 'title',
-    'label'      => 'Title',
+    'label'      => __('admin.field.title'),
     'translated' => true,
 ])
 
 @formField('select', [
     'name'       => 'background',
-    'label'      => 'Background',
+    'label'      => __('admin.field.background'),
     'required'   => true,
     'default'    => 'none',
     'options'    => collect(config('cms.colorGroups'))->map(function($key) {
@@ -19,7 +19,7 @@
 
 @formField('select', [
     'name'       => 'columns',
-    'label'      => 'Columns',
+    'label'      => __('admin.field.columns'),
     'required'   => true,
     'default'    => 3,
     'options'    => collect(range(1, 3))->map(function($key) {

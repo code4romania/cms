@@ -1,12 +1,12 @@
 @formField('input', [
     'name'           => 'header',
-    'label'          => 'Header',
+    'label'          => __('admin.field.header'),
     'translated'     => true,
 ])
 
 @formField('wysiwyg', [
     'name'           => 'description',
-    'label'          => 'Description',
+    'label'          =>__('admin.field.description'),
     'toolbarOptions' => config('twill.toolbar_options'),
     'translated'     => true,
     'editSource'     => true,
