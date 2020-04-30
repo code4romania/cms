@@ -19,7 +19,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $this->registerRouteMiddlewares($this->app->get('router'));
+        $this->registerRouteMiddlewares();
 
         parent::boot();
     }

@@ -14,9 +14,4 @@ use Illuminate\Support\Str;
 class Controller extends TwillFrontControler
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
-
-    public function isPreview(): bool
-    {
-        return Str::endsWith(Route::currentRouteName(), '.preview');
-    }
 }

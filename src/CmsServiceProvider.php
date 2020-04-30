@@ -123,12 +123,6 @@ class CmsServiceProvider extends ServiceProvider
         Relation::morphMap([
             'page'               => 'Code4Romania\Cms\Models\Page',
             'menu'               => 'Code4Romania\Cms\Models\Menu',
-            // 'partner'         => '\Models\Partner',
-            // 'financer'        => '\Models\Partner',
-            // 'implementer'     => '\Models\Partner',
-            // 'person'          => '\Models\Person',
-            // 'post'            => '\Models\Post',
-            // 'solution'        => '\Models\Solution',
         ]);
     }
 

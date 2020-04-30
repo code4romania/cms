@@ -26,7 +26,6 @@
         "nothingworks/blade-svg": "^0.3"
     },
     "require-dev": {
-        "nunomaduro/collision": "^4.2",
         "nunomaduro/larastan": "^0.5",
         "nunomaduro/phpinsights": "^1.14",
         "orchestra/testbench-browser-kit": "^5.0",
