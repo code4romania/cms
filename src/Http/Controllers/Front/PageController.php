@@ -16,6 +16,11 @@ class PageController extends Controller
             SettingsHelper::get('frontPage', 'site')
         );
 
+        $this->seo([
+            'title'       => $item->title,
+            'routeName'   => 'front.pages.index',
+        ]);
+
         return view('front.pages.show')->with([
             'item' => $item,
         ]);
@@ -28,6 +33,14 @@ class PageController extends Controller
             ->withActiveTranslations()
             ->firstOrFail();
 
+        $this->seo([
+            'title'       => $item->title,
+            'description' => $item->description,
+            'routeName'   => 'front.pages.show',
+            'routeArg'    => 'slug',
+            'slug'        => $slug,
+        ]);
+
         return view('front.pages.show')->with([
             'item' => $item,
         ]);
@@ -37,6 +50,11 @@ class PageController extends Controller
     {
         $item = Page::forSlug($slug)
             ->firstOrFail();
+
+        $this->seo([
+            'title'       => $item->title,
+            'description' => $item->description,
+        ]);
 
         return view('front.pages.show')->with([
             'item' => $item,
