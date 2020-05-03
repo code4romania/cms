@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Code4Romania\Cms\Tests\Helpers;
 
 use A17\Twill\Models\Block;
 use Code4Romania\Cms\Helpers\MenuHelper;
 use Code4Romania\Cms\Models\Menu;
+use Code4Romania\Cms\Models\Page;
 use Code4Romania\Cms\Repositories\MenuRepository;
-use Code4Romania\Cms\Repositories\PageRepository;
 use Code4Romania\Cms\Tests\TestCase;
 
 class MenuHelperTest extends TestCase
@@ -67,7 +69,7 @@ class MenuHelperTest extends TestCase
     }
 
     /** @test */
-    public function itReturnsAnEmptyArrayForAnUnkownMenuLocation()
+    public function itReturnsAnEmptyArrayForAnUnknownMenuLocation()
     {
         $this->assertEmpty(MenuHelper::getItemsTree('doesNotExist'));
     }
@@ -76,11 +78,13 @@ class MenuHelperTest extends TestCase
     public function itReturnsAnArrayForAKnownMenuLocation()
     {
         $menu = $this->createMenu('header')['model'];
-        $page = $this->createPage();
+        $page = factory(Page::class)
+            ->states('published')
+            ->create();
 
         $externalMenuItem = $this->addMenuItem($menu, 'external', $this->faker->url);
         $subMenuItem = $this->addMenuItem($menu, 'external', $this->faker->url, $externalMenuItem->id);
-        $pageMenuItem = $this->addMenuItem($menu, 'page', $page['model']->id);
+        $pageMenuItem = $this->addMenuItem($menu, 'page', (string) $page->id);
         $invalidMenuItem = $this->addMenuItem($menu, 'doesNotExist', '#');
 
         $expectedTree = [
@@ -106,7 +110,7 @@ class MenuHelperTest extends TestCase
                 'parent_id' => $pageMenuItem->parent_id,
                 'type'      => 'page',
                 'label'     => $pageMenuItem->translatedInput('label'),
-                'url'       => route('front.pages.show', $page['model']->slug),
+                'url'       => route('front.pages.show', $page->slug),
                 'children'  => [],
             ],
             [

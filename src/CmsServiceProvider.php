@@ -68,17 +68,34 @@ class CmsServiceProvider extends ServiceProvider
     }
 
     /**
+     * Returns path relative to the packages base directory
+     *
+     * @param string $path
+     * @return null|string
+     */
+    private function packagePath(string $path = ''): ?string
+    {
+        return realpath(__DIR__ . '/../' . ltrim($path, '/')) ?: null;
+    }
+
+    /**
      * Merges the package configuration files into the given configuration namespaces.
      */
     private function mergeConfigs(): void
     {
-        $this->mergeConfigFrom(__DIR__ . '/../config/cms.php', 'cms');
-        $this->mergeConfigFrom(__DIR__ . '/../config/translatable.php', 'translatable');
-        $this->mergeConfigFrom(__DIR__ . '/../config/twill.php', 'twill');
-        $this->mergeConfigFrom(__DIR__ . '/../config/twill/block_editor.php', 'twill.block_editor');
-        $this->mergeConfigFrom(__DIR__ . '/../config/twill/dashboard.php', 'twill.dashboard');
-        $this->mergeConfigFrom(__DIR__ . '/../config/twill/file_library.php', 'twill.file_library');
-        $this->mergeConfigFrom(__DIR__ . '/../config/twill/media_library.php', 'twill.media_library');
+        $configs = [
+            'cms' => 'cms',
+            'translatable' => 'translatable',
+            'twill' => 'twill',
+            'twill/block_editor' => 'twill.block_editor',
+            'twill/dashboard' => 'twill.dashboard',
+            'twill/file_library' => 'twill.file_library',
+            'twill/media_library' => 'twill.media_library',
+        ];
+
+        foreach ($configs as $path => $key) {
+            $this->mergeConfigFrom($this->packagePath("config/{$path}.php"), $key);
+        }
     }
 
     /**
@@ -87,27 +104,26 @@ class CmsServiceProvider extends ServiceProvider
     private function publishConfigs(): void
     {
         $this->publishes([
-            __DIR__ . '/../.gitignore.dist' => app()->basePath('.gitignore'),
-            __DIR__ . '/../.env.example' => app()->basePath('.env.example'),
+            $this->packagePath('.gitignore.dist') => base_path('.gitignore'),
+            $this->packagePath('.env.example') => base_path('.env.example'),
         ], 'config');
 
         collect(self::$configFiles)
             ->each(function ($fileName): void {
-                $configSourcePath = __DIR__ . '/../config/' . $fileName;
-                $configOutputPath = config_path($fileName);
-
                 $this->publishes([
-                    $configSourcePath => $configOutputPath,
+                    $this->packagePath('config/' . $fileName) => config_path($fileName),
                 ], 'config');
             });
     }
 
     private function publishMigrations(): void
     {
-        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+        $this->loadMigrationsFrom(
+            $this->packagePath('database/migrations')
+        );
 
         $this->publishes([
-            __DIR__ . '/../database/migrations' => database_path('migrations'),
+            $this->packagePath('database/migrations') => database_path('migrations'),
         ], 'migrations');
     }
 
@@ -121,8 +137,8 @@ class CmsServiceProvider extends ServiceProvider
     protected function registerRelationMorphMap(): void
     {
         Relation::morphMap([
-            'page'               => 'Code4Romania\Cms\Models\Page',
-            'menu'               => 'Code4Romania\Cms\Models\Menu',
+            'page' => 'Code4Romania\Cms\Models\Page',
+            'menu' => 'Code4Romania\Cms\Models\Menu',
         ]);
     }
 
@@ -132,7 +148,7 @@ class CmsServiceProvider extends ServiceProvider
     private function publishResources(): void
     {
         $this->publishes([
-            __DIR__ . '/../resources' => resource_path(),
+            $this->packagePath('resources') => resource_path(),
         ], 'resources');
     }
 
@@ -144,11 +160,8 @@ class CmsServiceProvider extends ServiceProvider
 
         collect(self::$assetFiles)
             ->each(function ($fileName): void {
-                $sourcePath = __DIR__ . '/../' . $fileName;
-                $outputPath = app()->basePath($fileName);
-
                 $this->publishes([
-                    $sourcePath => $outputPath,
+                    $this->packagePath($fileName) => base_path($fileName),
                 ], 'assets');
             });
     }
@@ -158,7 +171,7 @@ class CmsServiceProvider extends ServiceProvider
      */
     private function publishTranslations(): void
     {
-        $translationPath = __DIR__ . '/../resources/lang';
+        $translationPath = $this->packagePath('resources/lang');
 
         $this->loadTranslationsFrom($translationPath, 'cms');
         $this->publishes([

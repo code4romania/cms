@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Code4Romania\Cms\Tests\Presenters;
 
 use A17\Twill\Models\Block;

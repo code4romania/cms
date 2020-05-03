@@ -1,12 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Code4Romania\Cms\Tests;
 
 use A17\Twill\RouteServiceProvider;
 use A17\Twill\TwillServiceProvider;
 use Artesaos\SEOTools\Providers\SEOToolsServiceProvider;
 use Code4Romania\Cms\CmsServiceProvider;
-use Code4Romania\Cms\Repositories\PageRepository;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Collection;
@@ -94,27 +95,5 @@ class TestCase extends BaseTestCase
     protected function isCurrentLocale(string $locale): bool
     {
         return $locale === app()->getLocale();
-    }
-
-    protected function createPage()
-    {
-        $locales = $this->getAvailableLocales();
-
-        $attributes = collect([
-            'published' => true,
-            'languages' => $locales
-                ->map(fn ($locale) => ['value' => $locale, 'active' => true, 'published' => true]),
-
-            'title' => $locales
-                ->mapWithKeys(fn ($locale) => [$locale => $this->faker->word]),
-
-            'slug' => $locales
-                ->mapWithKeys(fn ($locale) => [$locale => $this->faker->slug]),
-        ])->toArray();
-
-        return [
-            'attributes' => $attributes,
-            'model'      => app(PageRepository::class)->create($attributes),
-        ];
     }
 }

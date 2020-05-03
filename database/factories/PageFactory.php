@@ -13,7 +13,7 @@ $factory->define(Page::class, static function (Faker $faker): array {
     return [
         'published'   => false,
         'position'    => 1,
-        'show_header' => false,
+        'show_header' => true,
     ];
 });
 
@@ -24,10 +24,13 @@ $factory->state(Page::class, 'published', [
 
 $factory->define(PageTranslation::class, static function (Faker $faker): array {
     return [
-        'page_id' => null,
-        'title'   => $faker->sentence,
-        'locale'  => 'en',
-        'active'  => false,
+        'page_id'     => null,
+        'title'       => $faker->sentence,
+        'description' => collect($faker->paragraphs)
+            ->map(fn ($paragraph) => "<p>{$paragraph}</p>")
+            ->join(''),
+        'locale'      => 'en',
+        'active'      => false,
     ];
 });
 

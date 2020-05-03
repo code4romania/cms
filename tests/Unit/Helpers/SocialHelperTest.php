@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Code4Romania\Cms\Tests\Helpers;
 
 use Code4Romania\Cms\Helpers\SettingsHelper;
