@@ -1,0 +1,11 @@
+img[lazyload] {
+    @apply bg-gray-300;
+    transition: opacity 250ms;
+    display: block;
+    opacity: 1;
+}
+
+img[lazyload][data-src]:not([src^='data:image']),
+img[lazyload][data-srcset]:not([src^='data:image']) {
+    opacity: 0;
+}

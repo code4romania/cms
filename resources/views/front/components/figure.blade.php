@@ -1,11 +1,17 @@
 @php
-    $alt = $alt ?? false;
-    $caption = $caption ?? false;
-    $classes = $classes ?? '';
+    $alt ??= false;
+    $caption ??= false;
+    $classes ??= '';
+    $lqip ??= false;
 @endphp
 
 <figure @if ($classes) class="{{ $classes }}" @endif>
-    <img src="{{ $src }}" alt="{{ $alt }}" class="block w-full">
+    @include('front.components.image', [
+        'lqip'  => $lqip,
+        'src'   => $src,
+        'alt'   => $alt,
+        'class' => 'block w-full',
+    ])
 
     @if ($caption)
         <figcaption class="table py-3 mx-auto">

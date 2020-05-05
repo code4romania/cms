@@ -15,11 +15,12 @@
             'color' => $block->input('button_color'),
         ])
     </div>
-    @if ($block->hasImage('image', 'desktop'))
+    @if ($block->hasImage('image'))
         <div class="mt-8 mb-16 md:mb-0 md:mt-0 md:w-1/2 md:pl-12">
             @include('front.components.figure', [
-                'src' => $block->image('image', 'desktop'),
-                'alt' => $block->imageAltText('image'),
+                'lqip'    => $block->lowQualityImagePlaceholder('image'),
+                'src'     => $block->image('image'),
+                'alt'     => $block->imageAltText('image'),
                 'caption' => $block->imageCaption('image'),
                 'classes' => $block->present()->imageTextImageClass
             ])

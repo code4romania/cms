@@ -24,8 +24,6 @@ class Page extends Model implements Sortable
         'description',
         'position',
         'show_header',
-        // 'public',
-        // 'featured',
         'publish_start_date',
         'publish_end_date',
     ];
@@ -64,8 +62,14 @@ class Page extends Model implements Sortable
         'published',
     ];
 
-    /**
-     * @var array<string>
-     */
-    public $mediasParams = [];
+    /** @var array<string,int> */
+    public $mediasParams = [
+        'image' => [
+            'default' => [
+                [
+                    'name' => 'default',
+                ],
+            ],
+        ],
+    ];
 }
