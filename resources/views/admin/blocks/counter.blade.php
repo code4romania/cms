@@ -9,7 +9,7 @@
     'label'      => __('admin.field.background'),
     'required'   => true,
     'default'    => 'none',
-    'options'    => collect(config('cms.colorGroups'))->map(function($key) {
+    'options'    => collect(config('cms.colors'))->map(function($key) {
         return [
             'value' => $key,
             'label' => ucfirst($key),

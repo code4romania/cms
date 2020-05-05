@@ -14,16 +14,16 @@ class SocialHelperTest extends TestCase
     public function itFetchesFormattedNetworks()
     {
         $user = $this->faker->userName;
-        $socialNetworks = collect(config('cms.socialNetworks'));
+        $networks = collect(config('cms.social.networks'));
 
         SettingsHelper::set(
-            $socialNetworks->map(fn (): string => $user)->toArray(),
+            $networks->map(fn (): string => $user)->toArray(),
             'social'
         );
 
         $this->assertSame(
             SocialHelper::getNetworks()->toArray(),
-            $socialNetworks
+            $networks
                 ->map(fn ($network) => $network['baseUrl'] . $user)
                 ->toArray()
         );

@@ -26,9 +26,11 @@ class Install extends Command
      */
     protected $description = 'Install CMS features';
 
-    protected Filesystem $files;
+    /** @var Filesystem */
+    protected $files;
 
-    protected DatabaseManager $database;
+    /** @var DatabaseManager */
+    protected $database;
 
     /**
      * Create a new command instance.
@@ -110,10 +112,14 @@ class Install extends Command
             ->merge($configFiles)
             ->merge($assetFiles)
             ->each(function ($filePath): void {
-                $this->info(
-                    "Removed File <warning>[{$filePath}]</warning>"
-                );
-                $this->files->delete($filePath);
+
+                if ($this->files->isDirectory($filePath)) {
+                    $this->info("Removed Directory <warning>[{$filePath}]</warning>");
+                    $this->files->deleteDirectory($filePath);
+                } else {
+                    $this->info("Removed File <warning>[{$filePath}]</warning>");
+                    $this->files->delete($filePath);
+                }
             });
 
         $this->info('Deleting complete.');
@@ -122,8 +128,6 @@ class Install extends Command
 
     private function installTwill(): void
     {
-        $this->call('twill:blocks');
-
         if ($this->confirm('Do you also want to run the Twill install process?')) {
             $this->call('vendor:publish', [
                 '--provider' => TwillServiceProvider::class,

@@ -1,7 +1,7 @@
 @extends('twill::layouts.settings')
 
 @section('contentFields')
-    @foreach (config('cms.socialNetworks') as $id => $network)
+    @foreach (config('cms.social.networks') as $id => $network)
         @formField('input', [
             'name'       => $id,
             'label'      => $network['name'],

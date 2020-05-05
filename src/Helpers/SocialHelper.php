@@ -13,7 +13,7 @@ class SocialHelper
      */
     public static function getNetworks(): Collection
     {
-        return collect(config('cms.socialNetworks', []))
+        return collect(config('cms.social.networks', []))
             ->map(function ($value, $key): ?string {
                 $username = SettingsHelper::get($key, 'social');
 

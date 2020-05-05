@@ -29,19 +29,4 @@ return [
 
     ],
 
-    'toolbar_options' => [
-
-        ['header' => [2, 3, false]],
-        'bold', 'italic', 'underline', 'strike', 'link', 'blockquote',
-        // ['color' => []],
-        // ['background' => []],
-        ['list' => 'ordered'],
-        ['list' => 'bullet'],
-        ['script' => 'sub'],
-        ['script' => 'super'],
-        ['align' => []],
-        ['clean' => ''],
-
-    ],
-
 ];

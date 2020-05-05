@@ -12,27 +12,29 @@ class CmsServiceProvider extends ServiceProvider
 {
     /**
      * Service providers to be registered.
+     *
+     * @var array
      */
-    protected array $providers = [
+    protected $providers = [
         LocaleServiceProvider::class,
         RouteServiceProvider::class,
     ];
 
-    public static array $configFiles = [
+    /** @var array */
+    public static $configFiles = [
         'blade-svg.php',
         'cms.php',
+        'cms',
         'deploy.php',
         'seotools.php',
         'twill.php',
         'twill-navigation.php',
-        'twill/block_editor.php',
-        'twill/dashboard.php',
-        'twill/file_library.php',
-        'twill/media_library.php',
+        'twill',
         'translatable.php',
     ];
 
-    public static array $assetFiles = [
+    /** @var array */
+    public static $assetFiles = [
         'deploy/assets.php',
         'package.json',
         'tailwind.config.js',
@@ -59,7 +61,6 @@ class CmsServiceProvider extends ServiceProvider
     {
         $this->publishConfigs();
         $this->publishMigrations();
-        $this->publishTranslations();
         $this->publishResources();
         $this->publishAssets();
 
@@ -85,6 +86,12 @@ class CmsServiceProvider extends ServiceProvider
     {
         $configs = [
             'cms' => 'cms',
+            'cms/colors' => 'cms.colors',
+            'cms/editor' => 'cms.editor',
+            'cms/embeds' => 'cms.embeds',
+            'cms/enabled' => 'cms.enabled',
+            'cms/menu' => 'cms.menu',
+            'cms/social' => 'cms.social',
             'translatable' => 'translatable',
             'twill' => 'twill',
             'twill/block_editor' => 'twill.block_editor',
@@ -157,25 +164,11 @@ class CmsServiceProvider extends ServiceProvider
      */
     private function publishAssets(): void
     {
-
         collect(self::$assetFiles)
             ->each(function ($fileName): void {
                 $this->publishes([
                     $this->packagePath($fileName) => base_path($fileName),
                 ], 'assets');
             });
-    }
-
-    /**
-     * Registers and publishes the package translations.
-     */
-    private function publishTranslations(): void
-    {
-        $translationPath = $this->packagePath('resources/lang');
-
-        $this->loadTranslationsFrom($translationPath, 'cms');
-        $this->publishes([
-            $translationPath => resource_path('lang')
-        ], 'translations');
     }
 }

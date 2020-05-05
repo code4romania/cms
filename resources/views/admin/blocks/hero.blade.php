@@ -13,7 +13,8 @@
 @formField('wysiwyg', [
     'name'           => 'content',
     'label'          => __('admin.field.content'),
-    'toolbarOptions' => config('twill.toolbar_options'),
+    'type'           => config('cms.editor.type'),
+    'toolbarOptions' => config('cms.editor.toolbar'),
     'translated'     => true,
     'editSource'     => true,
 ])
@@ -23,7 +24,7 @@
     'label'      => __('admin.field.buttonColor'),
     'required'   => true,
     'default'    => 'primary',
-    'options'    => collect(config('cms.colorGroups'))->map(function($key) {
+    'options'    => collect(config('cms.colors'))->map(function($key) {
         return [
             'value' => $key,
             'label' => ucfirst($key),

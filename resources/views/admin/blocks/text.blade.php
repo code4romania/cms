@@ -14,7 +14,8 @@
 @formField('wysiwyg', [
     'name'           => 'text',
     'label'          => __('admin.field.text'),
-    'toolbarOptions' => config('twill.toolbar_options'),
+    'type'           => config('cms.editor.type'),
+    'toolbarOptions' => config('cms.editor.toolbar'),
     'translated'     => true,
     'editSource'     => true,
 ])
