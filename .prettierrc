@@ -1,6 +1,6 @@
 {
     "trailingComma": "es5",
-    "printWidth": 120,
+    "printWidth": 80,
     "tabWidth": 4,
     "useTabs": false,
     "semi": true,
@@ -10,6 +10,12 @@
             "files": ["*.yml", "*.yaml"],
             "options": {
                 "tabWidth": 2
+            }
+        },
+        {
+            "files": ["*.php"],
+            "options": {
+                "printWidth": 120
             }
         }
     ]

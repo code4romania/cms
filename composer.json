@@ -20,6 +20,7 @@
         "artesaos/seotools": "^0.17",
         "kalnoy/nestedset": "^5.0",
         "laravel/framework": "^7.9",
+        "lasserafn/php-initial-avatar-generator": "^4.1",
         "leewillis77/cached-embed": "^0.8",
         "lorisleiva/laravel-deployer": "^0.3",
         "mcamara/laravel-localization": "^1.5",
@@ -49,7 +50,6 @@
         "analyse": "php -d memory_limit=-1 vendor/bin/phpstan analyse --ansi"
     },
     "config": {
-        "lock": false,
         "sort-packages": true
     },
     "extra": {

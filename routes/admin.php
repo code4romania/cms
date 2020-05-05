@@ -6,4 +6,11 @@ if (Route::hasMacro('module')) {
     Route::module('pages');
 
     Route::module('menus');
+
+    if (config('cms.enabled.people')) {
+        Route::prefix('people')->group(static function (): void {
+            Route::module('people');
+            Route::module('cityLabs');
+        });
+    }
 }

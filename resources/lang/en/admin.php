@@ -2,10 +2,14 @@
 
 return [
 
-    'model' => [
-        'page' => 'Page',
-        'menu' => 'Menu',
-    ],
+    'cityLab'  => 'City Lab',
+    'cityLabs' => 'City Labs',
+    'page'     => 'Page',
+    'pages'    => 'Pages',
+    'person'   => 'Person',
+    'people'   => 'People',
+    'menu'     => 'Menu',
+    'menus'    => 'Menus',
 
     'field' => [
         'affiliation'       => 'Affiliation',
@@ -25,8 +29,10 @@ return [
         'label'             => 'Label',
         'menuItems'         => 'Menu items',
         'menuLocation'      => 'Menu location',
+        'name'              => 'Name',
         'number'            => 'Number',
         'quote'             => 'Quote',
+        'showDescriptions'  => 'Show descriptions',
         'showHeader'        => 'Show header',
         'siteDescription'   => 'Site description',
         'siteTitle'         => 'Site title',
@@ -42,6 +48,7 @@ return [
     'fieldNote' => [
         'imagesUpTo' => 'Add up to :count images',
         'embedUrl'   => 'The embed is generated automatically from this url',
+        'peopleUpTo' => '{1} Add one person|[2,*] Add up to :count people',
     ],
 
     'position' => [

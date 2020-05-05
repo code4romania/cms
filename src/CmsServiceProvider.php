@@ -126,12 +126,27 @@ class CmsServiceProvider extends ServiceProvider
     private function publishMigrations(): void
     {
         $this->loadMigrationsFrom(
-            $this->packagePath('database/migrations')
+            $this->packagePath('database/migrations/default')
         );
 
         $this->publishes([
-            $this->packagePath('database/migrations') => database_path('migrations'),
+            $this->packagePath('database/migrations/default') => database_path('migrations'),
         ], 'migrations');
+
+        $this->publishOptionalMigration('people');
+    }
+
+    private function publishOptionalMigration(string $feature): void
+    {
+        $this->loadMigrationsFrom(
+            $this->packagePath("database/migrations/{$feature}")
+        );
+
+        if (config("cms.enabled.{$feature}", false)) {
+            $this->publishes([
+                $this->packagePath("database/migrations/{$feature}") => database_path('migrations'),
+            ], 'migrations');
+        }
     }
 
     protected function registerCommands(): void
@@ -144,8 +159,10 @@ class CmsServiceProvider extends ServiceProvider
     protected function registerRelationMorphMap(): void
     {
         Relation::morphMap([
-            'page' => 'Code4Romania\Cms\Models\Page',
-            'menu' => 'Code4Romania\Cms\Models\Menu',
+            'cityLab' => 'Code4Romania\Cms\Models\CityLab',
+            'page'    => 'Code4Romania\Cms\Models\Page',
+            'person'  => 'Code4Romania\Cms\Models\Person',
+            'menu'    => 'Code4Romania\Cms\Models\Menu',
         ]);
     }
 

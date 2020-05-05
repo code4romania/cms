@@ -25,6 +25,16 @@ return [
             'icon'       => 'media-list',
             'component'  => 'a17-block-accordion',
         ],
+        'callToAction' => [
+            'title'      => 'Call to action',
+            'icon'       => 'colors',
+            'component'  => 'a17-block-callToAction',
+        ],
+        'cityLabs' => [
+            'title'      => 'City labs list',
+            'icon'       => 'fix-grid',
+            'component'  => 'a17-block-cityLabs',
+        ],
         'counter' => [
             'title'      => 'Counter',
             'icon'       => 'star-feature',
@@ -34,11 +44,6 @@ return [
             'title'      => 'Embed',
             'icon'       => 'revision-single',
             'component'  => 'a17-block-embed',
-        ],
-        'quote' => [
-            'title'      => 'Quote',
-            'icon'       => 'quote',
-            'component'  => 'a17-block-quote',
         ],
         'hero' => [
             'title'      => 'Hero section',
@@ -55,25 +60,30 @@ return [
             'icon'       => 'image-text',
             'component'  => 'a17-block-imageText',
         ],
-        'callToAction' => [
-            'title'      => 'Call to action',
-            'icon'       => 'colors',
-            'component'  => 'a17-block-callToAction',
+        'menuItem' => [
+            'title'      => 'Menu Item',
+            'icon'       => 'info',
+            'component'  => 'a17-block-menuItem',
         ],
         'newsletter' => [
             'title'      => 'Subscribe to newsletter',
             'icon'       => 'info',
             'component'  => 'a17-block-newsletter',
         ],
+        'people' => [
+            'title'      => 'People list',
+            'icon'       => 'fix-grid',
+            'component'  => 'a17-block-people',
+        ],
+        'quote' => [
+            'title'      => 'Quote',
+            'icon'       => 'quote',
+            'component'  => 'a17-block-quote',
+        ],
         'text' => [
             'title'      => 'Text',
             'icon'       => 'text',
             'component'  => 'a17-block-text',
-        ],
-        'menuItem' => [
-            'title'      => 'Menu Item',
-            'icon'       => 'info',
-            'component'  => 'a17-block-menuItem',
         ],
     ],
     'repeaters' => [

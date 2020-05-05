@@ -50,9 +50,9 @@ trait WithSeoTags
         SEOTools::setTitle($title);
     }
 
-    public function setDescription(string $description = ''): void
+    public function setDescription(?string $description = ''): void
     {
-        $description = Str::limit(strip_tags($description), $this->maxDescriptionLength);
+        $description = Str::limit(strip_tags($description ?? ''), $this->maxDescriptionLength);
 
         if (empty($description)) {
             return;

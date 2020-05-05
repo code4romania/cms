@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Code4Romania\Cms\Presenters;
 
+use Code4Romania\Cms\Models\CityLab;
+use Code4Romania\Cms\Models\Person;
 use Leewillis77\CachedEmbed\CachedEmbed;
 
 /**
@@ -35,6 +37,144 @@ class BlockPresenter extends Presenter
                 return '';
             })
             ->implode('');
+    }
+
+    /**
+     * Block: cityLabs
+     */
+    public function cityLabsListPublished()
+    {
+        $ids = $this->model->browserIds('cityLabs');
+
+        return CityLab::publishedInListings()
+            ->withActiveTranslations()
+            ->orderByRaw('FIELD(id,' . implode(',', $ids) . ')')
+            ->findMany($ids);
+    }
+
+    /**
+     * Block: counter
+     */
+    public function counterBadgeBackgroundClass(): string
+    {
+        $classes = collect();
+
+        switch ($this->model->input('background')) {
+            case 'primary':
+                $classes->push('text-white');
+                break;
+
+            case 'secondary':
+                $classes->push('text-black');
+                break;
+
+            case 'danger':
+                $classes->push('text-white');
+                break;
+
+            case 'gray':
+                $classes->push('text-white');
+                break;
+
+            default:
+                break;
+        }
+
+        return $classes->implode(' ');
+    }
+
+    /**
+     * Block: counter
+     */
+    public function counterBadgeTextClass(): string
+    {
+        $classes = collect();
+
+        switch ($this->model->input('background')) {
+            case 'primary':
+                $classes->push('text-primary-700');
+                break;
+
+            case 'secondary':
+                $classes->push('text-secondary-400');
+                break;
+
+            case 'danger':
+                $classes->push('text-danger-700');
+                break;
+
+            case 'gray':
+                $classes->push('text-gray-800');
+                break;
+
+            default:
+                $classes->push('text-white');
+                break;
+        }
+
+        return $classes->implode(' ');
+    }
+
+    /**
+     * Block: counter
+     */
+    public function counterColumnsClass(): string
+    {
+        $classes = collect();
+
+        switch ($this->model->input('columns')) {
+            case 1:
+                $classes->push('grid-cols-1');
+                break;
+
+            case 2:
+                $classes->push('grid-cols-2');
+                break;
+
+            case 3:
+                $classes->push('grid-cols-2 lg:grid-cols-3');
+                break;
+
+            default:
+                break;
+        }
+
+        return $classes->implode(' ');
+    }
+
+    /**
+     * Block: counter
+     */
+    public function counterContainerClass(): string
+    {
+        $classes = collect();
+
+        switch ($this->model->input('background')) {
+            case 'primary':
+                $classes->push('bg-primary-700');
+                $classes->push('text-white');
+                break;
+
+            case 'secondary':
+                $classes->push('bg-secondary-400');
+                $classes->push('text-black');
+                break;
+
+            case 'danger':
+                $classes->push('bg-danger-700');
+                $classes->push('text-white');
+                break;
+
+            case 'gray':
+                $classes->push('bg-gray-800');
+                $classes->push('text-white');
+                break;
+
+            default:
+                break;
+        }
+
+        return $classes->implode(' ');
     }
 
     /**
@@ -95,6 +235,30 @@ class BlockPresenter extends Presenter
     /**
      * Block: imageText
      */
+    public function imageTextContentClass(): string
+    {
+        $classes = collect('rich-text');
+
+        switch ($this->model->input('width')) {
+            case '1/4':
+                $classes->push('md:col-span-3');
+                break;
+
+            case '1/3':
+                $classes->push('md:col-span-2');
+                break;
+
+            case '1/2':
+                $classes->push('md:col-span-1');
+                break;
+        }
+
+        return $classes->implode(' ');
+    }
+
+    /**
+     * Block: imageText
+     */
     public function imageTextImageClass(): string
     {
         $classes = collect(['col-span-1']);
@@ -119,82 +283,23 @@ class BlockPresenter extends Presenter
     }
 
     /**
-     * Block: imageText
+     * Block: people
      */
-    public function imageTextContentClass(): string
-    {
-        $classes = collect('rich-text');
-
-        switch ($this->model->input('width')) {
-            case '1/4':
-                $classes->push('md:col-span-3');
-                break;
-
-            case '1/3':
-                $classes->push('md:col-span-2');
-                break;
-
-            case '1/2':
-                $classes->push('md:col-span-1');
-                break;
-        }
-
-        return $classes->implode(' ');
-    }
-
-    /**
-     * Block: counter
-     */
-    public function counterContainerClass(): string
-    {
-        $classes = collect();
-
-        switch ($this->model->input('background')) {
-            case 'primary':
-                $classes->push('bg-primary-700');
-                $classes->push('text-white');
-                break;
-
-            case 'secondary':
-                $classes->push('bg-secondary-400');
-                $classes->push('text-black');
-                break;
-
-            case 'danger':
-                $classes->push('bg-danger-700');
-                $classes->push('text-white');
-                break;
-
-            case 'gray':
-                $classes->push('bg-gray-800');
-                $classes->push('text-white');
-                break;
-
-            default:
-                break;
-        }
-
-        return $classes->implode(' ');
-    }
-
-    /**
-     * Block: counter
-     */
-    public function counterColumnsClass(): string
+    public function peopleColumnsClass(): string
     {
         $classes = collect();
 
         switch ($this->model->input('columns')) {
-            case 1:
-                $classes->push('grid-cols-1');
-                break;
-
             case 2:
-                $classes->push('grid-cols-2');
+                $classes->push('sm:grid-cols-2');
                 break;
 
             case 3:
-                $classes->push('grid-cols-2 lg:grid-cols-3');
+                $classes->push('sm:grid-cols-2 lg:grid-cols-3');
+                break;
+
+            case 4:
+                $classes->push('sm:grid-cols-2 lg:grid-cols-4');
                 break;
 
             default:
@@ -205,64 +310,15 @@ class BlockPresenter extends Presenter
     }
 
     /**
-     * Block: counter
+     * Block: people
      */
-    public function counterBadgeBackgroundClass(): string
+    public function peopleListPublished()
     {
-        $classes = collect();
+        $ids = $this->model->browserIds('people');
 
-        switch ($this->model->input('background')) {
-            case 'primary':
-                $classes->push('text-white');
-                break;
-
-            case 'secondary':
-                $classes->push('text-black');
-                break;
-
-            case 'danger':
-                $classes->push('text-white');
-                break;
-
-            case 'gray':
-                $classes->push('text-white');
-                break;
-
-            default:
-                break;
-        }
-
-        return $classes->implode(' ');
-    }
-    /**
-     * Block: counter
-     */
-    public function counterBadgeTextClass(): string
-    {
-        $classes = collect();
-
-        switch ($this->model->input('background')) {
-            case 'primary':
-                $classes->push('text-primary-700');
-                break;
-
-            case 'secondary':
-                $classes->push('text-secondary-400');
-                break;
-
-            case 'danger':
-                $classes->push('text-danger-700');
-                break;
-
-            case 'gray':
-                $classes->push('text-gray-800');
-                break;
-
-            default:
-                $classes->push('text-white');
-                break;
-        }
-
-        return $classes->implode(' ');
+        return Person::publishedInListings()
+            ->withActiveTranslations()
+            ->orderByRaw('FIELD(id,' . implode(',', $ids) . ')')
+            ->findMany($ids);
     }
 }

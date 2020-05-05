@@ -2,44 +2,64 @@
 
 declare(strict_types=1);
 
-return [
-
+$navigation = [
     'pages' => [
         'title' => 'Pages',
         'module' => true,
     ],
-    'settings' => [
-        'title' => 'Settings',
-        'route' => 'admin.settings',
-        'params' => [
-            'section' => 'site'
-        ],
+];
+
+if (config('cms.enabled.people')) {
+    $navigation['people'] = [
+        'title' => 'People',
+        'route' => 'admin.people.people.index',
         'primary_navigation' => [
-            'site' => [
-                'title' => 'Site',
-                'route' => 'admin.settings',
-                'params' => [
-                    'section' => 'site'
-                ],
+            'people' => [
+                'title' => 'People',
+                'route' => 'admin.people.people.index',
             ],
-            'seo' => [
-                'title' => 'SEO',
-                'route' => 'admin.settings',
-                'params' => [
-                    'section' => 'seo'
-                ],
-            ],
-            'social' => [
-                'title' => 'Social',
-                'route' => 'admin.settings',
-                'params' => [
-                    'section' => 'social'
-                ],
+            'cityLabs' => [
+                'title' => 'City Labs',
+                'route' => 'admin.people.cityLabs.index',
             ],
         ],
+    ];
+}
+
+$navigation['settings'] = [
+    'title' => 'Settings',
+    'route' => 'admin.settings',
+    'params' => [
+        'section' => 'site'
     ],
-    'menus' => [
-        'title' => 'Menus',
-        'module' => true,
+    'primary_navigation' => [
+        'site' => [
+            'title' => 'Site',
+            'route' => 'admin.settings',
+            'params' => [
+                'section' => 'site'
+            ],
+        ],
+        'seo' => [
+            'title' => 'SEO',
+            'route' => 'admin.settings',
+            'params' => [
+                'section' => 'seo'
+            ],
+        ],
+        'social' => [
+            'title' => 'Social',
+            'route' => 'admin.settings',
+            'params' => [
+                'section' => 'social'
+            ],
+        ],
     ],
 ];
+
+$navigation['menus'] = [
+    'title' => 'Menus',
+    'module' => true,
+];
+
+return $navigation;

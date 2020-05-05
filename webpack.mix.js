@@ -33,5 +33,4 @@ mix.setPublicPath('public/assets/cms')
             bubble: ['screen'],
         }),
     ])
-    .purgeCss()
     .extract();
