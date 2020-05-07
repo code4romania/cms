@@ -13,11 +13,13 @@ class SocialHelper
      */
     public static function getNetworks(): Collection
     {
-        return collect(config('cms.social.networks', []))
-            ->map(function ($value, $key): ?string {
-                $username = SettingsHelper::get($key, 'social');
+        $settings = SettingsHelper::getSection('social');
 
-                if (is_null($username)) {
+        return collect(config('cms.social.networks', []))
+            ->map(function ($value, $key) use ($settings): ?string {
+                $username = $settings[$key] ?? null;
+
+                if ($username === null) {
                     return null;
                 }
 

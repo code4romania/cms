@@ -2,8 +2,8 @@
     'controlLanguagesPublication' => true,
     'additionalFieldsets'  => [
         [
-            'fieldset' => 'image',
-            'label'    => __('admin.field.image'),
+            'fieldset' => 'people',
+            'label'    => __('admin.people'),
         ],
     ],
 ])
@@ -19,21 +19,21 @@
         'translated'     => true,
     ])
 
-    @formField('browser', [
-        'routePrefix' => 'people',
-        'moduleName'  => 'people',
-        'name'        => 'people',
-        'label'       => __('admin.people'),
-        'note'        => trans_choice('admin.fieldNote.peopleUpTo', 100),
-        'max'         => 100,
+    @formField('medias', [
+        'name'  => 'image',
+        'label' => __('admin.field.image'),
     ])
 @endsection
 
 @section('fieldsets')
-    <a17-fieldset title="{{ __('admin.field.image') }}" id="image">
-        @formField('medias', [
-            'name'  => 'image',
-            'label' => false,
+    <a17-fieldset title="{{ __('admin.people') }}" id="people">
+        @formField('browser', [
+            'routePrefix' => 'people',
+            'moduleName'  => 'people',
+            'name'        => 'people',
+            'label'       => false,
+            'note'        => trans_choice('admin.fieldNote.peopleUpTo', 100),
+            'max'         => 100,
         ])
     </a17-fieldset>
 @endsection

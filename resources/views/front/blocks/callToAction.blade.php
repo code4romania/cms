@@ -8,11 +8,10 @@
         </div>
 
         <div class="text-center">
-            @include('front.components.button', [
-                'label' => $block->translatedInput('button_text'),
-                'href' => $block->translatedInput('button_url'),
-                'color' => $block->input('button_color'),
-            ])
+            <x-button
+                :href="$block->translatedInput('button_url')"
+                :color="$block->input('button_color')"
+            >{{ $block->translatedInput('button_text') }}</x-button>
         </div>
     </div>
 </section>

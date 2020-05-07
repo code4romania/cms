@@ -6,18 +6,12 @@ namespace Code4Romania\Cms\Http\Controllers\Admin;
 
 class PageController extends ModuleController
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $moduleName = 'pages';
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $permalinkBase = '';
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $previewView = 'front.pages.show';
 }

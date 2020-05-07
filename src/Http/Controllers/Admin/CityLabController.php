@@ -19,6 +19,9 @@ class CityLabController extends ModuleController
     /** @var string */
     protected $permalinkBase = 'city-labs';
 
+    /** @var string */
+    protected $previewView = 'front.cityLabs.show';
+
     /** @var array<string> */
     protected $indexOptions = [];
 

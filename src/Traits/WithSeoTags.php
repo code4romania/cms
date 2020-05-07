@@ -33,9 +33,9 @@ trait WithSeoTags
         $this->setCanonical($params['routeName'], $params['routeArg'], $params[$params['routeArg']] ?? '');
     }
 
-    public function setTitle(string $title = ''): void
+    public function setTitle(?string $title = ''): void
     {
-        $title = trim($title);
+        $title = trim($title ?? '');
 
         if (empty($title)) {
             return;

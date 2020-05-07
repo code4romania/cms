@@ -36,4 +36,18 @@ class SettingsHelperTest extends TestCase
         $this->assertEquals($settings['field'], SettingsHelper::get('field', $section));
         $this->assertNull(SettingsHelper::get('thisFieldDoesNotExist', $section));
     }
+
+    /** @test */
+    public function itGetsValueForSection()
+    {
+        $settings = [
+            'field' => $this->faker->word,
+        ];
+
+        $section = 'section';
+
+        SettingsHelper::set($settings, $section);
+
+        $this->assertEquals($settings, SettingsHelper::getSection($section));
+    }
 }

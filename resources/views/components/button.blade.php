@@ -1,10 +1,9 @@
 @inject('url', 'Code4Romania\Cms\Helpers\UrlHelper')
 
 @php
-    $href = $href ?? false;
-    $type = $type ?? 'button';
-    $color = $color ?? 'primary';
-    $label = $label ?? null;
+    $href ??= false;
+    $type ??= 'button';
+    $color ??= 'primary';
 
     $buttonBase = 'relative inline-block w-full px-6 py-2 font-semibold leading-snug tracking-wide text-center shadow-md sm:w-auto hover:shadow-lg focus:outline-none focus:shadow-md';
 
@@ -31,21 +30,19 @@
     }
 @endphp
 
-@if (!is_null($label))
-    @if ($href !== false)
-        <a
-            href="{{ $href }}"
-            class="{{ $buttonBase }} {{ $buttonColor }}"
+@if ($href !== false)
+    <a
+        href="{{ $href }}"
+        class="{{ $buttonBase }} {{ $buttonColor }}"
 
-            @if ($url->isExternal($href))
-                rel="noopener noreferrer"
-                target="_blank"
-            @endif
-        >{{ $label }}</a>
-    @else
-        <button
-            type="{{ $type }}"
-            class="{{ $buttonBase }} {{ $buttonColor }}"
-        >{{ $label }}</button>
-    @endif
+        @if ($url->isExternal($href))
+            rel="noopener noreferrer"
+            target="_blank"
+        @endif
+    >{{ $slot }}</a>
+@else
+    <button
+        type="{{ $type }}"
+        class="{{ $buttonBase }} {{ $buttonColor }}"
+    >{{ $slot }}</button>
 @endif

@@ -9,21 +9,21 @@
             {!! $block->translatedInput('content') !!}
         </div>
 
-        @include('front.components.button', [
-            'label' => $block->translatedInput('button_text'),
-            'href' => $block->translatedInput('button_url'),
-            'color' => $block->input('button_color'),
-        ])
+        <x-button
+            :href="$block->translatedInput('button_url')"
+            :color="$block->input('button_color')"
+        >{{ $block->translatedInput('button_text') }}</x-button>
+
     </div>
     @if ($block->hasImage('image'))
         <div class="mt-8 mb-16 md:mb-0 md:mt-0 md:w-1/2 md:pl-12">
-            @include('front.components.figure', [
-                'lqip'    => $block->lowQualityImagePlaceholder('image'),
-                'src'     => $block->image('image'),
-                'alt'     => $block->imageAltText('image'),
-                'caption' => $block->imageCaption('image'),
-                'classes' => $block->present()->imageTextImageClass
-            ])
+            <x-figure
+                :lqip="$block->lowQualityImagePlaceholder('image')"
+                :src="$block->image('image')"
+                :alt="$block->imageAltText('image')"
+                :caption="$block->imageCaption('image')"
+                :class="$block->present()->imageTextImageClass"
+            />
         </div>
     @endif
 </section>

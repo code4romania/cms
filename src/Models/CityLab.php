@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Code4Romania\Cms\Models;
 
 use A17\Twill\Models\Behaviors\HasMedias;
+use A17\Twill\Models\Behaviors\HasRevisions;
 use A17\Twill\Models\Behaviors\HasSlug;
 use A17\Twill\Models\Behaviors\HasTranslation;
 use A17\Twill\Models\Model;
@@ -12,7 +13,12 @@ use Code4Romania\Cms\Models\Person;
 
 class CityLab extends Model
 {
-    use HasTranslation, HasSlug, HasMedias;
+    use HasTranslation, HasSlug, HasMedias, HasRevisions;
+
+    protected $with = [
+        'translations',
+        'medias',
+    ];
 
     /** @var array<string> */
     protected $fillable = [

@@ -175,10 +175,20 @@ module.exports = {
                 },
             },
         }),
+        aspectRatio: {
+            none: 0,
+            square: [1, 1],
+            '16/9': [16, 9],
+            '4/3': [4, 3],
+            '21/9': [21, 9],
+        },
     },
-    variants: {},
+    variants: {
+        aspectRatio: ['responsive'],
+    },
     plugins: [
         //
+        require('tailwindcss-aspect-ratio'),
         require('@tailwindcss/custom-forms'),
         require('tailwindcss-typography')({
             componentPrefix: '', // the prefix to use for text style classes

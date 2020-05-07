@@ -16,6 +16,11 @@ class Person extends Model
 {
     use HasTranslation, HasMedias;
 
+    protected $with = [
+        'translations',
+        'medias',
+    ];
+
     /** @var Presenter */
     protected $presenterAdmin = PersonPresenter::class;
 

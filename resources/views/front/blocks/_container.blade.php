@@ -1,3 +1,3 @@
-<div class="grid row-gap-16 lg:row-gap-32">
+<x-container>
     {!! $item->renderBlocks(false) !!}
-</div>
+</x-container>

@@ -23,10 +23,15 @@ class CreateCityLabsTables extends Migration
         Schema::create('city_lab_slugs', static function (Blueprint $table): void {
             createDefaultSlugsTableFields($table, 'city_lab');
         });
+
+        Schema::create('city_lab_revisions', static function (Blueprint $table): void {
+            createDefaultRevisionsTableFields($table, 'city_lab');
+        });
     }
 
     public function down()
     {
+        Schema::dropIfExists('city_lab_revisions');
         Schema::dropIfExists('city_lab_translations');
         Schema::dropIfExists('city_lab_slugs');
         Schema::dropIfExists('city_labs');
