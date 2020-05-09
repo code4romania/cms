@@ -26,6 +26,11 @@ if (config('cms.enabled.people')) {
     ];
 }
 
+$navigation['partners'] = [
+    'title' => 'Partners',
+    'module' => true,
+];
+
 $navigation['settings'] = [
     'title' => 'Settings',
     'route' => 'admin.settings',

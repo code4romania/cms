@@ -6,6 +6,8 @@ return [
     'cityLabs' => 'City Labs',
     'page'     => 'Page',
     'pages'    => 'Pages',
+    'partner'  => 'partner',
+    'partners' => 'Partners',
     'person'   => 'Person',
     'people'   => 'People',
     'menu'     => 'Menu',
@@ -27,6 +29,7 @@ return [
         'imagePosition'     => 'Image position',
         'images'            => 'Images',
         'label'             => 'Label',
+        'logo'              => 'Logo',
         'menuItems'         => 'Menu items',
         'menuLocation'      => 'Menu location',
         'name'              => 'Name',
@@ -43,6 +46,7 @@ return [
         'type'              => 'Type',
         'url'               => 'URL',
         'verticalAlignment' => 'Vertical alignment',
+        'website'           => 'Website',
     ],
 
     'fieldNote' => [

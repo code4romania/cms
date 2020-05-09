@@ -18,6 +18,7 @@ class CmsServiceProvider extends ServiceProvider
     protected $providers = [
         LocaleServiceProvider::class,
         RouteServiceProvider::class,
+        FakerServiceProvider::class,
     ];
 
     /** @var array */

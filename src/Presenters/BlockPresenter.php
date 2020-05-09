@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Code4Romania\Cms\Presenters;
 
 use Code4Romania\Cms\Models\CityLab;
+use Code4Romania\Cms\Models\Partner;
 use Code4Romania\Cms\Models\Person;
 use Leewillis77\CachedEmbed\CachedEmbed;
 
@@ -48,7 +49,7 @@ class BlockPresenter extends Presenter
 
         return CityLab::publishedInListings()
             ->withActiveTranslations()
-            ->orderByRaw('FIELD(id,' . implode(',', $ids) . ')')
+            ->orderByIds($ids)
             ->findMany($ids);
     }
 
@@ -318,7 +319,46 @@ class BlockPresenter extends Presenter
 
         return Person::publishedInListings()
             ->withActiveTranslations()
-            ->orderByRaw('FIELD(id,' . implode(',', $ids) . ')')
+            ->orderByIds($ids)
+            ->findMany($ids);
+    }
+
+    /**
+     * Block: partners
+     */
+    public function partnersColumnsClass(): string
+    {
+        $classes = collect();
+
+        switch ($this->model->input('columns')) {
+            case 2:
+                $classes->push('sm:grid-cols-2');
+                break;
+
+            case 3:
+                $classes->push('sm:grid-cols-2 lg:grid-cols-3');
+                break;
+
+            case 4:
+                $classes->push('sm:grid-cols-2 lg:grid-cols-4');
+                break;
+
+            default:
+                break;
+        }
+
+        return $classes->implode(' ');
+    }
+
+    /**
+     * Block: partners
+     */
+    public function partnersListPublished()
+    {
+        $ids = $this->model->browserIds('partners');
+
+        return Partner::publishedInListings()
+            ->orderByIds($ids)
             ->findMany($ids);
     }
 }

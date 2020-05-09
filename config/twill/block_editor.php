@@ -75,6 +75,11 @@ return [
             'icon'       => 'fix-grid',
             'component'  => 'a17-block-people',
         ],
+        'partners' => [
+            'title'      => 'Partners list',
+            'icon'       => 'fix-grid',
+            'component'  => 'a17-block-partners',
+        ],
         'quote' => [
             'title'      => 'Quote',
             'icon'       => 'quote',

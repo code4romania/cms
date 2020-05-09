@@ -11,9 +11,9 @@ use A17\Twill\Models\Behaviors\HasRevisions;
 use A17\Twill\Models\Behaviors\HasSlug;
 use A17\Twill\Models\Behaviors\HasTranslation;
 use A17\Twill\Models\Behaviors\Sortable;
-use A17\Twill\Models\Model;
+use Code4Romania\Cms\Models\BaseModel;
 
-class Page extends Model implements Sortable
+class Page extends BaseModel implements Sortable
 {
     use HasBlocks, HasTranslation, HasSlug, HasMedias, HasRevisions, HasPosition;
 

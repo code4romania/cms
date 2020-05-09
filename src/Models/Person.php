@@ -6,13 +6,13 @@ namespace Code4Romania\Cms\Models;
 
 use A17\Twill\Models\Behaviors\HasMedias;
 use A17\Twill\Models\Behaviors\HasTranslation;
-use A17\Twill\Models\Model;
+use Code4Romania\Cms\Models\BaseModel;
 use Code4Romania\Cms\Presenters\PersonPresenter;
 use Illuminate\Support\Facades\Storage;
 use LasseRafn\InitialAvatarGenerator\InitialAvatar;
 use LasseRafn\Initials\Initials;
 
-class Person extends Model
+class Person extends BaseModel
 {
     use HasTranslation, HasMedias;
 
@@ -71,14 +71,12 @@ class Person extends Model
                     ->name($initials)
                     ->size(96)
                     ->generate()
-                    ->save("{$initials}.png")
+                    ->encode()
             );
         }
-        // dd($disk->file("avatars/{$initials}.png"));
-        // dd(storage_path());
+
         return $disk->url("avatars/{$initials}.png");
     }
-
 
     public function getTitleInBrowserAttribute(): string
     {

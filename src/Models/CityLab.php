@@ -8,10 +8,10 @@ use A17\Twill\Models\Behaviors\HasMedias;
 use A17\Twill\Models\Behaviors\HasRevisions;
 use A17\Twill\Models\Behaviors\HasSlug;
 use A17\Twill\Models\Behaviors\HasTranslation;
-use A17\Twill\Models\Model;
+use Code4Romania\Cms\Models\BaseModel;
 use Code4Romania\Cms\Models\Person;
 
-class CityLab extends Model
+class CityLab extends BaseModel
 {
     use HasTranslation, HasSlug, HasMedias, HasRevisions;
 

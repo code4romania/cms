@@ -4,15 +4,13 @@
     <x-container>
         <div class="container">
             <div class="grid gap-10 md:grid-cols-2">
-                <div class="">
-                    <div class="relative h-0 bg-white border border-gray-400 aspect-ratio-square">
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <x-image
-                                :src="$item->image('image')"
-                                :alt="$item->imageAltText('image')"
-                                class="block w-2/3"
-                            />
-                        </div>
+                <div class="relative h-0 bg-white border border-gray-400 aspect-ratio-square">
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <x-image
+                            :src="$item->image('image')"
+                            :alt="$item->imageAltText('image')"
+                            class="block w-2/3"
+                        />
                     </div>
                 </div>
                 <div class="rich-text">

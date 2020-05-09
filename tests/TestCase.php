@@ -11,6 +11,7 @@ use Code4Romania\Cms\CmsServiceProvider;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\View;
 use Kalnoy\Nestedset\NestedSetServiceProvider;
@@ -59,6 +60,7 @@ class TestCase extends BaseTestCase
         putenv(LaravelLocalization::ENV_ROUTE_KEY . '=' . 'en');
 
         parent::setUp();
+        Artisan::call('storage:link');
 
         $this->withFactories(__DIR__ . '/../database/factories');
 

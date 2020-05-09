@@ -6,7 +6,7 @@ return [
 
     'namespace' => 'Code4Romania\Cms',
 
-    'admin_app_url' => env('ADMIN_APP_URL', env('APP_URL')),
+    'admin_app_url' => env('ADMIN_APP_URL', env('APP_URL', 'http://localhost')),
     'admin_app_path' => env('ADMIN_APP_PATH', 'admin'),
 
     'migrations_use_big_integers' => true,

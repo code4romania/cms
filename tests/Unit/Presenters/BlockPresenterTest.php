@@ -5,15 +5,17 @@ declare(strict_types=1);
 namespace Code4Romania\Cms\Tests\Presenters;
 
 use A17\Twill\Models\Block;
+use Code4Romania\Cms\Models\CityLab;
+use Code4Romania\Cms\Models\Partner;
+use Code4Romania\Cms\Models\Person;
 use Code4Romania\Cms\Tests\TestCase;
 
 class BlockPresenterTest extends TestCase
 {
-    protected function createBlockWithContent(string $type, array $content = []): Block
+    protected function createBlock(string $type, array $content = []): Block
     {
-        return Block::create([
-            'type' => $type,
-            'position' => $this->faker->randomDigitNotNull,
+        return factory(Block::class)->make([
+            'type'    => $type,
             'content' => $content,
         ]);
     }
@@ -21,7 +23,7 @@ class BlockPresenterTest extends TestCase
     /** @test */
     public function itPresentsModelAttributeIfPresenterDoesntHaveMethod()
     {
-        $block = $this->createBlockWithContent('fallbackTest');
+        $block = $this->createBlock('fallbackTest');
 
         $this->assertEquals($block->type, $block->present()->type);
     }
@@ -29,22 +31,22 @@ class BlockPresenterTest extends TestCase
     /** @test */
     public function itPresentsCallToActionBlock()
     {
-        $blockNone = $this->createBlockWithContent('callToAction', [
+        $blockNone = $this->createBlock('callToAction', [
             'background_color' => null,
             'text_color' => null,
         ]);
 
-        $blockText = $this->createBlockWithContent('callToAction', [
+        $blockText = $this->createBlock('callToAction', [
             'background_color' => null,
             'text_color' => '#FFF',
         ]);
 
-        $blockBackground = $this->createBlockWithContent('callToAction', [
+        $blockBackground = $this->createBlock('callToAction', [
             'background_color' => '#FFF',
             'text_color' => null,
         ]);
 
-        $blockBoth = $this->createBlockWithContent('callToAction', [
+        $blockBoth = $this->createBlock('callToAction', [
             'background_color' => '#FFF',
             'text_color' => '#FFF',
         ]);
@@ -56,13 +58,31 @@ class BlockPresenterTest extends TestCase
     }
 
     /** @test */
+    public function itPresentsCityLabsBlock()
+    {
+        $cityLabs = factory(CityLab::class, 10)
+            ->state('published')
+            ->create()
+            ->shuffle()
+            ->pluck('id');
+
+        $blockWithBrowser = $this->createBlock('cityLabs', [
+            'browsers' => [
+                'cityLabs' => $cityLabs,
+            ],
+        ]);
+
+        $this->assertEquals($cityLabs, $blockWithBrowser->present()->cityLabsListPublished->pluck('id'));
+    }
+
+    /** @test */
     public function itPresentsEmbedBlock()
     {
-        $blockEmbed = $this->createBlockWithContent('embed', [
+        $blockEmbed = $this->createBlock('embed', [
             'url' => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
         ]);
 
-        $blockEmpty = $this->createBlockWithContent('embed', []);
+        $blockEmpty = $this->createBlock('embed', []);
 
         $this->assertStringContainsString(
             'https://www.youtube.com/embed/dQw4w9WgXcQ?feature=oembed',
@@ -75,49 +95,49 @@ class BlockPresenterTest extends TestCase
     /** @test */
     public function itPresentsImageTextBlock()
     {
-        $blockLeft = $this->createBlockWithContent('imageText', [
+        $blockLeft = $this->createBlock('imageText', [
             'position' => 'left',
         ]);
 
-        $blockRight = $this->createBlockWithContent('imageText', [
+        $blockRight = $this->createBlock('imageText', [
             'position' => 'right',
         ]);
 
-        $blockTop = $this->createBlockWithContent('imageText', [
+        $blockTop = $this->createBlock('imageText', [
             'valign' => 'top',
         ]);
 
-        $blockCenter = $this->createBlockWithContent('imageText', [
+        $blockCenter = $this->createBlock('imageText', [
             'valign' => 'center',
         ]);
 
-        $blockBottom = $this->createBlockWithContent('imageText', [
+        $blockBottom = $this->createBlock('imageText', [
             'valign' => 'bottom',
         ]);
 
-        $blockQuarter = $this->createBlockWithContent('imageText', [
+        $blockQuarter = $this->createBlock('imageText', [
             'width' => '1/4',
         ]);
 
-        $blockThird = $this->createBlockWithContent('imageText', [
+        $blockThird = $this->createBlock('imageText', [
             'width' => '1/3',
         ]);
 
-        $blockHalf = $this->createBlockWithContent('imageText', [
+        $blockHalf = $this->createBlock('imageText', [
             'width' => '1/2',
         ]);
 
-        $blockQuarterRight = $this->createBlockWithContent('imageText', [
+        $blockQuarterRight = $this->createBlock('imageText', [
             'width' => '1/4',
             'position' => 'right',
         ]);
 
-        $blockThirdRight = $this->createBlockWithContent('imageText', [
+        $blockThirdRight = $this->createBlock('imageText', [
             'width' => '1/3',
             'position' => 'right',
         ]);
 
-        $blockHalfRight = $this->createBlockWithContent('imageText', [
+        $blockHalfRight = $this->createBlock('imageText', [
             'width' => '1/2',
             'position' => 'right',
         ]);
@@ -162,37 +182,37 @@ class BlockPresenterTest extends TestCase
     /** @test */
     public function itPresentsCounterBlock()
     {
-        $blockPrimary = $this->createBlockWithContent('counter', [
+        $blockPrimary = $this->createBlock('counter', [
             'background' => 'primary',
         ]);
 
-        $blockSecondary = $this->createBlockWithContent('counter', [
+        $blockSecondary = $this->createBlock('counter', [
             'background' => 'secondary',
         ]);
 
-        $blockDanger = $this->createBlockWithContent('counter', [
+        $blockDanger = $this->createBlock('counter', [
             'background' => 'danger',
         ]);
 
-        $blockGray = $this->createBlockWithContent('counter', [
+        $blockGray = $this->createBlock('counter', [
             'background' => 'gray',
         ]);
 
-        $blockNone = $this->createBlockWithContent('counter', [
+        $blockNone = $this->createBlock('counter', [
             'background' => 'none',
         ]);
 
-        $blockEmpty = $this->createBlockWithContent('counter');
+        $blockEmpty = $this->createBlock('counter');
 
-        $blockOneColumn = $this->createBlockWithContent('counter', [
+        $blockOneColumn = $this->createBlock('counter', [
             'columns' => 1,
         ]);
 
-        $blockTwoColumns = $this->createBlockWithContent('counter', [
+        $blockTwoColumns = $this->createBlock('counter', [
             'columns' => 2,
         ]);
 
-        $blockThreeColumns = $this->createBlockWithContent('counter', [
+        $blockThreeColumns = $this->createBlock('counter', [
             'columns' => 3,
         ]);
 
@@ -221,5 +241,79 @@ class BlockPresenterTest extends TestCase
         $this->assertEquals('text-gray-800', $blockGray->present()->counterBadgeTextClass);
         $this->assertEquals('text-white', $blockNone->present()->counterBadgeTextClass);
         $this->assertEquals('text-white', $blockEmpty->present()->counterBadgeTextClass);
+    }
+
+    /** @test */
+    public function itPresentsPartnersBlock()
+    {
+        $blockEmpty = $this->createBlock('partners');
+
+        $blockTwoColumns = $this->createBlock('partners', [
+            'columns' => 2,
+        ]);
+
+        $blockThreeColumns = $this->createBlock('partners', [
+            'columns' => 3,
+        ]);
+
+        $blockFourColumns = $this->createBlock('partners', [
+            'columns' => 4,
+        ]);
+
+        $partners = factory(Partner::class, 10)
+            ->state('published')
+            ->create()
+            ->shuffle()
+            ->pluck('id');
+
+        $blockWithBrowser = $this->createBlock('partners', [
+            'browsers' => [
+                'partners' => $partners,
+            ],
+        ]);
+
+        $this->assertEmpty($blockEmpty->present()->partnersColumnsClass);
+        $this->assertEquals('sm:grid-cols-2', $blockTwoColumns->present()->partnersColumnsClass);
+        $this->assertEquals('sm:grid-cols-2 lg:grid-cols-3', $blockThreeColumns->present()->partnersColumnsClass);
+        $this->assertEquals('sm:grid-cols-2 lg:grid-cols-4', $blockFourColumns->present()->partnersColumnsClass);
+
+        $this->assertEquals($partners, $blockWithBrowser->present()->partnersListPublished->pluck('id'));
+    }
+
+    /** @test */
+    public function itPresentsPeopleBlock()
+    {
+        $blockEmpty = $this->createBlock('people');
+
+        $blockTwoColumns = $this->createBlock('people', [
+            'columns' => 2,
+        ]);
+
+        $blockThreeColumns = $this->createBlock('people', [
+            'columns' => 3,
+        ]);
+
+        $blockFourColumns = $this->createBlock('people', [
+            'columns' => 4,
+        ]);
+
+        $people = factory(Person::class, 10)
+            ->state('published')
+            ->create()
+            ->shuffle()
+            ->pluck('id');
+
+        $blockWithBrowser = $this->createBlock('people', [
+            'browsers' => [
+                'people' => $people,
+            ],
+        ]);
+
+        $this->assertEmpty($blockEmpty->present()->peopleColumnsClass);
+        $this->assertEquals('sm:grid-cols-2', $blockTwoColumns->present()->peopleColumnsClass);
+        $this->assertEquals('sm:grid-cols-2 lg:grid-cols-3', $blockThreeColumns->present()->peopleColumnsClass);
+        $this->assertEquals('sm:grid-cols-2 lg:grid-cols-4', $blockFourColumns->present()->peopleColumnsClass);
+
+        $this->assertEquals($people, $blockWithBrowser->present()->peopleListPublished->pluck('id'));
     }
 }

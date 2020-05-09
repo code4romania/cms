@@ -11,6 +11,12 @@ use Code4Romania\Cms\Tests\TestCase;
 class SocialHelperTest extends TestCase
 {
     /** @test */
+    public function itSkipsUnconfiguredNetworks()
+    {
+        $this->assertEmpty(SocialHelper::getNetworks()->toArray());
+    }
+
+    /** @test */
     public function itFetchesFormattedNetworks()
     {
         $user = $this->faker->userName;
@@ -27,11 +33,5 @@ class SocialHelperTest extends TestCase
                 ->map(fn ($network) => $network['baseUrl'] . $user)
                 ->toArray()
         );
-    }
-
-    /** @test */
-    public function itSkipsUnconfiguredNetworks()
-    {
-        $this->assertEmpty(SocialHelper::getNetworks()->toArray());
     }
 }
