@@ -20,8 +20,12 @@
         </whitelist>
     </filter>
     <php>
-        <server name="APP_ENV" value="testing"/>
-        <server name="APP_KEY" value="base64:czgLGZtXBtNLFw2+6939JIJiiF0Mdf02vzsZJtSYns8="/>
-        <server name="DB_CONNECTION" value="testing"/>
+        <env name="APP_ENV" value="testing" />
+        <env name="APP_KEY" value="base64:czgLGZtXBtNLFw2+6939JIJiiF0Mdf02vzsZJtSYns8=" />
+        <env name="DB_CONNECTION" value="mysql" />
+        <env name="DB_DATABASE" value="code4_cms_tests" />
+        <env name="DB_USERNAME" value="root" />
+        <env name="DB_HOST" value="127.0.0.1" />
+        <env name="DB_PORT" value="3306" />
     </php>
 </phpunit>

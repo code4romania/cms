@@ -4,6 +4,7 @@ on: [push]
 
 jobs:
   test:
+    name: PHP ${{ matrix.php-version }} - ${{ matrix.dependency-version }}
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -14,7 +15,15 @@ jobs:
           # - prefer-lowest
           - prefer-stable
 
-    name: PHP ${{ matrix.php-version }} - ${{ matrix.dependency-version }}
+    services:
+      mysql:
+        image: mariadb:10.4
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+          MYSQL_DATABASE: code4_cms_tests
+        ports:
+          - 3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
     steps:
       - name: Checkout code
@@ -38,3 +47,5 @@ jobs:
 
       - name: Run tests
         run: composer test
+        env:
+          DB_PORT: ${{ job.services.mysql.ports[3306] }}
