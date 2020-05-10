@@ -30,6 +30,7 @@
     <a17-fieldset title="{{ __('admin.field.content') }}" id="content-blocks">
         @formField('block_editor', [
             'withoutSeparator' => true,
+            'group' => 'content',
         ])
     </a17-fieldset>
 @stop

@@ -17,7 +17,7 @@ class CityLab extends BaseModel
 
     protected $with = [
         'translations',
-        'medias',
+        // 'medias',
     ];
 
     /** @var array<string> */

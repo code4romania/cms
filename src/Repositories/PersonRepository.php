@@ -14,12 +14,12 @@ class PersonRepository extends ModuleRepository
 {
     use HandleTranslations, HandleMedias;
 
-    // protected $browsers = [
-    //     'cityLab' => [
-    //         'routePrefix' => 'people',
-    //         'titleKey'    => 'name',
-    //     ],
-    // ];
+    protected $browsers = [
+        'cityLab' => [
+            'routePrefix' => 'people',
+            'titleKey'    => 'name',
+        ],
+    ];
 
     public function __construct(Person $model)
     {
@@ -31,14 +31,14 @@ class PersonRepository extends ModuleRepository
      * @param array $scopes
      * @return \Illuminate\Database\Query\Builder
      */
-    // public function filter($query, array $scopes = [])
-    // {
-    //     $cityLab = CityLab::find($scopes['cityLab'] ?? null);
+    public function filter($query, array $scopes = [])
+    {
+        $cityLab = CityLab::find($scopes['cityLab'] ?? null);
 
-    //     if ($cityLab) {
-    //         return $cityLab->people();
-    //     }
+        if ($cityLab) {
+            return $cityLab->people();
+        }
 
-    //     return parent::filter($query, $scopes);
-    // }
+        return parent::filter($query, $scopes);
+    }
 }

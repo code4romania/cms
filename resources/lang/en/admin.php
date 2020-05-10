@@ -35,6 +35,7 @@ return [
         'name'              => 'Name',
         'number'            => 'Number',
         'quote'             => 'Quote',
+        'show'              => 'Show',
         'showDescriptions'  => 'Show descriptions',
         'showHeader'        => 'Show header',
         'siteDescription'   => 'Site description',
@@ -55,6 +56,10 @@ return [
         'peopleUpTo' => '{1} Add one person|[2,*] Add up to :count people',
     ],
 
+    'settings' => [
+        'globalNotice' => 'Global notice',
+    ],
+
     'position' => [
         'top'    => 'Top',
         'center' => 'Center',
@@ -73,5 +78,6 @@ return [
             'page' => 'Page',
         ],
     ],
+
 
 ];

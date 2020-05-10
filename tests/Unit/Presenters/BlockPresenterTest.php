@@ -186,8 +186,8 @@ class BlockPresenterTest extends TestCase
             'background' => 'primary',
         ]);
 
-        $blockSecondary = $this->createBlock('counter', [
-            'background' => 'secondary',
+        $blockWarning = $this->createBlock('counter', [
+            'background' => 'warning',
         ]);
 
         $blockDanger = $this->createBlock('counter', [
@@ -217,7 +217,7 @@ class BlockPresenterTest extends TestCase
         ]);
 
         $this->assertEquals('bg-primary-700 text-white', $blockPrimary->present()->counterContainerClass);
-        $this->assertEquals('bg-secondary-400 text-black', $blockSecondary->present()->counterContainerClass);
+        $this->assertEquals('bg-warning-400 text-black', $blockWarning->present()->counterContainerClass);
         $this->assertEquals('bg-danger-700 text-white', $blockDanger->present()->counterContainerClass);
         $this->assertEquals('bg-gray-800 text-white', $blockGray->present()->counterContainerClass);
         $this->assertEmpty($blockNone->present()->counterContainerClass);
@@ -229,14 +229,14 @@ class BlockPresenterTest extends TestCase
         $this->assertEmpty($blockEmpty->present()->counterColumnsClass);
 
         $this->assertEquals('text-white', $blockPrimary->present()->counterBadgeBackgroundClass);
-        $this->assertEquals('text-black', $blockSecondary->present()->counterBadgeBackgroundClass);
+        $this->assertEquals('text-black', $blockWarning->present()->counterBadgeBackgroundClass);
         $this->assertEquals('text-white', $blockDanger->present()->counterBadgeBackgroundClass);
         $this->assertEquals('text-white', $blockGray->present()->counterBadgeBackgroundClass);
         $this->assertEmpty($blockNone->present()->counterBadgeBackgroundClass);
         $this->assertEmpty($blockEmpty->present()->counterBadgeBackgroundClass);
 
         $this->assertEquals('text-primary-700', $blockPrimary->present()->counterBadgeTextClass);
-        $this->assertEquals('text-secondary-400', $blockSecondary->present()->counterBadgeTextClass);
+        $this->assertEquals('text-warning-400', $blockWarning->present()->counterBadgeTextClass);
         $this->assertEquals('text-danger-700', $blockDanger->present()->counterBadgeTextClass);
         $this->assertEquals('text-gray-800', $blockGray->present()->counterBadgeTextClass);
         $this->assertEquals('text-white', $blockNone->present()->counterBadgeTextClass);

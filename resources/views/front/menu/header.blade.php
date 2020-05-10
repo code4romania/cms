@@ -6,7 +6,7 @@
     $baseButton = 'px-3 py-2 rounded hover:bg-gray-100 focus:bg-gray-200 focus:outline-none';
 @endphp
 
-<ul id="header-menu" class="items-center justify-end w-full col-span-4 lg:w-auto lg:flex lg:col-span-9 lg:col-start-4"
+<ul id="header-menu" class="relative z-50 items-center justify-end w-full col-span-4 lg:w-auto lg:flex lg:col-span-9 lg:col-start-4"
     :class="{ 'hidden' : !open }" x-on:click.away="open = false">
 
     @foreach ($menu->getItemsTree('header') as $item)

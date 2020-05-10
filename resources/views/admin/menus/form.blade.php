@@ -13,15 +13,13 @@
             ];
         })->toArray(),
     ])
-@stop
+@endsection
 
 @section('fieldsets')
     <a17-fieldset title="{{ __('admin.field.menuItems') }}" id="content-blocks">
         @formField('block_editor', [
             'withoutSeparator' => true,
-            'blocks' => [
-                'menuItem'
-            ]
+            'group' => 'menu',
         ])
     </a17-fieldset>
-@stop
+@endsection

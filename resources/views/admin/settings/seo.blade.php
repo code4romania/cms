@@ -42,14 +42,14 @@
         <a17-fieldset title="{{ __('admin.cityLabs') }}" id="city-labs">
             @formField('input', [
                 'name'       => 'cityLabsTitle',
-                'label'      => __('admin.field.siteTitle'),
+                'label'      => __('admin.field.title'),
                 'maxlength'  => 100,
                 'translated' => true,
             ])
 
             @formField('input', [
                 'name'       => 'cityLabsDescription',
-                'label'      => __('admin.field.siteDescription'),
+                'label'      => __('admin.field.description'),
                 'type'       => 'textarea',
                 'maxlength'  => 170,
                 'translated' => true,

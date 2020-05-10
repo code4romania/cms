@@ -87,7 +87,6 @@ class CmsServiceProvider extends ServiceProvider
     {
         $configs = [
             'cms' => 'cms',
-            'cms/colors' => 'cms.colors',
             'cms/editor' => 'cms.editor',
             'cms/embeds' => 'cms.embeds',
             'cms/enabled' => 'cms.enabled',

@@ -14,6 +14,8 @@
             </button>
         </div>
 
-        @include('front.partials.headerMenu')
+        @include('front.menu.header')
     </div>
 </nav>
+
+@include('front.partials.notice')

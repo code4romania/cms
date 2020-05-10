@@ -19,6 +19,7 @@ class Person extends BaseModel
     protected $with = [
         'translations',
         'medias',
+        'cityLab'
     ];
 
     /** @var Presenter */

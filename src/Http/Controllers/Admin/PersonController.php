@@ -21,6 +21,9 @@ class PersonController extends ModuleController
     /** @var string */
     protected $titleInDashboard = 'name';
 
+    /** @var string */
+    protected $previewView = 'front.people.show';
+
     /** @var array<string> */
     protected $indexOptions = [
         'permalink' => false,
@@ -41,7 +44,7 @@ class PersonController extends ModuleController
             'field' => 'name',
             'sort'  => true,
         ],
-        'citylab' => [
+        'cityLab' => [
             'title'   => 'City Lab',
             'field'   => 'cityLab',
             'present' => true,
@@ -50,7 +53,7 @@ class PersonController extends ModuleController
 
     /** @var array<string> */
     protected $filters = [
-        'citylab' => 'cityLab',
+        'cityLab' => 'cityLab',
     ];
 
     /** @param Request $request */
@@ -58,7 +61,7 @@ class PersonController extends ModuleController
     {
         return [
             'translateTitle' => false,
-            'citylabList'    => app(CityLabRepository::class)->listAll('name'),
+            'cityLabList'    => app(CityLabRepository::class)->listAll('name'),
         ];
     }
 }

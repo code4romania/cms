@@ -33,8 +33,12 @@ class UrlHelper
         return Str::startsWith($currentUrl, $adminUrl);
     }
 
-    public static function getAlternateLocaleUrls(string $routeName, ?Model $item = null): array
+    public static function getAlternateLocaleUrls(?string $routeName, ?Model $item = null): array
     {
+        if ($routeName === null) {
+            return [];
+        }
+
         $disabled = collect(config('translatable.disabled', []));
 
         return collect(config('translatable.locales', []))

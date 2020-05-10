@@ -89,8 +89,9 @@ class UrlHelperTest extends TestCase
     }
 
     /** @test */
-    public function itDoesntGenerateLocaleUrlsForNullItem()
+    public function itDoesntGenerateLocaleUrlsForNullArgs()
     {
+        $this->assertEmpty(UrlHelper::getAlternateLocaleUrls(null));
         $this->assertEmpty(UrlHelper::getAlternateLocaleUrls('front.pages.show', null));
     }
 }

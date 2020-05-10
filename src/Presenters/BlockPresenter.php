@@ -65,7 +65,7 @@ class BlockPresenter extends Presenter
                 $classes->push('text-white');
                 break;
 
-            case 'secondary':
+            case 'warning':
                 $classes->push('text-black');
                 break;
 
@@ -96,8 +96,8 @@ class BlockPresenter extends Presenter
                 $classes->push('text-primary-700');
                 break;
 
-            case 'secondary':
-                $classes->push('text-secondary-400');
+            case 'warning':
+                $classes->push('text-warning-400');
                 break;
 
             case 'danger':
@@ -156,8 +156,8 @@ class BlockPresenter extends Presenter
                 $classes->push('text-white');
                 break;
 
-            case 'secondary':
-                $classes->push('bg-secondary-400');
+            case 'warning':
+                $classes->push('bg-warning-400');
                 $classes->push('text-black');
                 break;
 

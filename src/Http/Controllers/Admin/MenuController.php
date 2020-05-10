@@ -18,4 +18,17 @@ class MenuController extends ModuleController
      * @var bool
      */
     protected $disableEditor = true;
+
+    /** @var array */
+    protected $indexColumns = [
+        'title' => [
+            'title' => 'Title',
+            'field' => 'title',
+            'sort'  => true,
+        ],
+        'location' => [
+            'title' => 'Location',
+            'field' => 'location',
+        ],
+    ];
 }
