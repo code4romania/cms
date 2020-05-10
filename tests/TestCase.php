@@ -65,7 +65,10 @@ class TestCase extends BaseTestCase
         $this->withFactories(__DIR__ . '/../database/factories');
 
         File::ensureDirectoryExists(public_path('assets/cms'), 0755, true);
-        File::put(public_path('assets/cms/mix-manifest.json'), '{}');
+        File::put(
+            public_path('assets/cms/mix-manifest.json'),
+            '{"/app.js":"/app.js","/app.css":"/app.css","/manifest.js":"/manifest.js","/vendor.js":"/vendor.js"}'
+        );
 
         // Load views for testing
         View::addLocation(__DIR__ . '/../resources/views');
