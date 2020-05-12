@@ -17,8 +17,7 @@ class PageController extends Controller
         );
 
         $this->seo([
-            'title'       => $item->title,
-            'routeName'   => 'front.pages.index',
+            'routeName' => 'front.pages.index',
         ]);
 
         return view('front.pages.show')->with([
