@@ -57,7 +57,9 @@ return [
     ],
 
     'settings' => [
+        'global'       => 'Global',
         'globalNotice' => 'Global notice',
+        'seo'          => 'SEO Settings',
     ],
 
     'position' => [

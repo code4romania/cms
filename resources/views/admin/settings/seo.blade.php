@@ -2,7 +2,7 @@
     $additionalFieldsets = [
         [
             'fieldset' => 'global',
-            'label'    => __('global'),
+            'label'    => __('admin.settings.global'),
         ],
     ];
 
@@ -15,13 +15,13 @@
 @endphp
 
 @extends('twill::layouts.settings', [
-    'customTitle'            => 'SEO Settings',
+    'customTitle'            => __('admin.settings.seo'),
     'disableContentFieldset' => true,
     'additionalFieldsets'    => $additionalFieldsets,
 ])
 
 @section('fieldsets')
-    <a17-fieldset title="{{ __('global') }}" id="global">
+    <a17-fieldset title="{{ __('admin.settings.global') }}" id="global">
         @formField('input', [
             'name'       => 'siteTitle',
             'label'      => __('admin.field.siteTitle'),
