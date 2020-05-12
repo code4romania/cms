@@ -112,7 +112,6 @@ class Install extends Command
             ->merge($configFiles)
             ->merge($assetFiles)
             ->each(function ($filePath): void {
-
                 if ($this->files->isDirectory($filePath)) {
                     $this->info("Removed Directory <warning>[{$filePath}]</warning>");
                     $this->files->deleteDirectory($filePath);

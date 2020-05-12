@@ -13,7 +13,6 @@ use Code4Romania\Cms\Tests\TestCase;
 
 class MenuHelperTest extends TestCase
 {
-
     protected function createMenu(string $location)
     {
         $locales = $this->getAvailableLocales();
