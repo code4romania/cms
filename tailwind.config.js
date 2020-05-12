@@ -209,10 +209,8 @@ module.exports = {
     ],
     purge: {
         content: [
-            'content/**/*.md',
-            'components/**/*.vue',
-            'layouts/**/*.vue',
-            'pages/**/*.vue',
+            'resources/**/*.blade.php',
+            'vendor/code4romania/cms/src/Presenters/*.php',
         ],
         options: {
             whitelist: ['rich-text'],
