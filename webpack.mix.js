@@ -1,5 +1,4 @@
 const mix = require('laravel-mix');
-require('laravel-mix-purgecss');
 
 mix.config.fileLoaderDirs.fonts = 'fonts';
 
