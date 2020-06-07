@@ -111,6 +111,12 @@ return [
             'component'  => 'a17-block-menuItem',
             'group'      => 'menu',
         ],
+        'formSection' => [
+            'title'      => 'Form Section',
+            'icon'       => 'editor',
+            'component'  => 'a17-block-formSection',
+            'group'      => 'form',
+        ],
     ],
     'repeaters' => [
         'accordionItem' => [
@@ -130,6 +136,11 @@ return [
             'trigger'    => 'Add submenu item',
             'component'  => 'a17-block-subMenuItem',
             'max'        => 20,
+        ],
+        'formField' => [
+            'title'      => 'Form Field',
+            'trigger'    => 'Add field',
+            'component'  => 'a17-block-formField',
         ],
     ],
 

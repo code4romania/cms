@@ -13,4 +13,6 @@ if (Route::hasMacro('module')) {
             Route::module('cityLabs');
         });
     }
+
+    Route::module('forms');
 }

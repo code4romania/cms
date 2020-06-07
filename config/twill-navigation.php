@@ -62,6 +62,11 @@ $navigation['settings'] = [
     ],
 ];
 
+$navigation['forms'] = [
+    'title' => 'Forms',
+    'module' => true,
+];
+
 $navigation['menus'] = [
     'title' => 'Menus',
     'module' => true,

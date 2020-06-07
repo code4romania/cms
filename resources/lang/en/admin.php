@@ -54,6 +54,8 @@ return [
         'imagesUpTo' => 'Add up to :count images',
         'embedUrl'   => 'The embed is generated automatically from this url',
         'peopleUpTo' => '{1} Add one person|[2,*] Add up to :count people',
+        'infoUser'   => 'Extra information, visible to the user',
+        'required'   => 'Required',
     ],
 
     'settings' => [
