@@ -8,12 +8,12 @@ use A17\Twill\Http\Requests\Admin\Request;
 
 class PersonRequest extends Request
 {
-    public function rulesForCreate()
+    public function rulesForCreate(): array
     {
         return [];
     }
 
-    public function rulesForUpdate()
+    public function rulesForUpdate(): array
     {
         return [];
     }

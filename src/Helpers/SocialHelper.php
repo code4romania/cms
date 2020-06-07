@@ -15,7 +15,7 @@ class SocialHelper
     {
         $settings = SettingsHelper::getSection('social');
 
-        return collect(config('cms.social.networks', []))
+        return collect(config('cms.social.networks'))
             ->map(function ($value, $key) use ($settings): ?string {
                 $username = $settings[$key] ?? null;
 

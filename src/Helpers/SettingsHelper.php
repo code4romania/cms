@@ -24,7 +24,8 @@ class SettingsHelper
     public static function getSection(string $section): array
     {
         return Cache::rememberForever('settings.' . $section, function () use ($section) {
-            return Setting::where('section', $section)
+            return Setting::query()
+                ->where('section', $section)
                 ->with('translations')
                 ->get()
                 ->mapWithKeys(fn ($item) => [$item->key => $item->value])

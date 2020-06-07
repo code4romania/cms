@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Cache;
 
 class MenuObserver
 {
-
     private function clearMenuLocationCache(Menu $menu): bool
     {
         return Cache::forget('menu.' . $menu->location);

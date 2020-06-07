@@ -19,7 +19,8 @@ class MenuHelper
         }
 
         return Cache::rememberForever('menu.' . $menuLocation, function () use ($menuLocation) {
-            $menu = Menu::with('blocks')
+            $menu = Menu::query()
+                ->with('blocks')
                 ->where('location', $menuLocation)
                 ->publishedInListings()
                 ->first();

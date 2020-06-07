@@ -12,7 +12,8 @@ class CityLabController extends Controller
 {
     public function index(): View
     {
-        $items = CityLab::publishedInListings()
+        $items = CityLab::query()
+            ->publishedInListings()
             ->withActiveTranslations()
             ->get();
 
@@ -29,7 +30,8 @@ class CityLabController extends Controller
 
     public function show(string $slug): View
     {
-        $item = CityLab::forSlug($slug)
+        $item = CityLab::query()
+            ->forSlug($slug)
             ->publishedInListings()
             ->with([
                 'people' => function ($query) {
@@ -55,7 +57,8 @@ class CityLabController extends Controller
 
     public function preview(string $slug): View
     {
-        $item = CityLab::forSlug($slug)
+        $item = CityLab::query()
+            ->forSlug($slug)
             ->firstOrFail();
 
         $this->seo([

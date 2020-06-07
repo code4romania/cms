@@ -27,7 +27,8 @@ class PageController extends Controller
 
     public function show(string $slug): View
     {
-        $item = Page::forSlug($slug)
+        $item = Page::query()
+            ->forSlug($slug)
             ->publishedInListings()
             ->firstOrFail();
 
@@ -46,7 +47,8 @@ class PageController extends Controller
 
     public function preview(string $slug): View
     {
-        $item = Page::forSlug($slug)
+        $item = Page::query()
+            ->forSlug($slug)
             ->firstOrFail();
 
         $this->seo([

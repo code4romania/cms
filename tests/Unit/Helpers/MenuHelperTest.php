@@ -42,13 +42,12 @@ class MenuHelperTest extends TestCase
             $position = 1;
         }
 
-        $attributes = collect([
+        $item = factory(Block::class)->create([
             'parent_id' => $parent_id,
             'child_key' => !is_null($parent_id) ? 'menuItem' : null,
 
             'position' => $position,
             'type'     => 'menuItem',
-            'target'   => $target,
             'content'  => [
                 'type'   => $type,
                 'target' => $target,
@@ -57,10 +56,6 @@ class MenuHelperTest extends TestCase
                     ->mapWithKeys(fn ($locale) => [$locale => $this->faker->word]),
             ],
         ]);
-
-        $attributes = $attributes->toArray();
-
-        $item = Block::create($attributes);
 
         $menu->blocks()->save($item);
 

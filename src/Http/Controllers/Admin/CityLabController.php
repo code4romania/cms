@@ -45,6 +45,11 @@ class CityLabController extends ModuleController
             'field' => 'name',
             'sort'  => true,
         ],
+        'people' => [
+            'title' => 'People',
+            'field' => 'people_count',
+            'sort'  => true,
+        ],
     ];
 
     /** @var array */

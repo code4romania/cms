@@ -29,7 +29,6 @@ class DefaultSeoConfig
             ]);
         }
 
-
         if ('' !== ($description = strip_tags($seo['siteDescription'] ?? ''))) {
             Config::set([
                 'seotools.meta.defaults.description'      => $description,

@@ -317,7 +317,8 @@ class BlockPresenter extends Presenter
     {
         $ids = $this->model->browserIds('people');
 
-        return Person::publishedInListings()
+        return Person::query()
+            ->publishedInListings()
             ->orderByIds($ids)
             ->findMany($ids);
     }
@@ -356,7 +357,8 @@ class BlockPresenter extends Presenter
     {
         $ids = $this->model->browserIds('partners');
 
-        return Partner::publishedInListings()
+        return Partner::query()
+            ->publishedInListings()
             ->orderByIds($ids)
             ->findMany($ids);
     }
