@@ -8,11 +8,7 @@ class PersonPresenter extends Presenter
 {
     public function cityLab(): string
     {
-        if ($this->model->cityLab->count()) {
-            return $this->model->cityLab->first()->name;
-        }
-
-        return '–';
+        return $this->model->cityLab->first()->name ?? '–';
     }
 
     public function imageSrc(int $width = 96): string

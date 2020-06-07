@@ -16,10 +16,10 @@ class Person extends BaseModel
 {
     use HasTranslation, HasMedias;
 
+    /** @var array<string> */
     protected $with = [
         'translations',
         'medias',
-        'cityLab'
     ];
 
     /** @var Presenter */

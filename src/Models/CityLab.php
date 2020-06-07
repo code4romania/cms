@@ -15,9 +15,14 @@ class CityLab extends BaseModel
 {
     use HasTranslation, HasSlug, HasMedias, HasRevisions;
 
+    /** @var array<string> */
     protected $with = [
         'translations',
-        // 'medias',
+    ];
+
+    /** @var array<string> */
+    protected $withCount = [
+        'people',
     ];
 
     /** @var array<string> */

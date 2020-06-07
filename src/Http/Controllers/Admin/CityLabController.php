@@ -23,6 +23,11 @@ class CityLabController extends ModuleController
     protected $previewView = 'front.cityLabs.show';
 
     /** @var array<string> */
+    protected $indexWith = [
+        'medias',
+    ];
+
+    /** @var array<string> */
     protected $indexOptions = [];
 
     /** @var array */

@@ -7,6 +7,7 @@ namespace Code4Romania\Cms\Helpers;
 use A17\Twill\Models\Block;
 use Code4Romania\Cms\Models\Menu;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Cache;
 
 class MenuHelper
 {
@@ -17,12 +18,14 @@ class MenuHelper
             return [];
         }
 
-        $menu = Menu::with('blocks')
-            ->where('location', $menuLocation)
-            ->publishedInListings()
-            ->first();
+        return Cache::rememberForever('menu.' . $menuLocation, function () use ($menuLocation) {
+            $menu = Menu::with('blocks')
+                ->where('location', $menuLocation)
+                ->publishedInListings()
+                ->first();
 
-        return self::buildTree($menu->blocks ?? collect());
+            return self::buildTree($menu->blocks ?? collect());
+        });
     }
 
     public static function buildTree(Collection $items): array

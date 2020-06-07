@@ -18,6 +18,11 @@ class Page extends BaseModel implements Sortable
     use HasBlocks, HasTranslation, HasSlug, HasMedias, HasRevisions, HasPosition;
 
     /** @var array<string> */
+    protected $with = [
+        'translations',
+    ];
+
+    /** @var array<string> */
     protected $fillable = [
         'published',
         'title',

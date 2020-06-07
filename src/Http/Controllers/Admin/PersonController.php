@@ -25,6 +25,11 @@ class PersonController extends ModuleController
     protected $previewView = 'front.people.show';
 
     /** @var array<string> */
+    protected $indexWith = [
+        'cityLab',
+    ];
+
+    /** @var array<string> */
     protected $indexOptions = [
         'permalink' => false,
     ];

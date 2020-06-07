@@ -14,4 +14,9 @@ class PageController extends ModuleController
 
     /** @var string */
     protected $previewView = 'front.pages.show';
+
+    /** @var array<string> */
+    protected $indexWith = [
+        'translations',
+    ];
 }

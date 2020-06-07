@@ -10,20 +10,6 @@ use Code4Romania\Cms\Tests\TestCase;
 class SettingsHelperTest extends TestCase
 {
     /** @test */
-    public function it_sets_and_gets_values_without_section()
-    {
-        $field = $this->faker->word;
-        $settings = [
-            $field => $this->faker->word,
-        ];
-
-        SettingsHelper::set($settings);
-
-        $this->assertEquals($settings[$field], SettingsHelper::get($field));
-        $this->assertNull(SettingsHelper::get('thisFieldDoesNotExist'));
-    }
-
-    /** @test */
     public function it_sets_and_gets_values_with_section()
     {
         $field = $this->faker->word;

@@ -31,13 +31,13 @@ class CityLabController extends Controller
     {
         $item = CityLab::forSlug($slug)
             ->publishedInListings()
-            ->withActiveTranslations()
-            ->with(['people' => function ($query) {
-                $query
-                    ->orderBy('people.name', 'asc')
-                    ->publishedInListings()
-                    ->withActiveTranslations();
-            }])
+            ->with([
+                'people' => function ($query) {
+                    $query
+                        ->publishedInListings()
+                        ->orderBy('people.name', 'asc');
+                }
+            ])
             ->firstOrFail();
 
         $this->seo([

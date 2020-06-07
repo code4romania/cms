@@ -318,7 +318,6 @@ class BlockPresenter extends Presenter
         $ids = $this->model->browserIds('people');
 
         return Person::publishedInListings()
-            ->withActiveTranslations()
             ->orderByIds($ids)
             ->findMany($ids);
     }

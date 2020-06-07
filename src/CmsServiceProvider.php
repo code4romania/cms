@@ -18,6 +18,7 @@ class CmsServiceProvider extends ServiceProvider
     protected $providers = [
         LocaleServiceProvider::class,
         RouteServiceProvider::class,
+        ObserverServiceProvider::class,
         FakerServiceProvider::class,
     ];
 
@@ -67,6 +68,7 @@ class CmsServiceProvider extends ServiceProvider
 
         $this->registerCommands();
         $this->registerRelationMorphMap();
+        $this->registerObservers();
     }
 
     /**
@@ -164,6 +166,10 @@ class CmsServiceProvider extends ServiceProvider
             'person'  => 'Code4Romania\Cms\Models\Person',
             'menu'    => 'Code4Romania\Cms\Models\Menu',
         ]);
+    }
+
+    protected function registerObservers(): void
+    {
     }
 
     /**

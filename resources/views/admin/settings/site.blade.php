@@ -9,7 +9,12 @@
 
 @php
     $allPages = app( config('twill.namespace') . '\Models\Page')
-        ->all()
+        ->with([
+            'translation' => function ($query) {
+                $query->select('id', 'title');
+            }
+        ])
+        ->get('id', 'translation')
         ->map(function($item) {
             return [
                 'value' => $item->id,

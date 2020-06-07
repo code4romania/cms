@@ -29,7 +29,6 @@ class PageController extends Controller
     {
         $item = Page::forSlug($slug)
             ->publishedInListings()
-            ->withActiveTranslations()
             ->firstOrFail();
 
         $this->seo([

@@ -33,10 +33,12 @@ class PersonRepository extends ModuleRepository
      */
     public function filter($query, array $scopes = [])
     {
-        $cityLab = CityLab::find($scopes['cityLab'] ?? null);
+        if (array_key_exists('cityLab', $scopes)) {
+            $cityLab = CityLab::find($scopes['cityLab']);
 
-        if ($cityLab) {
-            return $cityLab->people();
+            if ($cityLab) {
+                return $cityLab->people();
+            }
         }
 
         return parent::filter($query, $scopes);

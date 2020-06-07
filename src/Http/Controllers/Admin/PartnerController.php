@@ -19,6 +19,11 @@ class PartnerController extends ModuleController
     protected $titleInDashboard = 'name';
 
     /** @var array<string> */
+    protected $indexWith = [
+        'medias',
+    ];
+
+    /** @var array<string> */
     protected $indexOptions = [
         'permalink' => false,
         'reorder'   => true,
