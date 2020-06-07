@@ -14,7 +14,7 @@ class UrlHelperTest extends TestCase
     use WithoutMiddleware;
 
     /** @test */
-    public function itDetectsExternalUrls()
+    public function it_detects_external_urls()
     {
         $this->assertTrue(UrlHelper::isExternal('http://example.com/path/'));
 
@@ -23,7 +23,7 @@ class UrlHelperTest extends TestCase
     }
 
     /** @test */
-    public function itDetectsAdminUrl()
+    public function it_detects_admin_url()
     {
         $this->assertFalse(UrlHelper::isAdminUrl());
         $this->assertTrue(UrlHelper::isAdminUrl(
@@ -32,7 +32,7 @@ class UrlHelperTest extends TestCase
     }
 
     /** @test */
-    public function itGeneratesLocaleUrlsForIndex()
+    public function it_generates_locale_urls_for_index()
     {
         $alternateLocaleUrls = $this
             ->getLocalesExceptCurrent()
@@ -43,7 +43,7 @@ class UrlHelperTest extends TestCase
     }
 
     /** @test */
-    public function itGeneratesLocaleUrlsForPublishedPage()
+    public function it_generates_locale_urls_for_published_page()
     {
         $locales = $this->getLocalesExceptCurrent();
 
@@ -68,7 +68,7 @@ class UrlHelperTest extends TestCase
     }
 
     /** @test */
-    public function itDoesntGenerateLocaleUrlsForUnpublishedTranslation()
+    public function it_doesnt_generate_locale_urls_for_unpublished_translation()
     {
         $locales = $this->getAvailableLocales();
 
@@ -89,7 +89,7 @@ class UrlHelperTest extends TestCase
     }
 
     /** @test */
-    public function itDoesntGenerateLocaleUrlsForNullArgs()
+    public function it_doesnt_generate_locale_urls_for_null_args()
     {
         $this->assertEmpty(UrlHelper::getAlternateLocaleUrls(null));
         $this->assertEmpty(UrlHelper::getAlternateLocaleUrls('front.pages.show', null));

@@ -5,14 +5,13 @@ declare(strict_types=1);
 namespace Code4Romania\Cms\Tests\Http\Controllers\Front;
 
 use A17\Twill\Models\User;
-use Code4Romania\Cms\Helpers\SettingsHelper;
 use Code4Romania\Cms\Models\CityLab;
 use Code4Romania\Cms\Tests\TestCase;
 
 class CityLabControllerTest extends TestCase
 {
     /** @test */
-    public function itFetchesTheCityLabsList()
+    public function it_fetches_the_city_labs_list()
     {
         $cityLabs = factory(CityLab::class, 3)
             ->state('published')
@@ -24,7 +23,7 @@ class CityLabControllerTest extends TestCase
     }
 
     /** @test */
-    public function itFetchesPublishedCityLabsForGuests()
+    public function it_fetches_published_city_labs_for_guests()
     {
         $cityLab = factory(CityLab::class)
             ->state('published')
@@ -36,7 +35,7 @@ class CityLabControllerTest extends TestCase
     }
 
     /** @test */
-    public function itReturnsAnErrorForUnpublishedCityLabs()
+    public function it_returns_an_error_for_unpublished_city_labs()
     {
         $cityLab = factory(CityLab::class)
             ->create();
@@ -46,7 +45,7 @@ class CityLabControllerTest extends TestCase
     }
 
     /** @test */
-    public function itFetchesCityLabPreviewsForAdministrators()
+    public function it_fetches_city_lab_previews_for_administrators()
     {
         $admin = factory(User::class)->states('admin', 'active')->create();
         $cityLab = factory(CityLab::class)->create();
@@ -57,7 +56,7 @@ class CityLabControllerTest extends TestCase
     }
 
     // /** @test */
-    public function itReturnsAnErrorForCityLabPreviewsForGuests()
+    public function it_returns_an_error_for_city_lab_previews_for_guests()
     {
         $cityLab = factory(CityLab::class)->create();
 

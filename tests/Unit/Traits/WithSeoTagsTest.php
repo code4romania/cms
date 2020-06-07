@@ -13,7 +13,7 @@ class WithSeoTagsTest extends TestCase
     use WithSeoTags;
 
     /** @test */
-    public function itGeneratesTheTitle()
+    public function it_generates_the_title()
     {
         $title = $this->faker->sentence;
         $separator = config('seotools.meta.defaults.separator');
@@ -39,7 +39,7 @@ class WithSeoTagsTest extends TestCase
     }
 
     /** @test */
-    public function itReturnsTheDefaultTitleWhenEmpty()
+    public function it_returns_the_default_title_when_empty()
     {
         $title = '';
         $default = config('seotools.meta.defaults.title');
@@ -55,7 +55,7 @@ class WithSeoTagsTest extends TestCase
     }
 
     /** @test */
-    public function itGeneratesTheDescriptionWhenProvided()
+    public function it_generates_the_description_when_provided()
     {
         $description = $this->faker->sentence;
 
@@ -65,7 +65,7 @@ class WithSeoTagsTest extends TestCase
     }
 
     /** @test */
-    public function itGeneratesTheDefaultDescriptionWhenEmpty()
+    public function it_generates_the_default_description_when_empty()
     {
         $description = '';
         $default = config('seotools.meta.defaults.description');
@@ -75,7 +75,7 @@ class WithSeoTagsTest extends TestCase
     }
 
     /** @test */
-    public function itGeneratesCanonicalUrls()
+    public function it_generates_canonical_urls()
     {
         $this->setCanonical('');
         $this->assertFalse(SEOMeta::getCanonical());
@@ -88,7 +88,7 @@ class WithSeoTagsTest extends TestCase
     }
 
     /** @test */
-    public function itParsesArguments()
+    public function it_parses_arguments()
     {
         $defaultTitle = config('seotools.meta.defaults.title');
         $defaultDescription = config('seotools.meta.defaults.description');

@@ -9,7 +9,7 @@ use Code4Romania\Cms\Tests\TestCase;
 class PartnerPresenterTest extends TestCase
 {
     /** @test */
-    public function itPresentsImageSrc()
+    public function it_presents_image_src()
     {
         $person = factory(Partner::class)->create();
         $image = factory(Media::class)->create([

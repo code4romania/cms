@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Artisan;
 class PersonPresenterTest extends TestCase
 {
     /** @test */
-    public function itPresentsCityLabName()
+    public function it_presents_city_lab_name()
     {
         $personWithCity = factory(Person::class)->create();
         $personWithoutCity = factory(Person::class)->create();
@@ -26,7 +26,7 @@ class PersonPresenterTest extends TestCase
     }
 
     /** @test */
-    public function itPresentsImageSrcAndLqip()
+    public function it_presents_image_src_and_lqip()
     {
         $person = factory(Person::class)->create();
         $image = factory(Media::class)->create([

@@ -21,7 +21,7 @@ class BlockPresenterTest extends TestCase
     }
 
     /** @test */
-    public function itPresentsModelAttributeIfPresenterDoesntHaveMethod()
+    public function it_presents_model_attribute_if_presenter_doesnt_have_method()
     {
         $block = $this->createBlock('fallbackTest');
 
@@ -29,7 +29,7 @@ class BlockPresenterTest extends TestCase
     }
 
     /** @test */
-    public function itPresentsCallToActionBlock()
+    public function it_presents_call_to_action_block()
     {
         $blockNone = $this->createBlock('callToAction', [
             'background_color' => null,
@@ -58,7 +58,7 @@ class BlockPresenterTest extends TestCase
     }
 
     /** @test */
-    public function itPresentsCityLabsBlock()
+    public function it_presents_city_labs_block()
     {
         $cityLabs = factory(CityLab::class, 10)
             ->state('published')
@@ -76,7 +76,7 @@ class BlockPresenterTest extends TestCase
     }
 
     /** @test */
-    public function itPresentsEmbedBlock()
+    public function it_presents_embed_block()
     {
         $blockEmbed = $this->createBlock('embed', [
             'url' => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
@@ -93,7 +93,7 @@ class BlockPresenterTest extends TestCase
     }
 
     /** @test */
-    public function itPresentsImageTextBlock()
+    public function it_presents_image_text_block()
     {
         $blockLeft = $this->createBlock('imageText', [
             'position' => 'left',
@@ -180,7 +180,7 @@ class BlockPresenterTest extends TestCase
     }
 
     /** @test */
-    public function itPresentsCounterBlock()
+    public function it_presents_counter_block()
     {
         $blockPrimary = $this->createBlock('counter', [
             'background' => 'primary',
@@ -244,7 +244,7 @@ class BlockPresenterTest extends TestCase
     }
 
     /** @test */
-    public function itPresentsPartnersBlock()
+    public function it_presents_partners_block()
     {
         $blockEmpty = $this->createBlock('partners');
 
@@ -281,7 +281,7 @@ class BlockPresenterTest extends TestCase
     }
 
     /** @test */
-    public function itPresentsPeopleBlock()
+    public function it_presents_people_block()
     {
         $blockEmpty = $this->createBlock('people');
 

@@ -68,13 +68,13 @@ class MenuHelperTest extends TestCase
     }
 
     /** @test */
-    public function itReturnsAnEmptyArrayForAnUnknownMenuLocation()
+    public function test_it_returns_an_empty_array_for_an_unknown_menu_location()
     {
         $this->assertEmpty(MenuHelper::getItemsTree('doesNotExist'));
     }
 
     /** @test */
-    public function itReturnsAnArrayForAKnownMenuLocation()
+    public function it_returns_an_array_for_a_known_menu_location()
     {
         $menu = $this->createMenu('header')['model'];
         $page = factory(Page::class)

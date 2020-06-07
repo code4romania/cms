@@ -12,14 +12,14 @@ use Code4Romania\Cms\Tests\TestCase;
 class PageControllerTest extends TestCase
 {
     /** @test */
-    public function itReturnsAnErrorWhenFrontPageNotSet()
+    public function it_returns_an_error_when_front_page_not_set()
     {
         $this->get(route('front.pages.index'))
             ->assertResponseStatus(404);
     }
 
     /** @test */
-    public function itFetchesTheFrontPage()
+    public function it_fetches_the_front_page()
     {
         $page = factory(Page::class)
             ->state('published')
@@ -32,7 +32,7 @@ class PageControllerTest extends TestCase
     }
 
     /** @test */
-    public function itFetchesPublishedPagesForGuests()
+    public function it_fetches_published_pages_for_guests()
     {
         $page = factory(Page::class)
             ->state('published')
@@ -43,7 +43,7 @@ class PageControllerTest extends TestCase
     }
 
     /** @test */
-    public function itReturnsAnErrorForUnpublishedPages()
+    public function it_returns_an_error_for_unpublished_pages()
     {
         $page = factory(Page::class)
             ->create();
@@ -53,7 +53,7 @@ class PageControllerTest extends TestCase
     }
 
     /** @test */
-    public function itFetchesPagePreviewsForAdministrators()
+    public function it_fetches_page_previews_for_administrators()
     {
         $admin = factory(User::class)->states('admin', 'active')->create();
         $page = factory(Page::class)->create();
@@ -64,7 +64,7 @@ class PageControllerTest extends TestCase
     }
 
     /** @test */
-    public function itReturnsAnErrorForPagePreviewsForGuests()
+    public function it_returns_an_error_for_page_previews_for_guests()
     {
         $this->withoutExceptionHandling();
 

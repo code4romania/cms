@@ -11,13 +11,13 @@ use Code4Romania\Cms\Tests\TestCase;
 class SocialHelperTest extends TestCase
 {
     /** @test */
-    public function itSkipsUnconfiguredNetworks()
+    public function it_skips_unconfigured_networks()
     {
         $this->assertEmpty(SocialHelper::getNetworks()->toArray());
     }
 
     /** @test */
-    public function itFetchesFormattedNetworks()
+    public function it_fetches_formatted_networks()
     {
         $user = $this->faker->userName;
         $networks = collect(config('cms.social.networks'));

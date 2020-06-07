@@ -22,7 +22,7 @@ class RedirectTrailingSlashTest extends TestCase
     }
 
     /** @test */
-    public function itRemovesTrailingSlashFromUrl()
+    public function it_removes_trailing_slash_from_url()
     {
         $page = factory(Page::class)
             ->states('published')

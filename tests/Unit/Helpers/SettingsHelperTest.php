@@ -10,7 +10,7 @@ use Code4Romania\Cms\Tests\TestCase;
 class SettingsHelperTest extends TestCase
 {
     /** @test */
-    public function itSetsAndGetsValuesWithoutSection()
+    public function it_sets_and_gets_values_without_section()
     {
         $field = $this->faker->word;
         $settings = [
@@ -24,7 +24,7 @@ class SettingsHelperTest extends TestCase
     }
 
     /** @test */
-    public function itSetsAndGetsValuesWithSection()
+    public function it_sets_and_gets_values_with_section()
     {
         $field = $this->faker->word;
         $section = $this->faker->word;
@@ -41,7 +41,7 @@ class SettingsHelperTest extends TestCase
     }
 
     /** @test */
-    public function itGetsValueForSection()
+    public function it_gets_value_for_section()
     {
         $field = $this->faker->word;
         $section = $this->faker->word;
