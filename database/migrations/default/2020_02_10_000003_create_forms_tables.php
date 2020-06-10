@@ -12,6 +12,10 @@ class CreateFormsTables extends Migration
         Schema::create('forms', static function (Blueprint $table): void {
             // this will create an id, a "published" column, and soft delete and timestamps columns
             createDefaultTableFields($table);
+            $table->boolean('store')->default(false);
+            $table->boolean('send')->default(false);
+            $table->boolean('confirm')->default(false);
+            $table->text('recipients')->nullable();
         });
 
         Schema::create('form_translations', static function (Blueprint $table): void {

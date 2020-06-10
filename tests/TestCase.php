@@ -45,9 +45,9 @@ class TestCase extends BaseTestCase
 
     protected function refreshApplicationWithLocale($locale): void
     {
-        self::tearDown();
+        $this->tearDown();
         putenv(LaravelLocalization::ENV_ROUTE_KEY . '=' . $locale);
-        self::setUp();
+        $this->setUp();
     }
 
     /**
