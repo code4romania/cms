@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Code4Romania\Cms\Presenters;
 
 use Code4Romania\Cms\Models\CityLab;
+use Code4Romania\Cms\Models\Form;
 use Code4Romania\Cms\Models\Partner;
 use Code4Romania\Cms\Models\Person;
 use Leewillis77\CachedEmbed\CachedEmbed;
@@ -68,6 +69,19 @@ class BlockPresenter extends Presenter
         } catch (\Exception $exception) {
             return null;
         }
+    }
+
+    /**
+     * Block: form
+     */
+    public function formPublished()
+    {
+        return Form::query()
+            ->publishedInListings()
+            ->withActiveTranslations()
+            ->with('blocks')
+            ->findMany($this->model->browserIds('form'))
+            ->first();
     }
 
     /**

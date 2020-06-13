@@ -4,8 +4,13 @@ return [
 
     'choose'   => 'Choose file',
     'required' => 'Required',
+    'width'    => 'Width',
+
     'yes'      => 'Yes',
     'no'       => 'No',
+
+    'full'     => 'Full',
+    'half'     => 'Half',
 
     'database' => 'Database',
     'emails'   => 'Emails',
@@ -23,6 +28,7 @@ return [
     ],
 
     'label' => [
+        'minLength'     => 'Minimum length in characters',
         'maxLength'     => 'Maximum length in characters',
         'minValue'      => 'Minimum value',
         'maxValue'      => 'Maximum value',
@@ -32,7 +38,7 @@ return [
     ],
 
     'note' => [
-        'maxLength'     => '0 = no limit',
+        'noLimit'       => '0 = no limit',
         'checkboxLabel' => 'Will be displayed next to the checkbox',
         'selectDate'    => 'Select date',
     ],

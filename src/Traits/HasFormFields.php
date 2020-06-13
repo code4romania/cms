@@ -2,43 +2,44 @@
 
 declare(strict_types=1);
 
-namespace Code4Romania\Cms\Presenters;
+namespace Code4Romania\Cms\Traits;
 
 use A17\Twill\Models\Block;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Str;
 
-class FormPresenter extends Presenter
+trait HasFormFields
 {
-    public function getFieldsBySection(): Collection
+    public function getSections(): Collection
     {
-        return $this->model->blocks
+        return $this->blocks
             ->where('type', 'formSection')
-            ->where('parent_id', null)
-            ->map(function ($section): array {
-                return [
-                    'title' => $section->translatedInput('name'),
-                    'description' => $section->translatedInput('description'),
-                    'fields' => $this->model->blocks
-                        ->where('type', 'formField')
-                        ->where('parent_id', $section->id)
-                        ->map(fn ($field) => $this->getFieldParams($field))
-                        ->values(),
-                ];
-            })->values();
+            ->whereNull('parent_id')
+            ->values();
+    }
+
+    public function getFields(Block $section): array
+    {
+        return [
+            'title'       => $section->translatedInput('name'),
+            'description' => $section->translatedInput('description'),
+            'fields'      => $this->blocks
+                ->where('type', 'formField')
+                ->where('parent_id', $section->id)
+                ->map(fn ($field) => $this->getFieldParams($field))
+                ->values(),
+        ];
+    }
+
+    public function getFieldsBySection()
+    {
+        return $this->getSections()
+            ->map(fn ($section) => $this->getFields($section));
     }
 
     public function getFieldParams(Block $field): array
     {
         $params = $this->getCommonFieldParams($field);
-
-        $method = Str::camel("get_{$params['type']}_field_params");
-
-        if (!method_exists($this, $method)) {
-            $method = 'getTextFieldParams';
-        }
-
-        return $this->$method($field, $params);
 
         switch ($params['type']) {
             case 'date':
@@ -65,24 +66,12 @@ class FormPresenter extends Presenter
                 return $this->getCheckboxFieldParams($field, $params);
                 break;
 
+            case 'text':
+            case 'textarea':
             default:
                 return $this->getTextFieldParams($field, $params);
                 break;
         }
-    }
-
-    public function getValidationRules(): array
-    {
-        $rules = [];
-
-        foreach ($this->getFieldsBySection($sections) as $sectionIndex => $section) {
-            foreach ($section['fields'] as $fieldIndex => $field) {
-                $rules["data.${sectionIndex}.${fieldIndex}.label"] = [];
-                $rules["data.${sectionIndex}.${fieldIndex}.value"] = $field['validation'];
-            }
-        }
-
-        return $rules;
     }
 
     private function getCommonFieldParams($field): array
@@ -102,30 +91,24 @@ class FormPresenter extends Presenter
 
     private function getDateFieldParams(Block $field, array $params): array
     {
-        if ($field->input('minDate')) {
-            $minDate = Carbon::parse($field->input('minDate'));
-        } else {
-            $minDate = Carbon::today()->subYears(5);
-        }
-
-        if ($field->input('maxDate')) {
-            $maxDate = Carbon::parse($field->input('maxDate'));
-        } else {
-            $maxDate = Carbon::today()->addYears(5);
-        }
-
-        $params['minDate'] = $minDate->toIso8601String();
-        $params['maxDate'] = $maxDate->toIso8601String();
+        $params['minDate'] = $field->input('minDate') ? Carbon::parse($field->input('minDate'))->format('Y-m-d') : null;
+        $params['maxDate'] = $field->input('maxDate') ? Carbon::parse($field->input('maxDate'))->format('Y-m-d') : null;
 
         if (Carbon::today()->greaterThan($params['minDate'])) {
-            $params['focusedDate'] = Carbon::today()->toIso8601String();
+            $params['focusedDate'] = Carbon::today()->format('Y-m-d');
         } else {
             $params['focusedDate'] = $params['minDate'];
         }
 
         $params['validation'][] = 'date';
-        $params['validation'][] = sprintf('after_or_equal:%s', $minDate->format('Y-m-d'));
-        $params['validation'][] = sprintf('before_or_equal:%s', $maxDate->format('Y-m-d'));
+
+        if ($params['minDate']) {
+            $params['validation'][] = sprintf('after_or_equal:%s', $params['minDate']);
+        }
+
+        if ($params['maxDate']) {
+            $params['validation'][] = sprintf('before_or_equal:%s', $params['maxDate']);
+        }
 
         return $params;
     }
@@ -186,9 +169,14 @@ class FormPresenter extends Presenter
 
     private function getTextFieldParams(Block $field, array $params): array
     {
+        $params['minLength'] = intval($field->input('minLength')) ?: false;
         $params['maxLength'] = intval($field->input('maxLength')) ?: false;
 
         $params['validation'][] = 'string';
+
+        if ($params['minLength']) {
+            $params['validation'][] = sprintf('min:%d', $params['minLength']);
+        }
 
         if ($params['maxLength']) {
             $params['validation'][] = sprintf('max:%d', $params['maxLength']);

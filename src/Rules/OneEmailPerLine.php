@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Code4Romania\Cms\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
@@ -7,6 +9,10 @@ use Illuminate\Support\Facades\Validator;
 
 class OneEmailPerLine implements Rule
 {
+    protected $rules = [
+        'email' => ['required', 'email'],
+    ];
+
     /**
      * Determine if the validation rule passes.
      *
@@ -19,7 +25,7 @@ class OneEmailPerLine implements Rule
         $emails = preg_split('/\r\n|\r|\n/', $value);
 
         foreach ($emails as $email) {
-            if (Validator::make(['email' => $email], ['email' => 'required|email'])->fails()) {
+            if (Validator::make(['email' => $email], $this->rules)->fails()) {
                 return false;
             }
         }

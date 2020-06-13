@@ -44,6 +44,23 @@
     ],
 ])
 
+@formField('select', [
+    'name'       => 'width',
+    'label'      => __('form.width'),
+    'default'    => 'full',
+    'unpack'     => true,
+    'options'    => [
+        [
+            'value' => 'full',
+            'label' => __('form.full'),
+        ],
+        [
+            'value' => 'half',
+            'label' => __('form.half'),
+        ],
+    ],
+])
+
 @component('twill::partials.form.utils._connected_fields', [
     'fieldName'       => 'type',
     'fieldValues'     => 'text',
@@ -51,13 +68,23 @@
     'keepAlive'       => true,
 ])
     @formField('input', [
-        'name'           => 'maxLength',
-        'label'          => __('form.label.maxLength'),
-        'note'           => __('form.note.maxLength'),
+        'name'           => 'minLength',
+        'label'          => __('form.label.minLength'),
+        'note'           => __('form.note.noLimit'),
         'type'           => 'number',
         'required'       => false,
         'translated'     => false,
-        'default'        => '',
+        'default'        => '0',
+    ])
+
+    @formField('input', [
+        'name'           => 'maxLength',
+        'label'          => __('form.label.maxLength'),
+        'note'           => __('form.note.noLimit'),
+        'type'           => 'number',
+        'required'       => false,
+        'translated'     => false,
+        'default'        => '0',
     ])
 @endcomponent
 
@@ -68,13 +95,23 @@
     'keepAlive'       => true,
 ])
     @formField('input', [
-        'name'           => 'maxLength',
-        'label'          => __('form.label.maxLength'),
-        'note'           => __('form.note.maxLength'),
+        'name'           => 'minLength',
+        'label'          => __('form.label.minLength'),
+        'note'           => __('form.note.noLimit'),
         'type'           => 'number',
         'required'       => false,
         'translated'     => false,
-        'default'        => '',
+        'default'        => '0',
+    ])
+
+    @formField('input', [
+        'name'           => 'maxLength',
+        'label'          => __('form.label.maxLength'),
+        'note'           => __('form.note.noLimit'),
+        'type'           => 'number',
+        'required'       => false,
+        'translated'     => false,
+        'default'        => '0',
     ])
 @endcomponent
 

@@ -4,6 +4,8 @@ return [
 
     'cityLab'  => 'City Lab',
     'cityLabs' => 'City Labs',
+    'form'     => 'Form',
+    'forms'    => 'Forms',
     'page'     => 'Page',
     'pages'    => 'Pages',
     'partner'  => 'partner',

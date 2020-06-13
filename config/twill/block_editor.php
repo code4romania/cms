@@ -50,6 +50,12 @@ return [
             'component'  => 'a17-block-embed',
             'group'      => 'content',
         ],
+        'form' => [
+            'title'      => 'Form',
+            'icon'       => 'edit',
+            'component'  => 'a17-block-form',
+            'group'      => 'content',
+        ],
         'hero' => [
             'title'      => 'Hero section',
             'icon'       => 'website',
