@@ -7,7 +7,7 @@ class CreatePartnersTables extends Migration
 {
     public function up()
     {
-        Schema::create('partners', function (Blueprint $table) {
+        Schema::create('partners', static function (Blueprint $table): void {
             // this will create an id, a "published" column, and soft delete and timestamps columns
             createDefaultTableFields($table);
 
