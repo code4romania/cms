@@ -50,6 +50,12 @@ return [
             'component'  => 'a17-block-embed',
             'group'      => 'content',
         ],
+        'form' => [
+            'title'      => 'Form',
+            'icon'       => 'edit',
+            'component'  => 'a17-block-form',
+            'group'      => 'content',
+        ],
         'hero' => [
             'title'      => 'Hero section',
             'icon'       => 'website',
@@ -111,6 +117,12 @@ return [
             'component'  => 'a17-block-menuItem',
             'group'      => 'menu',
         ],
+        'formSection' => [
+            'title'      => 'Form Section',
+            'icon'       => 'editor',
+            'component'  => 'a17-block-formSection',
+            'group'      => 'form',
+        ],
     ],
     'repeaters' => [
         'accordionItem' => [
@@ -130,6 +142,11 @@ return [
             'trigger'    => 'Add submenu item',
             'component'  => 'a17-block-subMenuItem',
             'max'        => 20,
+        ],
+        'formField' => [
+            'title'      => 'Form Field',
+            'trigger'    => 'Add field',
+            'component'  => 'a17-block-formField',
         ],
     ],
 

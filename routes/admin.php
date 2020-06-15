@@ -13,4 +13,9 @@ if (Route::hasMacro('module')) {
             Route::module('cityLabs');
         });
     }
+
+    Route::prefix('forms')->group(static function (): void {
+        Route::module('forms');
+        Route::module('responses');
+    });
 }

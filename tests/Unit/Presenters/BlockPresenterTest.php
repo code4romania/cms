@@ -6,6 +6,7 @@ namespace Code4Romania\Cms\Tests\Presenters;
 
 use A17\Twill\Models\Block;
 use Code4Romania\Cms\Models\CityLab;
+use Code4Romania\Cms\Models\Form;
 use Code4Romania\Cms\Models\Partner;
 use Code4Romania\Cms\Models\Person;
 use Code4Romania\Cms\Tests\TestCase;
@@ -90,6 +91,21 @@ class BlockPresenterTest extends TestCase
         );
 
         $this->assertNull($blockEmpty->present()->embedCode);
+    }
+
+
+    /** @test */
+    public function it_presents_form_block()
+    {
+        $form = factory(Form::class)
+            ->state('published')
+            ->create();
+
+        $blockWithBrowser = $this->createBlock('form', [
+            'form' => $form->id,
+        ]);
+
+        $this->assertEquals($form->id, $blockWithBrowser->present()->formPublished->id);
     }
 
     /** @test */

@@ -4,6 +4,8 @@ return [
 
     'cityLab'  => 'City Lab',
     'cityLabs' => 'City Labs',
+    'form'     => 'Form',
+    'forms'    => 'Forms',
     'page'     => 'Page',
     'pages'    => 'Pages',
     'partner'  => 'partner',
@@ -35,6 +37,7 @@ return [
         'name'              => 'Name',
         'number'            => 'Number',
         'quote'             => 'Quote',
+        'recipients'        => 'Recipients',
         'show'              => 'Show',
         'showDescriptions'  => 'Show descriptions',
         'showHeader'        => 'Show header',
@@ -54,9 +57,13 @@ return [
         'imagesUpTo' => 'Add up to :count images',
         'embedUrl'   => 'The embed is generated automatically from this url',
         'peopleUpTo' => '{1} Add one person|[2,*] Add up to :count people',
+        'infoUser'   => 'Extra information, visible to the user',
+        'recipients' => 'Multiple email addresses, one per line',
+        'required'   => 'Required',
     ],
 
     'settings' => [
+        'config'       => 'Configuration',
         'global'       => 'Global',
         'globalNotice' => 'Global notice',
         'seo'          => 'SEO Settings',

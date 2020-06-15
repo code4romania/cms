@@ -92,6 +92,7 @@ class CmsServiceProvider extends ServiceProvider
             'cms/editor' => 'cms.editor',
             'cms/embeds' => 'cms.embeds',
             'cms/enabled' => 'cms.enabled',
+            'cms/form' => 'cms.form',
             'cms/menu' => 'cms.menu',
             'cms/social' => 'cms.social',
             'translatable' => 'translatable',
@@ -162,6 +163,7 @@ class CmsServiceProvider extends ServiceProvider
     {
         Relation::morphMap([
             'cityLab' => 'Code4Romania\Cms\Models\CityLab',
+            'form'    => 'Code4Romania\Cms\Models\Form',
             'page'    => 'Code4Romania\Cms\Models\Page',
             'person'  => 'Code4Romania\Cms\Models\Person',
             'menu'    => 'Code4Romania\Cms\Models\Menu',
