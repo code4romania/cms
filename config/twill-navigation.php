@@ -9,6 +9,21 @@ $navigation = [
     ],
 ];
 
+$navigation['blog'] = [
+    'title' => 'Blog',
+    'route' => 'admin.blog.posts.index',
+    'primary_navigation' => [
+        'posts' => [
+            'title' => 'Posts',
+            'route' => 'admin.blog.posts.index',
+        ],
+        'categories' => [
+            'title' => 'Categories',
+            'route' => 'admin.blog.categories.index',
+        ],
+    ],
+];
+
 if (config('cms.enabled.people')) {
     $navigation['people'] = [
         'title' => 'People',

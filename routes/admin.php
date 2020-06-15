@@ -7,6 +7,11 @@ if (Route::hasMacro('module')) {
     Route::module('menus');
     Route::module('partners');
 
+    Route::prefix('blog')->group(static function (): void {
+        Route::module('posts');
+        Route::module('categories');
+    });
+
     if (config('cms.enabled.people')) {
         Route::prefix('people')->group(static function (): void {
             Route::module('people');
