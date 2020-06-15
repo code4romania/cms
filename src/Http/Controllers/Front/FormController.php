@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace Code4Romania\Cms\Http\Controllers\Front;
 
 use Code4Romania\Cms\Http\Requests\Front\FormRequest;
+use Code4Romania\Cms\Mail\FormResponseSubmitted;
 use Code4Romania\Cms\Models\Form;
 use Code4Romania\Cms\Repositories\ResponseRepository;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Mail;
 
 class FormController extends Controller
 {
@@ -37,10 +39,16 @@ class FormController extends Controller
         }
 
         if ($form->store) {
-            app(ResponseRepository::class)->create([
+            $response = app(ResponseRepository::class)->create([
                 'form_id' => $form->id,
                 'data'    => $data,
             ]);
+        }
+
+        if ($form->send) {
+            $form->recipients_collection->each(function ($recipient) use ($response) {
+                Mail::to($recipient)->send(new FormResponseSubmitted($response));
+            });
         }
 
         return 'ok';

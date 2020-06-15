@@ -41,6 +41,11 @@ class Form extends BaseModel
         'active',
     ];
 
+    public function getRecipientsCollectionAttribute(): Collection
+    {
+        return collect(preg_split('/\r\n|\r|\n/', $this->recipients));
+    }
+
     public function responses(): HasMany
     {
         return $this->hasMany(Response::class);
