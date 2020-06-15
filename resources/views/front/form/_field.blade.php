@@ -1,42 +1,35 @@
 @php
     $sectionIndex ??= null;
     $fieldIndex ??= null;
+    $fieldClass = collect('block');
 
     switch ($field->input('width')) {
         case 'half':
-            $class = '';
+            $fieldClass->push('col-span-1');
             break;
 
         case 'full':
         default:
-            $class = 'md:col-span-2';
+            $fieldClass->push('md:col-span-2');
             break;
-    }
-
-    $attributes = collect();
-
-    if ($field->input('required')) {
-        $attributes->push('required');
     }
 @endphp
 
-<label class="block {{ $class }}">
+<label class="{{ $fieldClass->join(' ') }}">
     <span class="inline font-semibold text-black">{{ $field->translatedInput('label') }}</span>
 
     @if ($field->translatedInput('help') !== '')
         <span class="inline text-gray-700">{{ $field->translatedInput('help') }}</span>
     @endif
 
-    @includeIf("front.form.{$type}", [
+    @includeFirst(["front.form.{$type}", 'front.form.input'], [
+        'type'       => $type,
         'name'       => sprintf('fields[%s][%s]', $sectionIndex, $fieldIndex),
         'field'      => $field,
-        'attributes' => $attributes,
+        'attributes' => $field->present()->formFieldAttributes,
     ])
 
     @include('front.form._error', [
         'name' => sprintf('fields.%s.%s', $sectionIndex, $fieldIndex),
     ])
 </label>
-
-
-

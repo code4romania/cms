@@ -26,7 +26,9 @@ class FormRequest extends Request
      */
     public function rules(): array
     {
-        return $this->getFieldsColumn('validation');
+        return Form::query()
+            ->findOrFail($this->route('id'))
+            ->getFieldsColumn('validation');
     }
 
     /**
@@ -36,26 +38,8 @@ class FormRequest extends Request
      */
     public function attributes(): array
     {
-        return $this->getFieldsColumn('label');
-    }
-
-    /**
-     * Get common params by name for all fields. Acts like array_column.
-     *
-     * @param string $column
-     * @return array
-     */
-    protected function getFieldsColumn(string $column): array
-    {
         return Form::query()
             ->findOrFail($this->route('id'))
-            ->getFieldsBySection()
-            ->flatMap(function ($section, $sectionIndex) use ($column) {
-                return $section['fields']
-                    ->mapWithKeys(function ($field, $fieldIndex) use ($sectionIndex, $column) {
-                        return ["fields.${sectionIndex}.${fieldIndex}" => $field[$column]];
-                    });
-            })
-            ->toArray();
+            ->getFieldsColumn('validation');
     }
 }

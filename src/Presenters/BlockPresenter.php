@@ -80,8 +80,57 @@ class BlockPresenter extends Presenter
             ->publishedInListings()
             ->withActiveTranslations()
             ->with('blocks')
-            ->findMany($this->model->browserIds('form'))
-            ->first();
+            ->find($this->model->input('form'));
+    }
+
+    /**
+     * Block: formField
+     */
+    public function formFieldAttributes(): string
+    {
+        $attributes = collect();
+
+        if ($this->model->input('required')) {
+            $attributes->push('required');
+        }
+
+        if ($this->model->input('minLength')) {
+            $attributes->push(
+                sprintf('minlength="%d"', $this->model->input('minLength'))
+            );
+        }
+
+        if ($this->model->input('maxLength')) {
+            $attributes->push(
+                sprintf('maxlength="%d"', $this->model->input('maxLength'))
+            );
+        }
+
+        if ($this->model->input('minValue')) {
+            $attributes->push(
+                sprintf('min="%d"', $this->model->input('minValue'))
+            );
+        }
+
+        if ($this->model->input('maxValue')) {
+            $attributes->push(
+                sprintf('max="%d"', $this->model->input('maxValue'))
+            );
+        }
+
+        if ($this->model->input('minDate')) {
+            $attributes->push(
+                sprintf('min="%s"', $this->model->input('minDate'))
+            );
+        }
+
+        if ($this->model->input('maxDate')) {
+            $attributes->push(
+                sprintf('max="%s"', $this->model->input('maxDate'))
+            );
+        }
+
+        return $attributes->join(' ');
     }
 
     /**

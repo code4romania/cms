@@ -1,5 +1,5 @@
 @if ($errors->has($name))
-    <div class="text-danger-500" role="alert">
+    <div role="alert" class="text-sm text-danger-500 md:text-base">
         <span class="">{{ $errors->first($name) }}</span>
     </div>
 @endif

@@ -16,6 +16,8 @@ return [
     'emails'   => 'Emails',
     'fields'   => 'Fields',
 
+    'submit'   => 'Submit',
+
     'field' => [
         'text'     => 'Text',
         'textarea' => 'Textarea',
@@ -47,5 +49,5 @@ return [
         'confirm' => 'Send confirmation',
         'send'    => 'Send submissions by email',
         'store'   => 'Store submissions in database',
-    ]
+    ],
 ];

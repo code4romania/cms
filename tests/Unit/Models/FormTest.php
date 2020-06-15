@@ -2,14 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Code4Romania\Cms\Tests\Helpers;
+namespace Code4Romania\Cms\Tests\Models;
 
 use A17\Twill\Models\Block;
 use Code4Romania\Cms\Models\Form;
+use Code4Romania\Cms\Models\Page;
 use Code4Romania\Cms\Tests\TestCase;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\App;
 
-class HasFormFieldsTest extends TestCase
+class FormTest extends TestCase
 {
     protected function localizedStrings(string $type): Collection
     {
@@ -133,10 +135,19 @@ class HasFormFieldsTest extends TestCase
                 'required'      => false,
                 'checkboxLabel' => $this->localizedStrings('sentence'),
             ]),
+            $this->field([
+                'type'      => 'file',
+                'required'  => true,
+                'maxSize'   => 2,
+            ]),
+            $this->field([
+                'type'      => 'file',
+                'required'  => false,
+            ]),
         ]);
     }
 
-    protected function createFormWithSectionsAndFields(int $sections, Collection $fields): Form
+    protected function createFormWithSectionsAndFields(Collection $fields, int $sections = 1): Form
     {
         $form = factory(Form::class)
             ->state('published')
@@ -179,22 +190,25 @@ class HasFormFieldsTest extends TestCase
     }
 
     /** @test */
-    public function it_generates_the_form_fields()
+    public function it_configures_the_form_fields()
     {
+        $currentLocale = App::getLocale();
         $sections = 2;
         $fields = $this->fields();
 
-        $form = $this->createFormWithSectionsAndFields($sections, $fields);
+        $form = $this->createFormWithSectionsAndFields($fields, $sections);
 
         $this->assertCount($sections, $form->getSections());
         $this->assertCount($sections * $fields->count(), $form->getFieldsBySection()->pluck('fields')->flatten(1));
 
         $form->getFields($form->getSections()->first())['fields']
-            ->each(function ($field, $index) use ($fields) {
+            ->each(function ($field, $index) use ($fields, $currentLocale) {
                 $expected = $fields[$index];
 
                 $this->assertEquals($expected['type'], $field['type']);
                 $this->assertEquals($expected['required'], $field['required']);
+                $this->assertEquals($expected['label'][$currentLocale], $field['label']);
+                $this->assertEquals($expected['help'][$currentLocale], $field['help']);
 
                 if (array_key_exists('minLength', $expected)) {
                     $this->assertEquals($expected['minLength'], $field['minLength']);
@@ -220,5 +234,52 @@ class HasFormFieldsTest extends TestCase
                     $this->assertEquals($expected['maxDate'], $field['maxDate']);
                 }
             });
+
+        $allLabels = $form->getFieldsColumn('label');
+        $this->assertCount($sections * $fields->count(), $allLabels);
+
+        $form->getFieldsBySection()->each(function ($section, $sectionIndex) use ($allLabels) {
+            $section['fields']->each(function ($field, $fieldIndex) use ($sectionIndex, $allLabels) {
+                $this->assertEquals($field['label'], $allLabels["fields.${sectionIndex}.${fieldIndex}"]);
+            });
+        });
+    }
+
+    /** @test */
+    public function it_generates_the_form_fields()
+    {
+        $fields = $this->fields();
+
+        $form = $this->createFormWithSectionsAndFields($fields);
+
+        $page = factory(Page::class)
+            ->state('published')
+            ->create();
+
+        $page->blocks()->create(
+            factory(Block::class)
+                ->make([
+                    'blockable_id'   => $this->faker->randomDigitNotNull,
+                    'blockable_type' => 'page',
+                    'type'           => 'form',
+                    'position'       => 1,
+                    'content'        => [
+                        'browsers' => [
+                            'form' => [$form->id],
+                        ],
+                    ],
+                ])
+                ->toArray()
+        );
+
+        $page->load('blocks');
+
+        $this->visitRoute('front.pages.show', ['slug' => $page->slug])
+            ->seeElement('form', [
+                'method' => 'POST',
+                'action' => route('front.form.submit', $form->id),
+            ])
+            ->seeElementCount('fieldset', 1)
+            ->seeElementCount('label', $fields->count());
     }
 }

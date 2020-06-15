@@ -13,21 +13,20 @@
             ->get($section->id)
             ->map(fn ($field, $fieldIndex) => null);
     });
-
 @endphp
 
-<form method="POST" action="{{ route('front.form.submit', $form->id) }}">
-    @foreach ($sections as $sectionIndex => $block)
+<form class="grid grid-cols-1 row-gap-10" method="POST" action="{{ route('front.form.submit', $form->id) }}">
+    @foreach ($sections as $block)
         @include('front.blocks.formSection', [
             'block'        => $block,
             'fields'       => $fieldsBySection->get($block->id),
-            'sectionIndex' => $sectionIndex,
+            'sectionIndex' => $loop->index,
         ])
     @endforeach
 
     <div class="container">
         @csrf
 
-        <button type="submit">Submit</button>
+        <x-button type="submit">{{ __('form.submit') }}</x-button>
     </div>
 </form>

@@ -14,5 +14,8 @@ if (Route::hasMacro('module')) {
         });
     }
 
-    Route::module('forms');
+    Route::prefix('forms')->group(static function (): void {
+        Route::module('forms');
+        Route::module('responses');
+    });
 }

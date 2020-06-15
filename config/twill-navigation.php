@@ -64,7 +64,17 @@ $navigation['settings'] = [
 
 $navigation['forms'] = [
     'title' => 'Forms',
-    'module' => true,
+    'route' => 'admin.forms.forms.index',
+    'primary_navigation' => [
+        'forms' => [
+            'title' => 'Forms',
+            'route' => 'admin.forms.forms.index',
+        ],
+        'responses' => [
+            'title' => 'Responses',
+            'route' => 'admin.forms.responses.index',
+        ],
+    ],
 ];
 
 $navigation['menus'] = [
