@@ -102,9 +102,7 @@ class BlockPresenterTest extends TestCase
             ->create();
 
         $blockWithBrowser = $this->createBlock('form', [
-            'browsers' => [
-                'form' => $form->id,
-            ],
+            'form' => $form->id,
         ]);
 
         $this->assertEquals($form->id, $blockWithBrowser->present()->formPublished->id);
