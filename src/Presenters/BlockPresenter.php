@@ -48,7 +48,8 @@ class BlockPresenter extends Presenter
     {
         $ids = $this->model->browserIds('cityLabs');
 
-        return CityLab::publishedInListings()
+        return CityLab::query()
+            ->publishedInListings()
             ->withActiveTranslations()
             ->orderByIds($ids)
             ->findMany($ids);

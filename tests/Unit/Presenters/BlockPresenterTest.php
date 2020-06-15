@@ -86,7 +86,7 @@ class BlockPresenterTest extends TestCase
         $blockEmpty = $this->createBlock('embed', []);
 
         $this->assertStringContainsString(
-            'https://www.youtube.com/embed/dQw4w9WgXcQ?feature=oembed',
+            'https://www.youtube.com/embed/dQw4w9WgXcQ',
             $blockEmbed->present()->embedCode
         );
 

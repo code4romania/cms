@@ -1,12 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Code4Romania\Cms\Tests\Presenters;
 
 use A17\Twill\Models\Media;
 use Code4Romania\Cms\Models\CityLab;
 use Code4Romania\Cms\Models\Person;
 use Code4Romania\Cms\Tests\TestCase;
-use Illuminate\Support\Facades\Artisan;
 
 class PersonPresenterTest extends TestCase
 {
@@ -33,9 +34,6 @@ class PersonPresenterTest extends TestCase
             'width'  => 96,
             'height' => 96,
         ]);
-
-        $this->assertEquals($person->placeholder_avatar, $person->present()->imageSrc);
-        $this->assertNull($person->present()->imageLqip);
 
         $lqipData = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7s';
         $person->medias()->save($image, [

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Code4Romania\Cms\Tests\Presenters;
 
 use A17\Twill\Models\Media;
@@ -11,15 +13,13 @@ class PartnerPresenterTest extends TestCase
     /** @test */
     public function it_presents_image_src()
     {
-        $person = factory(Partner::class)->create();
+        $partner = factory(Partner::class)->create();
         $image = factory(Media::class)->create([
             'width'  => 200,
             'height' => 200,
         ]);
 
-        $this->assertEquals($person->placeholder_avatar, $person->present()->imageSrc);
-
-        $person->medias()->save($image, [
+        $partner->medias()->save($image, [
             'crop_x'    => 0,
             'crop_y'    => 0,
             'crop_w'    => $image->width,
@@ -35,8 +35,8 @@ class PartnerPresenterTest extends TestCase
             ]),
         ]);
 
-        $person->load('medias');
+        $partner->load('medias');
 
-        $this->assertStringContainsString(url("/img/{$image->uuid}"), $person->present()->imageSrc);
+        $this->assertStringContainsString(url("/img/{$image->uuid}"), $partner->present()->imageSrc);
     }
 }
