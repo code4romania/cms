@@ -264,9 +264,7 @@ class FormTest extends TestCase
                     'type'           => 'form',
                     'position'       => 1,
                     'content'        => [
-                        'browsers' => [
-                            'form' => [$form->id],
-                        ],
+                        'form' => $form->id,
                     ],
                 ])
                 ->toArray()
