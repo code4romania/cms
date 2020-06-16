@@ -2,18 +2,20 @@
 
 return [
 
-    'cityLab'  => 'City Lab',
-    'cityLabs' => 'City Labs',
-    'form'     => 'Form',
-    'forms'    => 'Forms',
-    'page'     => 'Page',
-    'pages'    => 'Pages',
-    'partner'  => 'partner',
-    'partners' => 'Partners',
-    'person'   => 'Person',
-    'people'   => 'People',
-    'menu'     => 'Menu',
-    'menus'    => 'Menus',
+    'category'   => 'Category',
+    'categories' => 'Categories',
+    'cityLab'    => 'City Lab',
+    'cityLabs'   => 'City Labs',
+    'form'       => 'Form',
+    'forms'      => 'Forms',
+    'page'       => 'Page',
+    'pages'      => 'Pages',
+    'partner'    => 'partner',
+    'partners'   => 'Partners',
+    'person'     => 'Person',
+    'people'     => 'People',
+    'menu'       => 'Menu',
+    'menus'      => 'Menus',
 
     'field' => [
         'affiliation'       => 'Affiliation',

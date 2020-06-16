@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Code4Romania\Cms\Http\Controllers\Admin;
 
-use A17\Twill\Http\Controllers\Admin\ModuleController;
-
 class PostController extends ModuleController
 {
     /** @var string */
@@ -13,4 +11,17 @@ class PostController extends ModuleController
 
     /** @var string */
     protected $permalinkBase = 'blog';
+
+    /** @var string */
+    protected $previewView = 'front.posts.show';
+
+    /** @var array<string> */
+    protected $indexWith = [
+        'translations',
+    ];
+
+    /** @var array<string> */
+    protected $indexForm = [
+        'translations',
+    ];
 }

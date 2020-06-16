@@ -6,22 +6,28 @@ namespace Code4Romania\Cms\Models;
 
 use A17\Twill\Models\Behaviors\HasBlocks;
 use A17\Twill\Models\Behaviors\HasMedias;
-use A17\Twill\Models\Behaviors\HasPosition;
 use A17\Twill\Models\Behaviors\HasRevisions;
 use A17\Twill\Models\Behaviors\HasSlug;
 use A17\Twill\Models\Behaviors\HasTranslation;
-use A17\Twill\Models\Behaviors\Sortable;
 use Code4Romania\Cms\Models\BaseModel;
 use Code4Romania\Cms\Models\Category;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class Post extends BaseModel implements Sortable
+class Post extends BaseModel
 {
-    use HasBlocks, HasTranslation, HasSlug, HasMedias, HasRevisions, HasPosition;
+    use HasBlocks, HasTranslation, HasSlug, HasMedias, HasRevisions;
+
+    /** @var array<string> */
+    protected $with = [
+        'categories',
+        // 'translations',
+    ];
 
     protected $fillable = [
         'published',
         'title',
         'description',
+        'author',
         'publish_start_date',
         'publish_end_date',
     ];
@@ -41,13 +47,14 @@ class Post extends BaseModel implements Sortable
         'image' => [
             'default' => [
                 [
-                    'name' => 'default',
+                    'name'  => 'default',
+                    'ratio' => 2 / 1,
                 ],
             ],
         ],
     ];
 
-    public function categories()
+    public function categories(): BelongsToMany
     {
         return $this->belongsToMany(Category::class);
     }
