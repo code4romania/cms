@@ -14,6 +14,10 @@ return [
             'name' => 'Twitter',
             'baseUrl' => 'https://twitter.com/',
         ],
+        'instagram' => [
+            'name' => 'Instagram',
+            'baseUrl' => 'https://www.instagram.com/',
+        ],
         'github' => [
             'name' => 'GitHub',
             'baseUrl' => 'https://github.com/',
@@ -21,6 +25,10 @@ return [
         'linkedin' => [
             'name' => 'LinkedIn',
             'baseUrl' => 'https://www.linkedin.com/',
+        ],
+        'tiktok' => [
+            'name' => 'TikTok',
+            'baseUrl' => 'https://www.tiktok.com/@',
         ],
     ],
 
