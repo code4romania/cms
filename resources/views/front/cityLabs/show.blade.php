@@ -31,5 +31,7 @@
                 @endforeach
             </section>
         </div>
+
+        {!! $item->renderBlocks(false) !!}
     </x-container>
 @endsection

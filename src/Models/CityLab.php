@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Code4Romania\Cms\Models;
 
+use A17\Twill\Models\Behaviors\HasBlocks;
 use A17\Twill\Models\Behaviors\HasMedias;
 use A17\Twill\Models\Behaviors\HasRevisions;
 use A17\Twill\Models\Behaviors\HasSlug;
@@ -13,7 +14,7 @@ use Code4Romania\Cms\Models\Person;
 
 class CityLab extends BaseModel
 {
-    use HasTranslation, HasSlug, HasMedias, HasRevisions;
+    use HasBlocks, HasTranslation, HasSlug, HasMedias, HasRevisions;
 
     /** @var array<string> */
     protected $with = [
