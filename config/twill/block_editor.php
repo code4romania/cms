@@ -104,6 +104,12 @@ return [
             'component'  => 'a17-block-quote',
             'group'      => 'content',
         ],
+        'separator' => [
+            'title'      => 'Separator',
+            'icon'       => 'more-dots',
+            'component'  => 'a17-block-separator',
+            'group'      => 'content',
+        ],
         'text' => [
             'title'      => 'Text',
             'icon'       => 'text',
