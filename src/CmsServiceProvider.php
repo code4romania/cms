@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Code4Romania\Cms;
 
 use Code4Romania\Cms\Commands\Install;
+use Code4Romania\Cms\Helpers\SettingsHelper;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\ServiceProvider;
 
@@ -68,7 +69,8 @@ class CmsServiceProvider extends ServiceProvider
 
         $this->registerCommands();
         $this->registerRelationMorphMap();
-        $this->registerObservers();
+
+        $this->setupMailchimpConfig();
     }
 
     /**
@@ -170,8 +172,13 @@ class CmsServiceProvider extends ServiceProvider
         ]);
     }
 
-    protected function registerObservers(): void
+    protected function setupMailchimpConfig(): void
     {
+        config([
+            'mailchimp' => [
+                'apikey' => SettingsHelper::get('apiKey', 'mailchimp'),
+            ],
+        ]);
     }
 
     /**

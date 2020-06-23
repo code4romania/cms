@@ -10,9 +10,15 @@ use Illuminate\Support\Facades\Cache;
 
 class SettingTranslationObserver
 {
-    private function clearSettingSectionCache(SettingTranslation $settingTranslation): bool
+    private function clearSettingSectionCache(SettingTranslation $settingTranslation): void
     {
-        return Cache::forget('settings.' . Setting::find($settingTranslation->setting_id)->section);
+        $section = Setting::find($settingTranslation->setting_id)->section;
+
+        Cache::forget('settings.' . $section);
+
+        if ($section === 'mailchimp') {
+            Cache::forget('settings.mailchimp.lists');
+        }
     }
 
     /**

@@ -24,7 +24,8 @@
         "leewillis77/cached-embed": "^0.8",
         "lorisleiva/laravel-deployer": "^0.3",
         "mcamara/laravel-localization": "^1.5",
-        "nothingworks/blade-svg": "^0.3"
+        "nothingworks/blade-svg": "^0.3",
+        "nztim/mailchimp": "^3.11"
     },
     "require-dev": {
         "nunomaduro/larastan": "^0.5",

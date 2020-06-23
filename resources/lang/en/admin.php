@@ -19,6 +19,7 @@ return [
 
     'field' => [
         'affiliation'       => 'Affiliation',
+        'apiKey'            => 'API key',
         'author'            => 'Author',
         'background'        => 'Background',
         'buttonColor'       => 'Button color',
@@ -33,6 +34,7 @@ return [
         'imagePosition'     => 'Image position',
         'images'            => 'Images',
         'label'             => 'Label',
+        'list'              => 'List',
         'logo'              => 'Logo',
         'menuItems'         => 'Menu items',
         'menuLocation'      => 'Menu location',

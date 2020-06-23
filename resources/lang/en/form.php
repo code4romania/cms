@@ -18,6 +18,9 @@ return [
 
     'submit'   => 'Submit',
 
+    'subscribe'           => 'Subscribe',
+    'confirmSubscription' => 'Thank you! Please check your email to confirm your subscription.',
+
     'field' => [
         'text'     => 'Text',
         'textarea' => 'Textarea',

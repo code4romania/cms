@@ -74,6 +74,13 @@ $navigation['settings'] = [
                 'section' => 'social'
             ],
         ],
+        'mailchimp' => [
+            'title' => 'Mailchimp',
+            'route' => 'admin.settings',
+            'params' => [
+                'section' => 'mailchimp'
+            ],
+        ],
     ],
 ];
 
