@@ -17,30 +17,6 @@ use Leewillis77\CachedEmbed\CachedEmbed;
  */
 class BlockPresenter extends Presenter
 {
-
-    /**
-     * Block: callToAction
-     */
-    public function callToActionStyle(): string
-    {
-        $props = [
-            'background_color' => 'background-color',
-            'text_color' => 'color',
-        ];
-
-        return collect($props)
-            ->map(function ($propName, $inputName): string {
-                $value = $this->model->input($inputName);
-
-                if (!is_null($value)) {
-                    return sprintf('%s:%s;', $propName, $value);
-                }
-
-                return '';
-            })
-            ->implode('');
-    }
-
     /**
      * Block: cityLabs
      */

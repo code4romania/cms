@@ -20,6 +20,14 @@
             $buttonColor = 'text-white bg-danger-500 focus:bg-danger-600';
             break;
 
+        case 'success':
+            $buttonColor = 'text-white bg-success-500 focus:bg-success-600';
+            break;
+
+        case 'black':
+            $buttonColor = 'text-white bg-black focus:bg-gray-900';
+            break;
+
         case 'gray':
             $buttonColor = 'text-white bg-gray-500 focus:bg-gray-600';
             break;

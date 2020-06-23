@@ -20,6 +20,18 @@
             $badgeText = 'text-danger-700';
             break;
 
+        case 'success':
+            $containerBackground = 'bg-success-700 text-white';
+            $badgeBackground = 'text-white';
+            $badgeText = 'text-success-700';
+            break;
+
+        case 'black':
+            $containerBackground = 'bg-black text-white';
+            $badgeBackground = 'text-white';
+            $badgeText = 'text-gray-900';
+            break;
+
         case 'gray':
             $containerBackground = 'bg-gray-800 text-white';
             $badgeBackground = 'text-white';

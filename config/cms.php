@@ -8,6 +8,8 @@ return [
         'primary',
         'warning',
         'danger',
+        'success',
+        'black',
         'gray',
         'none',
     ]
