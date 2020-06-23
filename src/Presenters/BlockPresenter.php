@@ -8,6 +8,7 @@ use Code4Romania\Cms\Models\CityLab;
 use Code4Romania\Cms\Models\Form;
 use Code4Romania\Cms\Models\Partner;
 use Code4Romania\Cms\Models\Person;
+use Embed\Adapters\Adapter;
 use Leewillis77\CachedEmbed\CachedEmbed;
 
 /**
@@ -34,18 +35,49 @@ class BlockPresenter extends Presenter
     /**
      * Block: embed
      */
-    public function embedCode(): ?string
+    public function embed(): ?Adapter
     {
         try {
-            $embed = CachedEmbed::create(
+            return CachedEmbed::create(
                 $this->model->input('url'),
                 config('cms.embeds.args'),
                 config('cms.embeds.expiry')
             );
-            return $embed->code;
         } catch (\Exception $exception) {
             return null;
         }
+    }
+
+    /**
+     * Block: embed
+     */
+    public function embedCode(): ?string
+    {
+        return $this->embed()->code ?? null;
+    }
+
+    /**
+     * Block: embed
+     */
+    public function embedAspectRatio(): ?string
+    {
+        $embed = $this->embed();
+        $closest = $ratio = null;
+
+        if (is_null($embed) || is_null($embed->width) || is_null($embed->height)) {
+            return null;
+        }
+
+        $search = round($embed->width / $embed->height, 3);
+
+        foreach (config('cms.embeds.aspectRatio') as $name => $value) {
+            if (is_null($closest) || abs($search - $closest) > abs($value - $search)) {
+                $ratio   = $name;
+                $closest = $value;
+            }
+        }
+
+        return $ratio;
     }
 
     /**

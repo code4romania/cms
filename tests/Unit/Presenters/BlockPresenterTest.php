@@ -60,8 +60,10 @@ class BlockPresenterTest extends TestCase
             'https://www.youtube.com/embed/dQw4w9WgXcQ',
             $blockEmbed->present()->embedCode
         );
+        $this->assertEquals('16/9', $blockEmbed->present()->embedAspectRatio);
 
         $this->assertNull($blockEmpty->present()->embedCode);
+        $this->assertNull($blockEmpty->present()->embedAspectRatio);
     }
 
 
