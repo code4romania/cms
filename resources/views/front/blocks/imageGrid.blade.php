@@ -19,12 +19,18 @@
     }
 @endphp
 
-<section class="container grid col-gap-8 row-gap-8 {{ $cols }}">
-    @foreach ($block->imageObjects('image') as $media)
-       <x-figure
-            :src="$block->image('image', 'default', [], false, false, $media)"
-            :alt="$block->imageAltText('image')"
-            :caption="$block->imageCaption('image')"
-        />
-    @endforeach
+<section class="container">
+    @if ($block->translatedInput('title'))
+        <h1 class="mb-5 h2">{{ $block->translatedInput('title') }}</h1>
+    @endif
+
+    <div class="grid col-gap-8 row-gap-8 {{ $cols }}">
+        @foreach ($block->imageObjects('image') as $media)
+        <x-figure
+                :src="$block->image('image', 'default', [], false, false, $media)"
+                :alt="$block->imageAltText('image')"
+                :caption="$block->imageCaption('image')"
+            />
+        @endforeach
+    </div>
 </section>

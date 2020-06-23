@@ -1,3 +1,9 @@
+@formField('input', [
+    'name'       => 'title',
+    'label'      => __('admin.field.title'),
+    'translated' => true,
+])
+
 @formField('select', [
     'name'       => 'columns',
     'label'      => __('admin.field.columns'),
