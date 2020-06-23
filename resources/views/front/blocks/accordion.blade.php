@@ -1,16 +1,15 @@
 @inject('url', 'Code4Romania\Cms\Helpers\UrlHelper')
 
-@php
-    $view = sprintf('%s.%s', config('twill.block_editor.block_views_path'), 'accordionItem');
-    $isBlockPreview = $url->isAdminUrl();
-@endphp
+<section class="container">
+    @if ($block->translatedInput('title'))
+        <h1 class="mb-5 h2">{{ $block->translatedInput('title') }}</h1>
+    @endif
 
-<section class="container" x-data="{ selected: 0 }">
-    @foreach ($block->children as $index => $child)
-        @include($view, [
-            'index'     => $index,
+    @foreach ($block->children as $child)
+        @include('front.blocks.accordionItem', [
+            'index'     => $loop->index,
             'block'     => $child,
-            'isPreview' => $isBlockPreview,
+            'isPreview' => $url->isAdminUrl(),
         ])
     @endforeach
 </section>
