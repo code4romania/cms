@@ -17,18 +17,18 @@
     "require": {
         "php": "^7.4",
         "area17/twill": "^2.0",
-        "artesaos/seotools": "^0.17",
+        "artesaos/seotools": "^0.18",
+        "blade-ui-kit/blade-icons": "^0.4.0",
         "kalnoy/nestedset": "^5.0",
         "laravel/framework": "^7.13",
         "lasserafn/php-initial-avatar-generator": "^4.1",
         "leewillis77/cached-embed": "^0.8",
         "lorisleiva/laravel-deployer": "^0.3",
         "mcamara/laravel-localization": "^1.5",
-        "nothingworks/blade-svg": "^0.3",
         "nztim/mailchimp": "^3.11"
     },
     "require-dev": {
-        "nunomaduro/larastan": "^0.5",
+        "nunomaduro/larastan": "^0.6",
         "nunomaduro/phpinsights": "^1.14",
         "orchestra/testbench-browser-kit": "^5.0",
         "phpunit/phpunit": "^9.0"

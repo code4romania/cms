@@ -13,6 +13,14 @@ use Mcamara\LaravelLocalization\Middleware\LocaleSessionRedirect;
 class LocaleServiceProvider extends ServiceProvider
 {
     /**
+     * Register services.
+     */
+    public function register(): void
+    {
+        $this->setupLocalizationConfig();
+    }
+
+    /**
      * Bootstraps the package services.
      */
     public function boot(): void
@@ -20,13 +28,6 @@ class LocaleServiceProvider extends ServiceProvider
         $this->registerRouteMiddlewares();
     }
 
-    /**
-     * Register services.
-     */
-    public function register(): void
-    {
-        $this->setupLocalizationConfig();
-    }
 
     /**
      * Infers laravellocalization config from translatable
