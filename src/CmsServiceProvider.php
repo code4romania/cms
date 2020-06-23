@@ -168,6 +168,7 @@ class CmsServiceProvider extends ServiceProvider
             'cityLab' => 'Code4Romania\Cms\Models\CityLab',
             'form'    => 'Code4Romania\Cms\Models\Form',
             'page'    => 'Code4Romania\Cms\Models\Page',
+            'partner' => 'Code4Romania\Cms\Models\Partner',
             'person'  => 'Code4Romania\Cms\Models\Person',
             'menu'    => 'Code4Romania\Cms\Models\Menu',
         ]);

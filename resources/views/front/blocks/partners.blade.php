@@ -18,10 +18,16 @@
     }
 @endphp
 
-<section class="container leading-relaxed grid gap-10 {{ $columns }}">
-    @foreach ($block->present()->partnersListPublished as $partner)
-        @include('front.partners.card', [
-            'partner' => $partner,
-        ])
-    @endforeach
+<section class="container">
+    @if ($block->translatedInput('title'))
+        <h1 class="mb-5 h2">{{ $block->translatedInput('title') }}</h1>
+    @endif
+
+    <div class="grid gap-10 {{ $columns }}">
+        @foreach ($block->present()->partnersListPublished as $partner)
+            @include('front.partners.card', [
+                'partner' => $partner,
+            ])
+        @endforeach
+    </div>
 </section>
