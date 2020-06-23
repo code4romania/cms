@@ -7,6 +7,7 @@ namespace Code4Romania\Cms;
 use Code4Romania\Cms\Commands\Install;
 use Code4Romania\Cms\Helpers\SettingsHelper;
 use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
 class CmsServiceProvider extends ServiceProvider
@@ -174,6 +175,10 @@ class CmsServiceProvider extends ServiceProvider
 
     protected function setupMailchimpConfig(): void
     {
+        if (!Schema::hasTable('settings')) {
+            return;
+        }
+
         config([
             'mailchimp' => [
                 'apikey' => SettingsHelper::get('apiKey', 'mailchimp'),

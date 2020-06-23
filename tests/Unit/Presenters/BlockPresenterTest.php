@@ -30,35 +30,6 @@ class BlockPresenterTest extends TestCase
     }
 
     /** @test */
-    public function it_presents_call_to_action_block()
-    {
-        $blockNone = $this->createBlock('callToAction', [
-            'background_color' => null,
-            'text_color' => null,
-        ]);
-
-        $blockText = $this->createBlock('callToAction', [
-            'background_color' => null,
-            'text_color' => '#FFF',
-        ]);
-
-        $blockBackground = $this->createBlock('callToAction', [
-            'background_color' => '#FFF',
-            'text_color' => null,
-        ]);
-
-        $blockBoth = $this->createBlock('callToAction', [
-            'background_color' => '#FFF',
-            'text_color' => '#FFF',
-        ]);
-
-        $this->assertEmpty($blockNone->present()->callToActionStyle);
-        $this->assertEquals('color:#FFF;', $blockText->present()->callToActionStyle);
-        $this->assertEquals('background-color:#FFF;', $blockBackground->present()->callToActionStyle);
-        $this->assertEquals('background-color:#FFF;color:#FFF;', $blockBoth->present()->callToActionStyle);
-    }
-
-    /** @test */
     public function it_presents_city_labs_block()
     {
         $cityLabs = factory(CityLab::class, 10)
