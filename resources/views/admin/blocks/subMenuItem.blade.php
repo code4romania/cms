@@ -35,7 +35,7 @@
                 'label'    => __("admin.{$type}"),
                 'native'   => true,
                 'max'      => 1,
-                'options'  => app( config('twill.namespace') . '\\Models\\' . ucfirst($type) )
+                'options'  => app("Code4Romania\Cms\Models\\". ucfirst($type))
                     ->with([ 'translation' => fn ($query) => $query->select('id', 'title') ])
                     ->get('id', 'title')
                     ->map(fn($item) => [ 'value' => $item->id, 'label' => $item->title ])
