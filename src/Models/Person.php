@@ -56,6 +56,34 @@ class Person extends BaseModel
         ],
     ];
 
+    public function setGithubAttribute(?string $value): void
+    {
+        $this->attributes['github'] = !is_null($value)
+            ? str_replace(config('cms.social.networks.github.baseUrl'), '', $value)
+            : null;
+    }
+
+    public function getGithubAttribute(?string $value): ?string
+    {
+        return !is_null($value)
+            ? config('cms.social.networks.github.baseUrl') . $value
+            : null;
+    }
+
+    public function setLinkedinAttribute(?string $value): void
+    {
+        $this->attributes['linkedin'] = !is_null($value)
+            ? str_replace(config('cms.social.networks.linkedin.baseUrl'), '', $value)
+            : null;
+    }
+
+    public function getLinkedinAttribute(?string $value): ?string
+    {
+        return !is_null($value)
+            ? config('cms.social.networks.linkedin.baseUrl') . $value
+            : null;
+    }
+
     public function getPlaceholderAvatarAttribute(): string
     {
         $disk = Storage::disk('public');

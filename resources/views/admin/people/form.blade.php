@@ -30,7 +30,6 @@
         @formField('input', [
             'name'       => $network,
             'label'      => config("cms.social.networks.{$network}.name"),
-            'prefix'     => config("cms.social.networks.{$network}.baseUrl"),
             'translated' => false,
         ])
     @endforeach
