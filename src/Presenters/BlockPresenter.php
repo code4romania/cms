@@ -103,6 +103,10 @@ class BlockPresenter extends Presenter
             $attributes->push('required');
         }
 
+        if ($this->model->input('multiple')) {
+            $attributes->push('multiple');
+        }
+
         if ($this->model->input('minLength')) {
             $attributes->push(
                 sprintf('minlength="%d"', $this->model->input('minLength'))
@@ -140,6 +144,15 @@ class BlockPresenter extends Presenter
         }
 
         return $attributes->join(' ');
+    }
+
+    /**
+     * Block: formField
+     */
+    public function formFieldSelectOptions(): array
+    {
+        // dd($this->model->translatedInput('options'));
+        return preg_split('/\r\n|\r|\n/', $this->model->translatedInput('options'));
     }
 
     /**

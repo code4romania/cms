@@ -165,6 +165,38 @@
 
 @component('twill::partials.form.utils._connected_fields', [
     'fieldName'       => 'type',
+    'fieldValues'     => 'select',
+    'renderForBlocks' => true,
+])
+    @formField('input', [
+        'name'           => 'options',
+        'label'          => __('form.label.options'),
+        'note'           => __('form.note.options'),
+        'type'           => 'textarea',
+        'required'       => false,
+        'translated'     => true,
+    ])
+
+    @formField('select', [
+        'name'       => 'multiple',
+        'label'      => __('form.label.multiple'),
+        'unpack'     => true,
+        'default'    => false,
+        'options'    => [
+            [
+                'value' => false,
+                'label' => __('form.no'),
+            ],
+            [
+                'value' => true,
+                'label' => __('form.yes'),
+            ],
+        ],
+    ])
+@endcomponent
+
+@component('twill::partials.form.utils._connected_fields', [
+    'fieldName'       => 'type',
     'fieldValues'     => 'checkbox',
     'renderForBlocks' => true,
 ])

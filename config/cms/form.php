@@ -12,6 +12,7 @@ return [
         'number',
         'date',
         'file',
+        'select',
         'checkbox',
     ],
 

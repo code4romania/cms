@@ -29,6 +29,7 @@ return [
         'number'   => 'Number',
         'date'     => 'Date',
         'file'     => 'File',
+        'select'   => 'Select',
         'checkbox' => 'Checkbox',
     ],
 
@@ -39,12 +40,15 @@ return [
         'maxValue'      => 'Maximum value',
         'minDate'       => 'Earliest date available for selection',
         'maxDate'       => 'Latest date available for selection',
+        'multiple'      => 'Multiple select',
+        'options'       => 'Options',
         'checkboxLabel' => 'Checkbox Label',
     ],
 
     'note' => [
         'noLimit'       => '0 = no limit',
         'checkboxLabel' => 'Will be displayed next to the checkbox',
+        'options'       => 'Multiple options, one per line',
         'selectDate'    => 'Select date',
     ],
 
