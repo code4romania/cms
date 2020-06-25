@@ -1,6 +1,10 @@
 @php
     $form = $block->present()->formPublished;
 
+    if (is_null($form)) {
+        return;
+    }
+
     $sections = $form->blocks->where('type', 'formSection');
 
     $fieldsBySection = $form->blocks
