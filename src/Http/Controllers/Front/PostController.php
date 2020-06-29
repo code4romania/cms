@@ -33,6 +33,7 @@ class PostController extends Controller
         $item = Post::query()
             ->forSlug($slug)
             ->publishedInListings()
+            ->with('translation')
             ->firstOrFail();
 
         $this->seo([

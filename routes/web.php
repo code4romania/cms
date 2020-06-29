@@ -15,15 +15,22 @@ Route::middleware(['web', 'twill_auth:twill_users', 'can:list'])->group(static f
     Route::get('/admin-preview/{slug}', [PageController::class, 'preview'])->name('pages.preview');
 });
 
-Route::get('/city-labs', [CityLabController::class, 'index'])->name('cityLabs.index');
-Route::get('/city-labs/{slug}', [CityLabController::class, 'show'])->name('cityLabs.show');
+Route::prefix('/city-labs')->group(static function (): void {
+    Route::get('/', [CityLabController::class, 'index'])->name('cityLabs.index');
+    Route::get('/{slug}', [CityLabController::class, 'show'])->name('cityLabs.show');
+});
+
+Route::prefix('/blog')->group(static function (): void {
+    Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
+    Route::get('/categories/{slug}', [CategoryController::class, 'show'])->name('categories.show');
+
+    Route::get('/', [PostController::class, 'index'])->name('posts.index');
+    Route::get('/{slug}', [PostController::class, 'show'])->name('posts.show');
+});
+
 
 Route::post('/form/{id}', [FormController::class, 'submit'])->name('form.submit')
     ->middleware('throttle:10,1');
-
-Route::get('/blog', [PostController::class, 'index'])->name('posts.index');
-Route::get('/blog/categories/{slug}', [CategoryController::class, 'show'])->name('categories.show');
-Route::get('/blog/{slug}', [PostController::class, 'show'])->name('posts.show');
 
 Route::post('/newsletter', [NewsletterSubscriptionController::class, 'subscribe'])->name('newsletter.subscribe')
     ->middleware('throttle:10,1');
