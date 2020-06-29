@@ -18,8 +18,8 @@ class CityLabController extends Controller
             ->get();
 
         $this->seo([
-            'title'       => SettingsHelper::get('cityLabsTitle', 'seo'),
-            'description' => SettingsHelper::get('cityLabsDescription', 'seo'),
+            'title'       => SettingsHelper::get('cityLabsTitle', 'site'),
+            'description' => SettingsHelper::get('cityLabsDescription', 'site'),
             'routeName'   => 'front.cityLabs.index',
         ]);
 

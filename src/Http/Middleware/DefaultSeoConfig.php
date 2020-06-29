@@ -18,7 +18,7 @@ class DefaultSeoConfig
      */
     public function handle(Request $request, Closure $next)
     {
-        $seo = SettingsHelper::getSection('seo');
+        $seo = SettingsHelper::getSection('site');
 
         if ('' !== ($title = strip_tags($seo['siteTitle'] ?? ''))) {
             Config::set([

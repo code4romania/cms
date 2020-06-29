@@ -5,7 +5,7 @@
 @section('content')
     @include('front.partials.page-header', [
         'title'       => $item->title,
-        'description' => $settings->get('blogDescription', 'seo'),
+        'description' => $settings->get('blogDescription', 'site'),
     ])
 
     <x-container class="container md:grid-cols-2 md:col-gap-16">

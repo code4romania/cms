@@ -151,7 +151,6 @@ class BlockPresenter extends Presenter
      */
     public function formFieldSelectOptions(): array
     {
-        // dd($this->model->translatedInput('options'));
         return preg_split('/\r\n|\r|\n/', $this->model->translatedInput('options'));
     }
 

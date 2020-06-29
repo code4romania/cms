@@ -13,12 +13,13 @@ class PostController extends Controller
     public function index(): View
     {
         $items = Post::query()
+            ->with('translation', 'slugs', 'medias')
             ->publishedInListings()
-            ->get();
+            ->paginate();
 
         $this->seo([
-            'title'       => SettingsHelper::get('blogTitle', 'seo'),
-            'description' => SettingsHelper::get('blogDescription', 'seo'),
+            'title'       => SettingsHelper::get('blogTitle', 'site'),
+            'description' => SettingsHelper::get('blogDescription', 'site'),
             'routeName'   => 'front.posts.index',
         ]);
 

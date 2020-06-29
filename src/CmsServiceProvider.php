@@ -165,12 +165,13 @@ class CmsServiceProvider extends ServiceProvider
     protected function registerRelationMorphMap(): void
     {
         Relation::morphMap([
-            'cityLab' => 'Code4Romania\Cms\Models\CityLab',
-            'form'    => 'Code4Romania\Cms\Models\Form',
-            'page'    => 'Code4Romania\Cms\Models\Page',
-            'partner' => 'Code4Romania\Cms\Models\Partner',
-            'person'  => 'Code4Romania\Cms\Models\Person',
-            'menu'    => 'Code4Romania\Cms\Models\Menu',
+            'cityLab' => \Code4Romania\Cms\Models\CityLab::class,
+            'form'    => \Code4Romania\Cms\Models\Form::class,
+            'menu'    => \Code4Romania\Cms\Models\Menu::class,
+            'page'    => \Code4Romania\Cms\Models\Page::class,
+            'partner' => \Code4Romania\Cms\Models\Partner::class,
+            'person'  => \Code4Romania\Cms\Models\Person::class,
+            'post'    => \Code4Romania\Cms\Models\Post::class,
         ]);
     }
 

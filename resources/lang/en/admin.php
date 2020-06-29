@@ -4,6 +4,7 @@ return [
 
     'category'   => 'Category',
     'categories' => 'Categories',
+    'blog'       => 'Blog',
     'cityLab'    => 'City Lab',
     'cityLabs'   => 'City Labs',
     'form'       => 'Form',
@@ -70,7 +71,6 @@ return [
         'config'       => 'Configuration',
         'global'       => 'Global',
         'globalNotice' => 'Global notice',
-        'seo'          => 'SEO Settings',
     ],
 
     'position' => [

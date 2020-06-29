@@ -1,36 +1,48 @@
-@extends('twill::layouts.settings', [
-    'additionalFieldsets' => [
+@php
+    $additionalFieldsets = [
         [
             'fieldset' => 'notice',
             'label'    => __('admin.settings.globalNotice'),
         ],
-    ],
-])
+    ];
 
-@php
-    $allPages = app( config('twill.namespace') . '\Models\Page')
-        ->with([
-            'translation' => function ($query) {
-                $query->select('id', 'title');
-            }
-        ])
-        ->get('id', 'translation')
-        ->map(function($item) {
-            return [
-                'value' => $item->id,
-                'label' => $item->title,
-            ];
-        })
-        ->toArray();
+    if (config('cms.enabled.people', false)) {
+        $additionalFieldsets[] = [
+            'fieldset' => 'city-labs',
+            'label'    => __('admin.cityLabs'),
+        ];
+    }
 @endphp
 
+@extends('twill::layouts.settings', [
+    'additionalFieldsets' => $additionalFieldsets,
+])
+
 @section('contentFields')
+    @formField('input', [
+        'name'       => 'siteTitle',
+        'label'      => __('admin.field.siteTitle'),
+        'maxlength'  => 100,
+        'translated' => true,
+    ])
+
+    @formField('input', [
+        'name'       => 'siteDescription',
+        'label'      => __('admin.field.siteDescription'),
+        'type'       => 'textarea',
+        'maxlength'  => 170,
+        'translated' => true,
+    ])
+
     @formField('select', [
         'name'         => 'frontPage',
         'label'        => __('admin.field.frontPage'),
         'native'       => true,
         'max'          => 1,
-        'options'      => $allPages,
+        'options'      => Code4Romania\Cms\Models\Page::query()
+            ->with('translation:id,page_id,title')
+            ->get('id')
+            ->mapWithKeys(fn($page) => [ $page->id => $page->title ]),
     ])
 @endsection
 
@@ -77,4 +89,40 @@
             'maxlength'      => 200,
         ])
     </a17-fieldset>
+
+    <a17-fieldset title="{{ __('admin.blog') }}" id="blog">
+        @formField('input', [
+            'name'       => 'blogTitle',
+            'label'      => __('admin.field.title'),
+            'maxlength'  => 100,
+            'translated' => true,
+        ])
+
+        @formField('input', [
+            'name'       => 'blogDescription',
+            'label'      => __('admin.field.description'),
+            'type'       => 'textarea',
+            'maxlength'  => 170,
+            'translated' => true,
+        ])
+    </a17-fieldset>
+
+    @if (config('cms.enabled.people', false))
+        <a17-fieldset title="{{ __('admin.cityLabs') }}" id="city-labs">
+            @formField('input', [
+                'name'       => 'cityLabsTitle',
+                'label'      => __('admin.field.title'),
+                'maxlength'  => 100,
+                'translated' => true,
+            ])
+
+            @formField('input', [
+                'name'       => 'cityLabsDescription',
+                'label'      => __('admin.field.description'),
+                'type'       => 'textarea',
+                'maxlength'  => 170,
+                'translated' => true,
+            ])
+        </a17-fieldset>
+    @endif
 @endsection

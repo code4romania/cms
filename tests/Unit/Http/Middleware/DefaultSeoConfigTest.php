@@ -24,7 +24,7 @@ class DefaultSeoConfigTest extends TestCase
             'siteDescription' => $this->faker->paragraph,
         ];
 
-        SettingsHelper::set($config, 'seo');
+        SettingsHelper::set($config, 'site');
 
         $this->visitRoute('front.pages.index')
             ->see('<title>' . $config['siteTitle'] . '</title>')

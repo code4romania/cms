@@ -20,7 +20,6 @@ class Post extends BaseModel
     /** @var array<string> */
     protected $with = [
         'categories',
-        // 'translations',
     ];
 
     protected $fillable = [
