@@ -19,7 +19,6 @@ class Category extends Model
     ];
 
     protected $fillable = [
-        'published',
         'title',
         'description',
     ];

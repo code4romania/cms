@@ -1,7 +1,5 @@
-@inject('menu', 'Code4Romania\Cms\Helpers\MenuHelper')
-
 <div class="flex flex-wrap lg:col-span-2 lg:justify-end">
-    @foreach ($menu->getItemsTree('footer') as $item)
+    @foreach (Code4Romania\Cms\Models\Menu::getLocation('footer') as $item)
         <ul class="w-full py-5 md:w-1/2 md:px-3 lg:py-0 lg:w-1/4">
             <li class="font-bold uppercase">
                 @if (!empty($item['url']))

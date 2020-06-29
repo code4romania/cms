@@ -60,13 +60,6 @@ $navigation['settings'] = [
                 'section' => 'site'
             ],
         ],
-        'seo' => [
-            'title' => 'SEO',
-            'route' => 'admin.settings',
-            'params' => [
-                'section' => 'seo'
-            ],
-        ],
         'social' => [
             'title' => 'Social',
             'route' => 'admin.settings',

@@ -2,37 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Code4Romania\Cms\Tests\Helpers;
+namespace Code4Romania\Cms\Tests\Models;
 
 use A17\Twill\Models\Block;
-use Code4Romania\Cms\Helpers\MenuHelper;
+use Code4Romania\Cms\Models\Category;
 use Code4Romania\Cms\Models\Menu;
 use Code4Romania\Cms\Models\Page;
-use Code4Romania\Cms\Repositories\MenuRepository;
 use Code4Romania\Cms\Tests\TestCase;
 
-class MenuHelperTest extends TestCase
+class MenuTest extends TestCase
 {
-    protected function createMenu(string $location)
-    {
-        $locales = $this->getAvailableLocales();
-
-        $attributes = collect([
-            'published' => true,
-            'languages' => $locales
-                ->map(fn ($locale) => ['value' => $locale, 'active' => true, 'published' => true]),
-
-            'location' => $location,
-        ])->toArray();
-
-
-        return [
-            'attributes' => $attributes,
-            'model'      => app(MenuRepository::class)->create($attributes),
-        ];
-    }
-
-    protected function addMenuItem(Menu $menu, string $type, string $target, ?int $parent_id = null): Block
+    private function addMenuItem(Menu $menu, string $type, string $target, ?int $parent_id = null): Block
     {
         $locales = $this->getAvailableLocales();
 
@@ -65,20 +45,28 @@ class MenuHelperTest extends TestCase
     /** @test */
     public function test_it_returns_an_empty_array_for_an_unknown_menu_location()
     {
-        $this->assertEmpty(MenuHelper::getItemsTree('doesNotExist'));
+        $this->assertEmpty(Menu::getLocation('doesNotExist'));
     }
+
 
     /** @test */
     public function it_returns_an_array_for_a_known_menu_location()
     {
-        $menu = $this->createMenu('header')['model'];
+        $menu = factory(Menu::class)
+            ->states('published', 'header')
+            ->create();
+
         $page = factory(Page::class)
             ->states('published')
+            ->create();
+
+        $category = factory(Category::class)
             ->create();
 
         $externalMenuItem = $this->addMenuItem($menu, 'external', $this->faker->url);
         $subMenuItem = $this->addMenuItem($menu, 'external', $this->faker->url, $externalMenuItem->id);
         $pageMenuItem = $this->addMenuItem($menu, 'page', (string) $page->id);
+        $categoryMenuItem = $this->addMenuItem($menu, 'category', (string) $category->id);
         $invalidMenuItem = $this->addMenuItem($menu, 'doesNotExist', '#');
 
         $expectedTree = [
@@ -108,6 +96,14 @@ class MenuHelperTest extends TestCase
                 'children'  => [],
             ],
             [
+                'id'        => $categoryMenuItem->id,
+                'parent_id' => $categoryMenuItem->parent_id,
+                'type'      => 'category',
+                'label'     => $categoryMenuItem->translatedInput('label'),
+                'url'       => route('front.categories.show', $category->slug),
+                'children'  => [],
+            ],
+            [
                 'id'        => $invalidMenuItem->id,
                 'parent_id' => $invalidMenuItem->parent_id,
                 'type'      => 'doesNotExist',
@@ -117,6 +113,6 @@ class MenuHelperTest extends TestCase
             ],
         ];
 
-        $this->assertEquals($expectedTree, MenuHelper::getItemsTree('header'));
+        $this->assertEquals($expectedTree, Menu::getLocation('header'));
     }
 }
