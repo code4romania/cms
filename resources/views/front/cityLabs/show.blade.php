@@ -4,7 +4,7 @@
     <x-container>
         <div class="container">
             <div class="grid gap-10 md:grid-cols-2">
-                <div class="relative h-0 bg-white border border-gray-400 aspect-ratio-square">
+                <div class="relative h-0 bg-white border border-gray-400 aspect-ratio-1/1">
                     <div class="absolute inset-0 flex items-center justify-center">
                         <x-image
                             :src="$item->image('image')"

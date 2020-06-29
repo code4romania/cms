@@ -1,5 +1,5 @@
 @php
-    $outerClass = 'relative h-0 bg-white border border-gray-400 aspect-ratio-square';
+    $outerClass = 'relative h-0 bg-white border border-gray-400 aspect-ratio-1/1';
 @endphp
 
 <article>
