@@ -8,8 +8,10 @@ use A17\Twill\Models\Behaviors\HasBlocks;
 use A17\Twill\Models\Behaviors\HasTranslation;
 use A17\Twill\Models\Block;
 use Code4Romania\Cms\Models\BaseModel;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Str;
 
 class Menu extends BaseModel
 {
@@ -56,6 +58,7 @@ class Menu extends BaseModel
                 'type'      => $item->input('type'),
                 'label'     => $item->translatedInput('label'),
                 'url'       => self::getItemUrl($item),
+                'newtab'    => $item->checkbox('newtab'),
                 'children'  => [],
             ];
         }
@@ -82,29 +85,36 @@ class Menu extends BaseModel
     {
         switch ($item->input('type')) {
             default:
-                return null;
+                return self::getModelUrl($item->input('type'), $item->input('target'));
                 break;
 
             case 'external':
                 return $item->input('target');
                 break;
 
-            case 'page':
-                return self::getModelUrl('Page', 'front.pages.show', $item->input('target'));
-                break;
-
-            case 'category':
-                return self::getModelUrl('Category', 'front.categories.show', $item->input('target'));
+            case 'blog':
+                return route('front.posts.index');
                 break;
         }
     }
 
-    public static function getModelUrl(string $modelName, string $routeName, $target): string
+    public static function getModelUrl(string $modelName, $target, ?string $routeName = null): ?string
     {
-        $item = app(config('twill.namespace') . '\\Models\\' . ucfirst($modelName))
-            ->withActiveTranslations()
-            ->find($target);
+        try {
+            $item = app('Code4Romania\Cms\Models\\' . ucfirst($modelName))
+                ->withActiveTranslations()
+                ->find($target);
 
-        return route($routeName, $item->slug);
+            if (is_null($routeName)) {
+                $routeName = 'front.' . Str::plural($modelName) . '.show';
+            }
+
+            return route(
+                $routeName ?? 'front.' . Str::plural($modelName) . '.show',
+                $item->slug
+            );
+        } catch (BindingResolutionException $e) {
+            return null;
+        }
     }
 }

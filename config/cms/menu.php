@@ -13,6 +13,7 @@ return [
         'external',
         'page',
         'category',
+        'blog',
     ],
 
 ];

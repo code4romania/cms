@@ -12,12 +12,15 @@ use Code4Romania\Cms\Tests\TestCase;
 
 class MenuTest extends TestCase
 {
-    private function addMenuItem(Menu $menu, string $type, string $target, ?int $parent_id = null): Block
+    /** @var Menu */
+    protected $menu;
+
+    private function addItem(string $type, ?string $target = null, ?int $parent_id = null, bool $newtab = false): Block
     {
         $locales = $this->getAvailableLocales();
 
-        if ($menu->blocks->count()) {
-            $position = $menu->blocks->last()->position + 1;
+        if ($this->menu->blocks->count()) {
+            $position = $this->menu->blocks->last()->position + 1;
         } else {
             $position = 1;
         }
@@ -31,13 +34,14 @@ class MenuTest extends TestCase
             'content'  => [
                 'type'   => $type,
                 'target' => $target,
+                'newtab' => $newtab,
 
                 'label'  => $locales
                     ->mapWithKeys(fn ($locale) => [$locale => $this->faker->word]),
             ],
         ]);
 
-        $menu->blocks()->save($item);
+        $this->menu->blocks()->save($item);
 
         return $item;
     }
@@ -52,7 +56,7 @@ class MenuTest extends TestCase
     /** @test */
     public function it_returns_an_array_for_a_known_menu_location()
     {
-        $menu = factory(Menu::class)
+        $this->menu = factory(Menu::class)
             ->states('published', 'header')
             ->create();
 
@@ -63,11 +67,12 @@ class MenuTest extends TestCase
         $category = factory(Category::class)
             ->create();
 
-        $externalMenuItem = $this->addMenuItem($menu, 'external', $this->faker->url);
-        $subMenuItem = $this->addMenuItem($menu, 'external', $this->faker->url, $externalMenuItem->id);
-        $pageMenuItem = $this->addMenuItem($menu, 'page', (string) $page->id);
-        $categoryMenuItem = $this->addMenuItem($menu, 'category', (string) $category->id);
-        $invalidMenuItem = $this->addMenuItem($menu, 'doesNotExist', '#');
+        $externalMenuItem = $this->addItem('external', $this->faker->url);
+        $subMenuItem = $this->addItem('external', $this->faker->url, $externalMenuItem->id, true);
+        $pageMenuItem = $this->addItem('page', (string) $page->id);
+        $blogMenuItem = $this->addItem('blog');
+        $categoryMenuItem = $this->addItem('category', (string) $category->id, $blogMenuItem->id);
+        $invalidMenuItem = $this->addItem('doesNotExist', '#');
 
         $expectedTree = [
             [
@@ -75,6 +80,7 @@ class MenuTest extends TestCase
                 'parent_id' => $externalMenuItem->parent_id,
                 'type'      => 'external',
                 'label'     => $externalMenuItem->translatedInput('label'),
+                'newtab'    => false,
                 'url'       => $externalMenuItem->input('target'),
                 'children'  => [
                     [
@@ -82,6 +88,7 @@ class MenuTest extends TestCase
                         'parent_id' => $subMenuItem->parent_id,
                         'type'      => 'external',
                         'label'     => $subMenuItem->translatedInput('label'),
+                        'newtab'    => true,
                         'url'       => $subMenuItem->input('target'),
                         'children'  => [],
                     ],
@@ -92,22 +99,35 @@ class MenuTest extends TestCase
                 'parent_id' => $pageMenuItem->parent_id,
                 'type'      => 'page',
                 'label'     => $pageMenuItem->translatedInput('label'),
+                'newtab'    => false,
                 'url'       => route('front.pages.show', $page->slug),
                 'children'  => [],
             ],
             [
-                'id'        => $categoryMenuItem->id,
-                'parent_id' => $categoryMenuItem->parent_id,
-                'type'      => 'category',
-                'label'     => $categoryMenuItem->translatedInput('label'),
-                'url'       => route('front.categories.show', $category->slug),
-                'children'  => [],
+                'id'        => $blogMenuItem->id,
+                'parent_id' => $blogMenuItem->parent_id,
+                'type'      => 'blog',
+                'label'     => $blogMenuItem->translatedInput('label'),
+                'newtab'    => false,
+                'url'       => route('front.posts.index'),
+                'children'  => [
+                    [
+                        'id'        => $categoryMenuItem->id,
+                        'parent_id' => $categoryMenuItem->parent_id,
+                        'type'      => 'category',
+                        'label'     => $categoryMenuItem->translatedInput('label'),
+                        'newtab'    => false,
+                        'url'       => route('front.categories.show', $category->slug),
+                        'children'  => [],
+                    ],
+                ],
             ],
             [
                 'id'        => $invalidMenuItem->id,
                 'parent_id' => $invalidMenuItem->parent_id,
                 'type'      => 'doesNotExist',
                 'label'     => $invalidMenuItem->translatedInput('label'),
+                'newtab'    => false,
                 'url'       => null,
                 'children'  => [],
             ],

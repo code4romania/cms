@@ -4,11 +4,8 @@
     'required'     => true,
     'native'       => true,
     'max'          => 1,
-    'options'      => app( config('twill.namespace') . '\Models\Form')
-        ->with([
-            'translation' => fn ($query) => $query->select('id', 'title'),
-        ])
-        ->get('id', 'translation')
-        ->map(fn($item) => ['value' => $item->id, 'label' => $item->title])
-        ->toArray(),
+    'options'      => Code4Romania\Cms\Models\Form::query()
+        ->with('translation:id,form_id,title')
+        ->get('id')
+        ->mapWithKeys(fn($form) => [ $form->id => $form->title ]),
 ])

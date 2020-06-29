@@ -40,6 +40,7 @@ return [
         'menuItems'         => 'Menu items',
         'menuLocation'      => 'Menu location',
         'name'              => 'Name',
+        'newTab'            => 'Open in new tab',
         'number'            => 'Number',
         'quote'             => 'Quote',
         'recipients'        => 'Recipients',
@@ -88,7 +89,9 @@ return [
         ],
         'type' => [
             'external' => 'External',
-            'page' => 'Page',
+            'page'     => 'Page',
+            'category' => 'Category',
+            'blog'     => 'Blog',
         ],
     ],
 

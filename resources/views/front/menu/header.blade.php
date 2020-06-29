@@ -18,39 +18,44 @@
                         <span>{{ $item['label'] }}</span>
                         @svg('icons/dropdown', '-mr-1 ml-1 h-5 w-5')
                     </button>
-                    <a
+
+                    <x-link
                         class="{{ $baseButton }} flex lg:hidden"
                         href="{{ $item['url'] }}"
-                    >{{ $item['label'] }}</a>
+                        newtab="{{ $item['newtab'] }}"
+                    >{{ $item['label'] }}</x-link>
 
                     <div class="pl-5 lg:shadow-xs lg:pl-0 lg:absolute lg:right-0 lg:mt-2 lg:w-48 lg:origin-top-right lg:bg-white" :class="{ 'lg:hidden' : !open }">
                         <ul class="lg:shadow-lg">
                             @if (!is_null($item['url']))
                                 <li>
-                                    <a
+                                    <x-link
                                         class="{{ $baseButton }} hidden font-bold lg:flex lg:rounded-none"
                                         href="{{ $item['url'] }}"
-                                    >{{ $item['label'] }}</a>
+                                        newtab="{{ $item['newtab'] }}"
+                                    >{{ $item['label'] }}</x-link>
                                 </li>
                             @endif
 
                             @foreach ($item['children'] as $child)
                                 @continue(empty($child['label']) || is_null($child['url']))
                                 <li>
-                                    <a
+                                    <x-link
                                         class="{{ $baseButton }} flex"
                                         href="{{ $child['url'] }}"
-                                    >{{ $child['label'] }}</a>
+                                        newtab="{{ $child['newtab'] }}"
+                                    >{{ $child['label'] }}</x-link>
                                 </li>
                             @endforeach
                         </ul>
                     </div>
                 </div>
             @else
-                <a
+                <x-link
                     class="{{ $baseButton }}"
                     href="{{ $item['url'] }}"
-                >{{ $item['label'] }}</a>
+                    newtab="{{ $item['newtab'] }}"
+                >{{ $item['label'] }}</x-link>
             @endif
         </li>
     @endforeach

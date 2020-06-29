@@ -29,17 +29,35 @@
                 'translated' => false,
                 'required'   => false,
             ])
-        @else
+
+            @formField('select', [
+                'name'       => 'newtab',
+                'label'      => __('admin.field.newTab'),
+                'default'    => false,
+                'unpack'     => true,
+                'options'    => [
+                    [
+                        'value' => false,
+                        'label' => __('form.no'),
+                    ],
+                    [
+                        'value' => true,
+                        'label' => __('form.yes'),
+                    ],
+                ],
+            ])
+        @elseif($type !== 'blog')
             @formField('select', [
                 'name'     => 'target',
                 'label'    => __("admin.{$type}"),
                 'native'   => true,
                 'max'      => 1,
-                'options'  => app("Code4Romania\Cms\Models\\". ucfirst($type))
-                    ->with([ 'translation' => fn ($query) => $query->select('id', 'title') ])
-                    ->get('id', 'title')
-                    ->map(fn($item) => [ 'value' => $item->id, 'label' => $item->title ])
-                    ->toArray(),
+                'options'  => Cache::store('array')->rememberForever("subMenuItem.dropdown.{$type}", function () use ($type) {
+                    return app("Code4Romania\Cms\Models\\" . ucfirst($type))
+                        ->with("translation:id,title,{$type}_id")
+                        ->get('id')
+                        ->mapWithKeys(fn ($item) => [$item->id => $item->title]);
+                }),
             ])
         @endif
     @endcomponent
