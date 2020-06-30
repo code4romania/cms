@@ -12,8 +12,8 @@
             $buttonColor = 'text-white bg-primary-500 focus:bg-primary-600';
             break;
 
-        case 'secondary':
-            $buttonColor = 'text-black bg-secondary-500 focus:bg-secondary-600';
+        case 'warning':
+            $buttonColor = 'text-black bg-warning-500 focus:bg-warning-600';
             break;
 
         case 'danger':

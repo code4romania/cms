@@ -26,6 +26,12 @@ return [
             'component'  => 'a17-block-accordion',
             'group'      => 'content',
         ],
+        'button' => [
+            'title'      => 'Button',
+            'icon'       => 'colors',
+            'component'  => 'a17-block-button',
+            'group'      => 'content',
+        ],
         'callToAction' => [
             'title'      => 'Call to action',
             'icon'       => 'colors',
