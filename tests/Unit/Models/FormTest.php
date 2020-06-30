@@ -126,14 +126,24 @@ class FormTest extends TestCase
                 'maxDate'  => $this->faker->dateTimeBetween('now', '10 years')->format('Y-m-d'),
             ]),
             $this->field([
-                'type'          => 'checkbox',
-                'required'      => true,
-                'checkboxLabel' => $this->localizedStrings('sentence'),
+                'type'     => 'radio',
+                'required' => true,
+                'options'  => $this->localizedStrings('words')->map(fn ($words) => implode(PHP_EOL, $words)),
             ]),
             $this->field([
-                'type'          => 'checkbox',
-                'required'      => false,
-                'checkboxLabel' => $this->localizedStrings('sentence'),
+                'type'     => 'radio',
+                'required' => false,
+                'options'  => $this->localizedStrings('words')->map(fn ($words) => implode(PHP_EOL, $words)),
+            ]),
+            $this->field([
+                'type'     => 'checkbox',
+                'required' => true,
+                'options'  => $this->localizedStrings('words')->map(fn ($words) => implode(PHP_EOL, $words)),
+            ]),
+            $this->field([
+                'type'     => 'checkbox',
+                'required' => false,
+                'options'  => $this->localizedStrings('words')->map(fn ($words) => implode(PHP_EOL, $words)),
             ]),
             $this->field([
                 'type'      => 'file',
@@ -278,6 +288,6 @@ class FormTest extends TestCase
                 'action' => route('front.form.submit', $form->id),
             ])
             ->seeElementCount('fieldset', 1)
-            ->seeElementCount('label', $fields->count());
+            ->seeElementCount('.field', $fields->count());
     }
 }

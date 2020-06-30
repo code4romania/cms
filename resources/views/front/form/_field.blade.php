@@ -5,7 +5,7 @@
     $fieldName = "fields[{$sectionIndex}][{$fieldIndex}]";
     $fieldId   = "fields.{$sectionIndex}.{$fieldIndex}";
 
-    $fieldClass = collect('block');
+    $fieldClass = collect(['field', 'block']);
 
     switch ($field->input('width')) {
         case 'half':
