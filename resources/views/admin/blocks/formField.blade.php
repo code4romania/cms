@@ -197,14 +197,29 @@
 
 @component('twill::partials.form.utils._connected_fields', [
     'fieldName'       => 'type',
+    'fieldValues'     => 'radio',
+    'renderForBlocks' => true,
+])
+    @formField('input', [
+        'name'           => 'options',
+        'label'          => __('form.label.options'),
+        'note'           => __('form.note.options'),
+        'type'           => 'textarea',
+        'required'       => false,
+        'translated'     => true,
+    ])
+@endcomponent
+
+@component('twill::partials.form.utils._connected_fields', [
+    'fieldName'       => 'type',
     'fieldValues'     => 'checkbox',
     'renderForBlocks' => true,
 ])
     @formField('input', [
-        'name'           => 'checkboxLabel',
-        'label'          => __('form.label.checkboxLabel'),
-        'note'           => __('form.note.checkboxLabel'),
-        'type'           => 'text',
+        'name'           => 'options',
+        'label'          => __('form.label.options'),
+        'note'           => __('form.note.options'),
+        'type'           => 'textarea',
         'required'       => false,
         'translated'     => true,
     ])

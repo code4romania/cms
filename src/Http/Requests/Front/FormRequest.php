@@ -40,6 +40,6 @@ class FormRequest extends Request
     {
         return Form::query()
             ->findOrFail($this->route('id'))
-            ->getFieldsColumn('validation');
+            ->getFieldsColumn('label');
     }
 }

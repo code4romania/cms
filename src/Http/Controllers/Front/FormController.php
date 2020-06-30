@@ -33,7 +33,7 @@ class FormController extends Controller
             foreach ($section['fields'] as $fieldIndex => $field) {
                 $data[$sectionIndex]['fields'][$fieldIndex] = [
                     'label' => $field['label'] ?? null,
-                    'value' => $values[$sectionIndex][$fieldIndex],
+                    'value' => $values[$sectionIndex][$fieldIndex] ?? null,
                 ];
             }
         }

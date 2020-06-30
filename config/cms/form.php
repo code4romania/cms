@@ -13,6 +13,7 @@ return [
         'date',
         'file',
         'select',
+        'radio',
         'checkbox',
     ],
 

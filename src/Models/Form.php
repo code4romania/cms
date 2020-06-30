@@ -9,23 +9,26 @@ use A17\Twill\Models\Behaviors\HasTranslation;
 use A17\Twill\Models\Block;
 use Code4Romania\Cms\Models\BaseModel;
 use Code4Romania\Cms\Models\Response;
-use Code4Romania\Cms\Presenters\FormPresenter;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
+use Illuminate\Validation\Rule;
 
 class Form extends BaseModel
 {
     use HasBlocks, HasTranslation;
 
+    /** @var array<string> */
+    protected $with = [
+        'translations',
+    ];
+
+    /** @var array<string> */
     protected $casts = [
         'store'   => 'boolean',
         'send'    => 'boolean',
         'confirm' => 'boolean',
     ];
-
-    /** @var Presenter */
-    protected $presenter = FormPresenter::class;
 
     protected $fillable = [
         'published',
@@ -119,6 +122,10 @@ class Form extends BaseModel
 
             case 'url':
                 return $this->getUrlFieldParams($field, $params);
+                break;
+
+            case 'radio':
+                return $this->getRadioFieldParams($field, $params);
                 break;
 
             case 'checkbox':
@@ -218,10 +225,17 @@ class Form extends BaseModel
         return $params;
     }
 
+    private function getRadioFieldParams(Block $field, array $params): array
+    {
+        $params['validation'][] = Rule::in($field->present()->formFieldOptions);
+
+        return $params;
+    }
+
     private function getCheckboxFieldParams(Block $field, array $params): array
     {
-        $params['validation'][] = 'boolean';
-        $params['checkboxLabel'] = $field->translatedInput('checkboxLabel');
+        $params['validation'][] = 'array';
+        $params['validation'][] = Rule::in($field->present()->formFieldOptions);
 
         return $params;
     }

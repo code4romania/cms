@@ -99,7 +99,14 @@ class BlockPresenter extends Presenter
     {
         $attributes = collect();
 
-        if ($this->model->input('required')) {
+        /**
+         * The spec currently dictates that @required directly relates to the
+         * checkbox it is on, without consideration for others in the group.
+         * Right now, any required checkbox must be ticked.
+         *
+         * @see https://www.w3.org/html/wg/tracker/issues/111
+         */
+        if ($this->model->input('required') && $this->model->input('type') !== 'checkbox') {
             $attributes->push('required');
         }
 
@@ -149,7 +156,7 @@ class BlockPresenter extends Presenter
     /**
      * Block: formField
      */
-    public function formFieldSelectOptions(): array
+    public function formFieldOptions(): array
     {
         return preg_split('/\r\n|\r|\n/', $this->model->translatedInput('options'));
     }
