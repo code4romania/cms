@@ -39,14 +39,10 @@ class UrlHelper
             return [];
         }
 
-        $disabled = collect(config('translatable.disabled', []));
-
         return collect(config('translatable.locales', []))
-            ->mapWithKeys(function (string $locale) use ($disabled, $routeName, $item): array {
-                if ($disabled->contains($locale) || app()->getLocale() === $locale) {
-                    return [];
-                }
-
+            ->diff(config('translatable.disabled', []))
+            ->reject(fn (string $locale) => app()->getLocale() === $locale || Str::endsWith($routeName, '.preview'))
+            ->mapWithKeys(function (string $locale) use ($routeName, $item): array {
                 if (Str::endsWith($routeName, '.index')) {
                     return [
                         $locale => LaravelLocalization::getLocalizedURL($locale, route($routeName))
@@ -66,6 +62,7 @@ class UrlHelper
                 }
 
                 return [];
-            })->toArray();
+            })
+            ->toArray();
     }
 }
