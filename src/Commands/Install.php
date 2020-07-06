@@ -84,7 +84,7 @@ class Install extends Command
         $this->files->cleanDirectory(resource_path());
 
         $this->info('Blanking the default route files.');
-        collect($this->files->files(app()->basePath('routes')))
+        collect($this->files->files(base_path('routes')))
             ->each(function ($file) {
                 $this->files->replace(
                     $file->getPathname(),
@@ -95,15 +95,15 @@ class Install extends Command
         $this->info('Deleting previously copied files.');
 
         $filesToDelete = [
-            app()->basePath('.gitignore'),
-            app()->basePath('.env.example'),
+            base_path('.gitignore'),
+            base_path('.env.example'),
             database_path('migrations/2014_10_12_000000_create_users_table.php'),
             database_path('migrations/2014_10_12_100000_create_password_resets_table.php'),
             database_path('migrations/2019_08_19_000000_create_failed_jobs_table.php'),
         ];
 
         $assetFiles = collect(CmsServiceProvider::$assetFiles)
-            ->map(fn ($fileName): string => app()->basePath($fileName));
+            ->map(fn ($fileName): string => base_path($fileName));
 
         $configFiles = collect(CmsServiceProvider::$configFiles)
             ->map(fn ($fileName): string => config_path($fileName));

@@ -27,10 +27,10 @@
     <div class="grid col-gap-8 row-gap-8 {{ $cols }}">
         @foreach ($block->imageObjects('image') as $media)
         <x-figure
-                :src="$block->image('image', 'default', [], false, false, $media)"
-                :alt="$block->imageAltText('image')"
-                :caption="$block->imageCaption('image')"
-            />
+            :src="$block->image('image', 'default', [], false, false, $media)"
+            :alt="$block->imageAltText('image')"
+            :caption="$block->imageCaption('image')"
+        />
         @endforeach
     </div>
 </section>
