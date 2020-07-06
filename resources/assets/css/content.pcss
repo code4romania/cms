@@ -1,0 +1,184 @@
+@import 'fonts.pcss';
+
+.ck-editor .ck-content {
+    @apply max-h-screen;
+    min-height: 4rem;
+}
+
+.ck-content {
+    @apply font-sans text-lg !important;
+    line-height: theme('lineHeight.relaxed') !important;
+
+    > * + * {
+        @apply mt-5;
+    }
+
+    ul,
+    ol {
+        @apply my-5 ml-10;
+
+        li {
+            @apply mt-1;
+
+            list-style-type: inherit;
+        }
+    }
+
+    ul {
+        @apply list-disc;
+    }
+
+    ol {
+        @apply list-decimal;
+    }
+
+    a {
+        @apply font-semibold text-primary-500 underline;
+
+        &:hover {
+            @apply no-underline;
+        }
+    }
+
+    b,
+    strong {
+        @apply font-bold;
+    }
+
+    i,
+    em {
+        @apply italic;
+    }
+
+    .table,
+    table {
+        @apply w-full text-base text-left;
+
+        thead tr {
+            @apply bg-gray-200;
+        }
+
+        tbody tr:nth-child(2n) {
+            @apply bg-gray-100;
+        }
+
+        th {
+            @apply font-bold;
+        }
+
+        th,
+        td {
+            @apply py-2 px-3;
+        }
+    }
+
+    blockquote {
+        @apply relative py-4 text-left;
+
+        &::before {
+            @apply font-serif font-semibold leading-none text-primary-100;
+            @apply absolute top-0 left-0;
+
+            @screen md {
+                @apply -ml-5;
+            }
+
+            @screen lg {
+                @apply -ml-10;
+            }
+
+            content: open-quote;
+            font-size: 11em;
+            z-index: -1;
+        }
+
+        &::after {
+            content: no-close-quote;
+        }
+
+        p {
+            @apply p-0 m-0;
+        }
+
+        + cite {
+            @apply not-italic;
+        }
+
+        @at-root {
+            html[lang='ro'] .block-content blockquote::before {
+                @apply bottom-0 top-auto;
+            }
+        }
+    }
+
+    figure.image {
+        @apply table text-center mx-auto max-w-full;
+
+        &.image-style-side {
+            @apply ml-5 float-right;
+        }
+
+        figcaption {
+            @apply table py-3 mx-auto italic text-gray-600 break-all;
+            background-color: transparent;
+        }
+    }
+
+    mark {
+        &.yellow {
+            @apply bg-warning-400;
+        }
+    }
+}
+
+.h1,
+.ck-content h1 {
+    @apply text-3xl font-bold leading-tight;
+
+    @screen md {
+        @apply text-4xl;
+    }
+
+    @screen lg {
+        @apply text-5xl;
+    }
+}
+
+.h2,
+.ck-content h2 {
+    @apply text-2xl font-bold leading-tight;
+
+    @screen md {
+        @apply text-3xl;
+    }
+
+    @screen lg {
+        @apply text-4xl;
+    }
+}
+
+.h3,
+.ck-content h3 {
+    @apply text-xl font-bold leading-tight;
+
+    @screen md {
+        @apply text-2xl;
+    }
+
+    @screen lg {
+        @apply text-3xl;
+    }
+}
+
+.h4,
+.ck-content h4 {
+    @apply text-lg font-bold leading-tight;
+
+    @screen md {
+        @apply text-xl;
+    }
+
+    @screen lg {
+        @apply text-2xl;
+    }
+}
