@@ -1,7 +1,7 @@
 @php
     $container = collect();
     $imageRight = collect('col-span-1');
-    $content = collect('rich-text');
+    $content = collect('ck-content');
 
     switch ($block->input('width')) {
         case '1/4':

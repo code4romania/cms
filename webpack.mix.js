@@ -10,26 +10,18 @@ if (mix.config.production) {
     mix.version();
 }
 
-/*
- |--------------------------------------------------------------------------
- | Mix Asset Management
- |--------------------------------------------------------------------------
- |
- | Mix provides a clean, fluent API for defining some Webpack build steps
- | for your Laravel application. By default, we are compiling the Sass
- | file for the application as well as bundling up all the JS files.
- |
- */
+const config = [
+    require('postcss-import'),
+    require('tailwindcss')('./tailwind.config.js'),
+    require('postcss-nested')({
+        bubble: ['screen'],
+    }),
+];
 
 mix.setPublicPath('public/assets/cms')
     .setResourceRoot('./')
 
-    .js('resources/js/app.js', 'public/assets/cms')
-    .postCss('resources/css/app.pcss', 'public/assets/cms', [
-        require('postcss-import'),
-        require('tailwindcss')('./tailwind.config.js'),
-        require('postcss-nested')({
-            bubble: ['screen'],
-        }),
-    ])
+    .js('resources/assets/js/app.js', 'public/assets/cms')
+    .postCss('resources/assets/css/app.pcss', 'public/assets/cms', config)
+    .postCss('resources/assets/css/content.pcss', 'public/assets/cms', config)
     .extract();

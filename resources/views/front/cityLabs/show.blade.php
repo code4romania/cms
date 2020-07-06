@@ -13,7 +13,7 @@
                         />
                     </div>
                 </div>
-                <div class="rich-text">
+                <div class="ck-content">
                     <h1 class="title">{{ $item->name }}</h1>
                     {!! $item->description !!}
                 </div>

@@ -20,6 +20,6 @@
     </h4>
     <div
         x-show="{{ !$isPreview ? 'open' : 'true' }}"
-        class="px-6 py-4 border rich-text"
+        class="px-6 py-4 border ck-content"
     >{!! $block->translatedInput('description') !!}</div>
 </div>
