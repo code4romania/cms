@@ -18,13 +18,10 @@
 
 @section('fieldsets')
     <a17-fieldset title="{{ __('admin.field.summary') }}" id="summary">
-        @formField('wysiwyg', [
-            'name'           => 'description',
-            'label'          => __('admin.field.description'),
-            'type'           => config('cms.editor.type'),
-            'toolbarOptions' => config('cms.editor.toolbar'),
-            'editSource'     => true,
-            'translated'     => true,
+        @include('admin.utils.ckeditor', [
+            'name'       => 'description',
+            'label'      => __('admin.field.description'),
+            'translated' => true,
         ])
 
         @formField('medias', [

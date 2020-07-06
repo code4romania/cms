@@ -10,13 +10,10 @@
     'translated'     => true,
 ])
 
-@formField('wysiwyg', [
-    'name'           => 'content',
-    'label'          => __('admin.field.content'),
-    'type'           => config('cms.editor.type'),
-    'toolbarOptions' => config('cms.editor.toolbar'),
-    'translated'     => true,
-    'editSource'     => true,
+@include('admin.utils.ckeditor', [
+    'name'       => 'content',
+    'label'      => __('admin.field.content'),
+    'translated' => true,
 ])
 
 @formField('select', [
