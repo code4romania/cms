@@ -11,6 +11,7 @@ use A17\Twill\Models\Behaviors\HasSlug;
 use A17\Twill\Models\Behaviors\HasTranslation;
 use Code4Romania\Cms\Models\BaseModel;
 use Code4Romania\Cms\Models\Category;
+use Code4Romania\Cms\Presenters\PostPresenter;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Carbon;
 
@@ -22,6 +23,12 @@ class Post extends BaseModel
     protected $with = [
         'categories',
     ];
+
+    /** @var Presenter */
+    protected $presenterAdmin = PostPresenter::class;
+
+    /** @var Presenter */
+    protected $presenter = PostPresenter::class;
 
     /** @var array<string> */
     protected $casts = [

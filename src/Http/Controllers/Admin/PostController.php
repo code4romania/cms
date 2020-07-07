@@ -32,11 +32,10 @@ class PostController extends ModuleController
             'field' => 'title',
             'sort'  => true,
         ],
-        'date' => [
+        'publishDate' => [
             'title'   => 'Publish Date',
-            'field'   => 'date',
-            'present' => false,
-            'sort'    => true,
+            'field'   => 'publishDate',
+            'present' => true,
         ],
     ];
 }

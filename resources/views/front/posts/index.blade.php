@@ -12,7 +12,6 @@
         @foreach ($items as $item)
             @include('front.posts.card', [
                 'item'  => $item,
-                'class' => $loop->index === 0 ? 'md:col-span-2' : '',
             ])
         @endforeach
 

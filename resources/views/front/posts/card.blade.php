@@ -1,4 +1,4 @@
-<article class="flex {{ $class }}">
+<article class="flex {{ $class ?? '' }}">
     <a href="{{ route('front.posts.show', ['slug' => $item->slug]) }}" class="block w-full overflow-hidden transition-shadow duration-150 rounded-sm shadow-lg hover:shadow-xl">
         <div class="relative border-b aspect-ratio-2/1">
             @if ($item->hasImage('image'))
@@ -15,7 +15,7 @@
         <div class="px-8 py-6 leading-normal">
             <h1 class="mb-4 font-semibold h2">{{ $item->title }}</h1>
             <div class="flex items-center mb-6 text-base text-gray-800">
-                <span>{{ $item->date->isoFormat(__('date.format')) }}</span>
+                <span>{{ $item->present()->publishDate }}</span>
 
                 @if ($item->author)
                     <span class="mx-2" aria-hidden="true">&middot;</span>
