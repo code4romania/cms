@@ -32,11 +32,8 @@
         :lqip="$item->lowQualityImagePlaceholder('image')"
         :src="$item->image('image')"
         :alt="$item->imageAltText('image')"
-        class="w-full max-w-4xl mx-auto mb-12 border"
+        class="container mb-12 border"
     />
-
-
-
 
     @include('front.blocks._container', [
         'item' => $item,
