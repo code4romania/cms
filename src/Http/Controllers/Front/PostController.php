@@ -15,6 +15,7 @@ class PostController extends Controller
         $items = Post::query()
             ->with('translation', 'slugs', 'medias')
             ->publishedInListings()
+            ->orderByDesc('publish_start_date')
             ->paginate();
 
         $this->seo([
