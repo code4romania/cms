@@ -13,10 +13,14 @@ class PostController extends Controller
     public function index(): View
     {
         $items = Post::query()
-            ->with('translation', 'slugs', 'medias')
+            ->withActiveTranslations()
+            ->with('medias')
+            ->with(['slugs' => fn ($query) => $query->where('locale', app()->getLocale())])
             ->publishedInListings()
             ->orderByDesc('publish_start_date')
             ->paginate();
+
+        abort_if($items->isEmpty(), 404);
 
         $this->seo([
             'title'       => SettingsHelper::get('blogTitle', 'site'),
