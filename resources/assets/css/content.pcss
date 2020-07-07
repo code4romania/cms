@@ -1,10 +1,5 @@
 @import 'fonts.pcss';
 
-.ck-editor .ck-content {
-    @apply max-h-screen;
-    min-height: 10rem;
-}
-
 .ck-content {
     @apply font-sans text-lg !important;
     line-height: theme('lineHeight.relaxed') !important;
@@ -73,23 +68,20 @@
     }
 
     blockquote {
-        @apply relative py-4 text-left;
+        @apply relative py-4 px-6 not-italic border-0 overflow-visible !important;
+        @apply text-left;
 
         &::before {
-            @apply font-serif font-semibold leading-none text-primary-100;
-            @apply absolute top-0 left-0;
+            @apply absolute top-0 left-0 h-full -ml-5 -mt-5;
+            @apply bg-no-repeat bg-contain w-32 opacity-25;
 
-            @screen md {
-                @apply -ml-5;
-            }
+            content: '';
+            z-index: -1;
+            background-image: url('../svg/icons/quote.svg');
 
             @screen lg {
-                @apply -ml-10;
+                @apply -ml-10 -mt-10;
             }
-
-            content: open-quote;
-            font-size: 11em;
-            z-index: -1;
         }
 
         &::after {
@@ -105,8 +97,8 @@
         }
 
         @at-root {
-            html[lang='ro'] .block-content blockquote::before {
-                @apply bottom-0 top-auto;
+            html[lang='ro'] .ck-content blockquote::before {
+                /* @apply bottom-0 top-auto; */
             }
         }
     }
@@ -180,5 +172,14 @@
 
     @screen lg {
         @apply text-2xl;
+    }
+}
+
+.ck-editor .ck-content {
+    @apply max-h-screen;
+    min-height: 10rem;
+
+    blockquote::before {
+        @apply -ml-3 -mt-3 z-0;
     }
 }

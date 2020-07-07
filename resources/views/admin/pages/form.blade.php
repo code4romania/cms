@@ -9,16 +9,16 @@
 ])
 
 @section('contentFields')
-    @include('admin.utils.ckeditor', [
-        'name'       => 'description',
-        'label'      => __('admin.field.description'),
-        'translated' => true,
-    ])
-
     @formField('checkbox', [
         'name'    => 'show_header',
         'label'   => __('admin.field.showHeader'),
         'default' => true,
+    ])
+
+    @include('admin.utils.ckeditor', [
+        'name'       => 'description',
+        'label'      => __('admin.field.description'),
+        'translated' => true,
     ])
 @stop
 

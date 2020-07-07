@@ -1,3 +1,7 @@
+@twillBlockTitle('City labs list')
+@twillBlockIcon('fix-grid')
+@twillBlockGroup('content')
+
 @formField('browser', [
     'routePrefix' => 'people',
     'moduleName'  => 'cityLabs',

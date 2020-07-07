@@ -1,3 +1,7 @@
+@twillBlockTitle('Partners list')
+@twillBlockIcon('fix-grid')
+@twillBlockGroup('content')
+
 @formField('input', [
     'name'       => 'title',
     'label'      => __('admin.field.title'),

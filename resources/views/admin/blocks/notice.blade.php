@@ -1,3 +1,7 @@
+@twillBlockTitle('Notice')
+@twillBlockIcon('info')
+@twillBlockGroup('content')
+
 @formField('select', [
     'name'       => 'color',
     'label'      => __('admin.field.background'),

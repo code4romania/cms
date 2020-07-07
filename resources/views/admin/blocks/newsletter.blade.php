@@ -1,3 +1,7 @@
+@twillBlockTitle('Newsletter form')
+@twillBlockIcon('info')
+@twillBlockGroup('content')
+
 @inject('mailchimp', 'Code4Romania\Cms\Helpers\MailchimpHelper')
 
 @include('admin.utils.ckeditor', [

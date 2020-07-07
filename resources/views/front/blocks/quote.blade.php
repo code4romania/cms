@@ -1,14 +1,14 @@
-<section class="container leading-relaxed rich-content">
+<section class="container leading-relaxed ck-content">
     <blockquote>
-        <p>{{ $block->translatedinput('quote') }}</p>
+        {!! $block->translatedInput('quote') !!}
     </blockquote>
 
-    @if ($block->translatedinput('author'))
+    @if ($block->translatedInput('author'))
         <cite>
-            <strong>{{ $block->translatedinput('author') }}</strong>
+            <strong>{{ $block->translatedInput('author') }}</strong>
 
-            @if ($block->translatedinput('affiliation'))
-                <br><em>{{ $block->translatedinput('affiliation') }}</em>
+            @if ($block->translatedInput('affiliation'))
+                <br><em>{{ $block->translatedInput('affiliation') }}</em>
             @endif
         </cite>
     @endif

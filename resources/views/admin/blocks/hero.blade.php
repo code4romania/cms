@@ -1,3 +1,7 @@
+@twillBlockTitle('Hero section')
+@twillBlockIcon('website')
+@twillBlockGroup('content')
+
 @formField('input', [
     'name'           => 'title',
     'label'          => __('admin.field.title'),

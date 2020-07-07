@@ -1,3 +1,7 @@
+@twillRepeaterTitle('Counter item')
+@twillRepeaterTrigger('Add counter item')
+@twillRepeaterGroup('twill')
+
 @formField('input', [
     'name'           => 'number',
     'label'          => __('admin.field.number'),

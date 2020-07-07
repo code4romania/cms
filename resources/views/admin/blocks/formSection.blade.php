@@ -1,3 +1,7 @@
+@twillBlockTitle('Form section')
+@twillBlockIcon('editor')
+@twillBlockGroup('form')
+
 @formField('input', [
     'name'           => 'name',
     'label'          => __('admin.field.name'),

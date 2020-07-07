@@ -1,3 +1,7 @@
+@twillRepeaterTitle('Accordion Item')
+@twillRepeaterTrigger('Add accordion item')
+@twillRepeaterGroup('twill')
+
 @formField('input', [
     'name'           => 'header',
     'label'          => __('admin.field.header'),

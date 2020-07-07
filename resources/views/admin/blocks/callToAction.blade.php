@@ -1,3 +1,7 @@
+@twillBlockTitle('Call to action')
+@twillBlockIcon('colors')
+@twillBlockGroup('content')
+
 @formField('input', [
     'name'       => 'title',
     'label'      => __('admin.field.title'),

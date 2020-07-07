@@ -1,3 +1,7 @@
+@twillBlockTitle('Image with text')
+@twillBlockIcon('image-text')
+@twillBlockGroup('content')
+
 @formField('medias', [
     'name'         => 'image',
     'label'        => __('admin.field.image'),

@@ -1,3 +1,7 @@
+@twillRepeaterTitle('Submenu item')
+@twillRepeaterTrigger('Add submenu item')
+@twillRepeaterGroup('twill')
+
 @formField('input', [
     'name'           => 'label',
     'label'          => __('admin.field.label'),

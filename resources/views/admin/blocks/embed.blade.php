@@ -1,3 +1,7 @@
+@twillBlockTitle('Embed')
+@twillBlockIcon('revision-single')
+@twillBlockGroup('content')
+
 @formField('input', [
     'name'       => 'title',
     'label'      => __('admin.field.title'),
