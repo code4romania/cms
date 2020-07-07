@@ -15,5 +15,7 @@
                 'class' => $loop->index === 0 ? 'md:col-span-2' : '',
             ])
         @endforeach
+
+        {{ $items->links('front.partials.pagination') }}
     </x-container>
 @endsection

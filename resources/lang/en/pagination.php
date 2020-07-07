@@ -14,7 +14,8 @@ return [
     */
 
     'previous' => '&larr; Previous',
-    'next' => 'Next &rarr;',
-    'page' => 'Page :page',
-
+    'next'     => 'Next &rarr;',
+    'page'     => 'Page :page',
+    'label'    => 'Pagination Navigation',
+    'goto'     => 'Go to page :page',
 ];
