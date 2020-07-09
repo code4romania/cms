@@ -64,6 +64,7 @@
         th,
         td {
             @apply py-2 px-3;
+            @apply bg-transparent !important;
         }
     }
 
@@ -75,9 +76,9 @@
             @apply absolute top-0 left-0 h-full -ml-5 -mt-5;
             @apply bg-no-repeat bg-contain w-32 opacity-25;
 
-            content: '';
-            z-index: -1;
             background-image: url('../svg/icons/quote.svg');
+            z-index: -1;
+            content: '';
 
             @screen lg {
                 @apply -ml-10 -mt-10;
@@ -94,12 +95,6 @@
 
         + cite {
             @apply not-italic;
-        }
-
-        @at-root {
-            html[lang='ro'] .ck-content blockquote::before {
-                /* @apply bottom-0 top-auto; */
-            }
         }
     }
 

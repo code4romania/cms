@@ -108,7 +108,12 @@ Editor.defaultConfig = {
     },
     language: 'en',
     image: {
-        toolbar: ['imageTextAlternative', 'imageStyle:full', 'imageStyle:side'],
+        toolbar: [
+            //
+            'imageTextAlternative',
+            'imageStyle:full',
+            'imageStyle:side',
+        ],
     },
     table: {
         contentToolbar: [
