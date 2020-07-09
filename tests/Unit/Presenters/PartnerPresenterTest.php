@@ -37,6 +37,6 @@ class PartnerPresenterTest extends TestCase
 
         $partner->load('medias');
 
-        $this->assertStringContainsString(url("/img/{$image->uuid}"), $partner->present()->imageSrc);
+        $this->assertStringContainsString("/img/{$image->uuid}", $partner->present()->imageSrc);
     }
 }

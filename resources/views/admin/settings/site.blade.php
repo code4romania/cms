@@ -79,14 +79,10 @@
                 })->toArray(),
         ])
 
-        @formField('wysiwyg', [
-            'name'           => 'notice_content',
-            'label'          => __('admin.field.content'),
-            'type'           => config('cms.editor.type'),
-            'toolbarOptions' => config('cms.editor.toolbar'),
-            'translated'     => true,
-            'editSource'     => true,
-            'maxlength'      => 200,
+        @include('admin.utils.ckeditor', [
+            'name'       => 'notice_content',
+            'label'      => __('admin.field.content'),
+            'translated' => true,
         ])
     </a17-fieldset>
 

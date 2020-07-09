@@ -9,6 +9,6 @@
     </h1>
 
     @if ($description)
-        <div class="mt-5 text-lg leading-relaxed rich-text">{!! $description !!}</div>
+        <div class="mt-5 text-lg leading-relaxed ck-content">{!! $description !!}</div>
     @endif
 </header>

@@ -1,10 +1,11 @@
-@formField('input', [
+@twillBlockTitle('Quote')
+@twillBlockIcon('quote')
+@twillBlockGroup('content')
+
+@include('admin.utils.ckeditor', [
     'name'       => 'quote',
     'label'      => __('admin.field.quote'),
-    'type'       => 'textarea',
-    'required'   => true,
     'translated' => true,
-    'rows'       => 4,
 ])
 
 @formField('input', [

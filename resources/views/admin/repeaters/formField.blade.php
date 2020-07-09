@@ -1,3 +1,7 @@
+@twillRepeaterTitle('Form field')
+@twillRepeaterTrigger('Add form field')
+@twillRepeaterGroup('twill')
+
 @formField('input', [
     'name'           => 'label',
     'label'          => __('admin.field.label'),

@@ -1,3 +1,3 @@
-<section class="container leading-relaxed rich-text">
+<section class="container leading-relaxed ck-content">
     {!! $block->translatedInput('text') !!}
 </section>

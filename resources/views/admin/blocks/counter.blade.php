@@ -1,3 +1,7 @@
+@twillBlockTitle('Counter')
+@twillBlockIcon('star-feature')
+@twillBlockGroup('content')
+
 @formField('input', [
     'name'       => 'title',
     'label'      => __('admin.field.title'),

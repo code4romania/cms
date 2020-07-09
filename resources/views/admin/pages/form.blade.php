@@ -9,19 +9,16 @@
 ])
 
 @section('contentFields')
-    @formField('wysiwyg', [
-        'name'           => 'description',
-        'label'          => __('admin.field.description'),
-        'type'           => config('cms.editor.type'),
-        'toolbarOptions' => config('cms.editor.toolbar'),
-        'editSource'     => true,
-        'translated'     => true,
-    ])
-
     @formField('checkbox', [
         'name'    => 'show_header',
         'label'   => __('admin.field.showHeader'),
         'default' => true,
+    ])
+
+    @include('admin.utils.ckeditor', [
+        'name'       => 'description',
+        'label'      => __('admin.field.description'),
+        'translated' => true,
     ])
 @stop
 

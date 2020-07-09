@@ -1,3 +1,7 @@
+@twillBlockTitle('Notice')
+@twillBlockIcon('info')
+@twillBlockGroup('content')
+
 @formField('select', [
     'name'       => 'color',
     'label'      => __('admin.field.background'),
@@ -12,12 +16,8 @@
         })->toArray(),
 ])
 
-@formField('wysiwyg', [
-    'name'           => 'content',
-    'label'          => __('admin.field.text'),
-    'type'           => config('cms.editor.type'),
-    'toolbarOptions' => config('cms.editor.toolbar'),
-    'translated'     => true,
-    'editSource'     => true,
-    'maxlength'      => 200,
+@include('admin.utils.ckeditor', [
+    'name'       => 'content',
+    'label'      => __('admin.field.content'),
+    'translated' => true,
 ])

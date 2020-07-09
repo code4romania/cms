@@ -25,7 +25,7 @@
 @endphp
 
 <div class="{{ $classes->implode(' ') }}">
-    <div class="max-w-5xl p-3 mx-auto text-center sm:px-6 lg:px-8 rich-text">
+    <div class="max-w-5xl p-3 mx-auto text-center sm:px-6 lg:px-8 ck-content">
         {!! $content !!}
     </div>
 </div>

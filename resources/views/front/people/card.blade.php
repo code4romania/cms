@@ -27,7 +27,7 @@
     </div>
 
     @if ($showDescription && $person->description)
-        <div class="mt-4 rich-text">
+        <div class="mt-4 ck-content">
             {!! $person->description !!}
         </div>
     @endif

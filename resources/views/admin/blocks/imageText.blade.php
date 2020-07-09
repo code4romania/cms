@@ -1,3 +1,7 @@
+@twillBlockTitle('Image with text')
+@twillBlockIcon('image-text')
+@twillBlockGroup('content')
+
 @formField('medias', [
     'name'         => 'image',
     'label'        => __('admin.field.image'),
@@ -67,11 +71,8 @@
     ],
 ])
 
-@formField('wysiwyg', [
-    'name'           => 'text',
-    'label'          => __('admin.field.text'),
-    'type'           => config('cms.editor.type'),
-    'toolbarOptions' => config('cms.editor.toolbar'),
-    'translated'     => true,
-    'editSource'     => true,
+@include('admin.utils.ckeditor', [
+    'name'       => 'text',
+    'label'      => __('admin.field.text'),
+    'translated' => true,
 ])

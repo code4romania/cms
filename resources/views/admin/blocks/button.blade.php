@@ -1,3 +1,7 @@
+@twillBlockTitle('Button')
+@twillBlockIcon('colors')
+@twillBlockGroup('content')
+
 @formField('select', [
     'name'       => 'button_color',
     'label'      => __('admin.field.buttonColor'),

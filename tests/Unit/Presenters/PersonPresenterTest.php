@@ -54,7 +54,7 @@ class PersonPresenterTest extends TestCase
 
         $person->load('medias');
 
-        $this->assertStringContainsString(url("/img/{$image->uuid}"), $person->present()->imageSrc);
+        $this->assertStringContainsString("/img/{$image->uuid}", $person->present()->imageSrc);
         $this->assertEquals($lqipData, $person->present()->imageLqip);
     }
 }

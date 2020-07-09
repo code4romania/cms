@@ -1,3 +1,7 @@
+@twillBlockTitle('Form')
+@twillBlockIcon('edit')
+@twillBlockGroup('content')
+
 @formField('select', [
     'name'         => 'form',
     'label'        => __('admin.form'),

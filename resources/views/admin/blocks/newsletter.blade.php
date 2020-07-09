@@ -1,12 +1,13 @@
+@twillBlockTitle('Newsletter form')
+@twillBlockIcon('info')
+@twillBlockGroup('content')
+
 @inject('mailchimp', 'Code4Romania\Cms\Helpers\MailchimpHelper')
 
-@formField('wysiwyg', [
-    'name'           => 'text',
-    'label'          => __('admin.field.text'),
-    'type'           => config('cms.editor.type'),
-    'toolbarOptions' => config('cms.editor.toolbar'),
-    'translated'     => true,
-    'editSource'     => true,
+@include('admin.utils.ckeditor', [
+    'name'       => 'text',
+    'label'      => __('admin.field.text'),
+    'translated' => true,
 ])
 
 @formField('select', [

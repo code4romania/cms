@@ -1,5 +1,5 @@
 <section class="container grid items-center row-gap-8 col-gap-8 md:grid-cols-2 lg:grid-cols-3">
-    <div class="rich-text lg:col-span-2">
+    <div class="ck-content lg:col-span-2">
         {!! $block->translatedInput('text') !!}
     </div>
 

@@ -16,7 +16,7 @@
     "prefer-stable": true,
     "require": {
         "php": "^7.4",
-        "area17/twill": "^2.0",
+        "area17/twill": "2.x-dev",
         "artesaos/seotools": "^0.18",
         "blade-ui-kit/blade-icons": "^0.4.0",
         "kalnoy/nestedset": "^5.0",
