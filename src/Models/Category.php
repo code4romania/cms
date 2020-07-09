@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class Category extends Model
 {
     use HasTranslation, HasSlug;
+
     /** @var array<string> */
     protected $with = [
         'translation',

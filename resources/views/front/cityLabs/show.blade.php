@@ -21,7 +21,7 @@
         </div>
 
         <div class="container">
-            <x-hex-badge icon="community" :title="__('community')" />
+            <x-hex-badge icon="community" :title="__('misc.community')" />
 
             <section class="grid gap-10 mt-6 leading-tight sm:grid-cols-2 lg:grid-cols-4">
                 @foreach ($item->people as $person)

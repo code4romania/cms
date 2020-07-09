@@ -24,4 +24,18 @@ class PostController extends ModuleController
     protected $indexForm = [
         'translations',
     ];
+
+    /** @var array */
+    protected $indexColumns = [
+        'title' => [
+            'title' => 'Title',
+            'field' => 'title',
+            'sort'  => true,
+        ],
+        'publishDate' => [
+            'title'   => 'Publish Date',
+            'field'   => 'publishDate',
+            'present' => true,
+        ],
+    ];
 }

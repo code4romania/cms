@@ -17,7 +17,7 @@
 
     <div class="absolute inset-0 flex items-center justify-center">
         <x-image
-            class=""
+            class="w-4/5"
             :src="$partner->present()->imageSrc"
             :alt="$partner->imageAltText('logo')"
         />

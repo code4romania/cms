@@ -14,7 +14,17 @@ class CategoryController extends ModuleController
 
     /** @var array<string> */
     protected $indexOptions = [
-        'editInModal' => true,
+        'editInModal' => false,
         'publish'     => false,
+    ];
+
+    /** @var array<string> */
+    protected $indexWith = [
+        'translations',
+    ];
+
+    /** @var array<string> */
+    protected $indexForm = [
+        'translations',
     ];
 }
