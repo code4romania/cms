@@ -9,6 +9,7 @@ use Code4Romania\Cms\CmsServiceProvider;
 use Illuminate\Console\Command;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Filesystem\Filesystem;
+use Symfony\Component\Process\Process;
 
 class Install extends Command
 {
@@ -17,7 +18,8 @@ class Install extends Command
      *
      * @var string
      */
-    protected $signature = 'cms:install {--y|yes : Automatic yes to initial prompt}';
+    protected $signature = 'cms:install {--y|yes : Automatic yes to initial prompt} ' .
+        '{--build} {--noInstall}';
 
     /**
      * The console command description.
@@ -61,8 +63,15 @@ class Install extends Command
         $this->publish('migrations', true);
         $this->publish();
         $this->installTwill();
-
         $this->buildFrontend();
+    }
+
+    private function runProcess(array $command, ?int $timeout = 300): void
+    {
+        (new Process($command))
+            ->setTty(Process::isTtySupported())
+            ->setTimeout($timeout)
+            ->mustRun();
     }
 
     public function checkDatabaseConnection(): bool
@@ -144,8 +153,25 @@ class Install extends Command
 
     private function buildFrontend(): void
     {
-        $this->line('');
-        $this->info('Don\'t forget to build the frontend with <warning>npm run cms:install</warning>');
+        if (!$this->option('build') && !$this->confirm('Do you want to build the frontend?')) {
+            return;
+        }
+
+        if (!$this->option('noInstall')) {
+            $this->info('Installing npm dependencies');
+            $this->runProcess(['npm', 'install', '--no-save', '--prefer-offline', '--no-audit']);
+        } else {
+            $this->info('Reusing npm dependencies');
+        }
+
+        $this->info('Building the ckeditor');
+        $this->runProcess(['npm', 'run', 'ckeditor:build']);
+
+        $this->info('Building the twill frontend');
+        $this->call('twill:build');
+
+        $this->info('Building the public frontend');
+        $this->runProcess(['npm', 'run', 'prod']);
     }
 
     /**
