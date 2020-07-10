@@ -36,7 +36,8 @@ module.exports = (env, config) => ({
             language: 'en',
         }),
         new webpack.BannerPlugin({
-            banner: 'eslint-disable',
+            banner: '/* eslint-disable */',
+            raw: true,
         }),
     ],
 
