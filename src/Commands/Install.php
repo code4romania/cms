@@ -61,7 +61,7 @@ class Install extends Command
         $this->publish('migrations', true);
         $this->publish();
         $this->installTwill();
-        $this->call('cms:build');
+        $this->call('cms:build', ['--install' => true]);
     }
 
     public function checkDatabaseConnection(): bool

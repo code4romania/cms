@@ -14,7 +14,7 @@ const CKEditorWebpackPlugin = require('@ckeditor/ckeditor5-dev-webpack-plugin');
 
 module.exports = (env, config) => ({
     mode: 'production',
-    devtool: config.mode === 'production' ? 'none' : 'source-map',
+    devtool: process.env.NODE_ENV === 'production' ? 'none' : 'source-map',
     performance: { hints: false },
 
     entry: path.resolve(__dirname, 'src', 'ckeditor.js'),

@@ -28,6 +28,7 @@ class Build extends Command
         if ($this->option('install')) {
             $this->info('Installing npm dependencies');
             $this->runProcess(['npm', 'install', '--no-save', '--prefer-offline', '--no-audit']);
+            $this->runProcess(['npm', 'ci'], base_path('vendor/area17/twill'));
         } else {
             $this->info('Reusing npm dependencies');
         }
