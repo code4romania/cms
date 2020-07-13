@@ -17,6 +17,16 @@
             "options": {
                 "printWidth": 120
             }
+        },
+        {
+            "files": [
+                "resources/assets/js/blocks/*",
+                "resources/assets/js/components/*"
+            ],
+            "options": {
+                "tabWidth": 2,
+                "semi": false
+            }
         }
     ]
 }
