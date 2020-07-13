@@ -6,7 +6,6 @@ namespace Code4Romania\Cms\Commands;
 
 use A17\Twill\TwillServiceProvider;
 use Code4Romania\Cms\CmsServiceProvider;
-use Illuminate\Console\Command;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Filesystem\Filesystem;
 use Symfony\Component\Process\Process;
@@ -18,8 +17,7 @@ class Install extends Command
      *
      * @var string
      */
-    protected $signature = 'cms:install {--y|yes : Automatic yes to initial prompt} ' .
-        '{--build} {--noInstall}';
+    protected $signature = 'cms:install {--y|yes : Automatic yes to initial prompt}';
 
     /**
      * The console command description.
@@ -63,15 +61,7 @@ class Install extends Command
         $this->publish('migrations', true);
         $this->publish();
         $this->installTwill();
-        $this->buildFrontend();
-    }
-
-    private function runProcess(array $command, ?int $timeout = 300): void
-    {
-        (new Process($command))
-            ->setTty(Process::isTtySupported())
-            ->setTimeout($timeout)
-            ->mustRun();
+        $this->call('cms:build');
     }
 
     public function checkDatabaseConnection(): bool
@@ -136,42 +126,21 @@ class Install extends Command
 
     private function installTwill(): void
     {
-        if ($this->confirm('Do you also want to run the Twill install process?')) {
-            $this->call('vendor:publish', [
-                '--provider' => TwillServiceProvider::class,
-                '--tag' => 'migrations',
-            ]);
-
-            if ($this->checkDatabaseConnection()) {
-                $this->call('twill:install');
-            } else {
-                $this->line('');
-                $this->warn('After configuring the database access, you still need to run `php artisan twill:install`');
-            }
-        }
-    }
-
-    private function buildFrontend(): void
-    {
-        if (!$this->option('build') && !$this->confirm('Do you want to build the frontend?')) {
+        if (!$this->confirm('Do you also want to run the Twill install process?')) {
             return;
         }
 
-        if (!$this->option('noInstall')) {
-            $this->info('Installing npm dependencies');
-            $this->runProcess(['npm', 'install', '--no-save', '--prefer-offline', '--no-audit']);
+        $this->call('vendor:publish', [
+            '--provider' => TwillServiceProvider::class,
+            '--tag' => 'migrations',
+        ]);
+
+        if ($this->checkDatabaseConnection()) {
+            $this->call('twill:install');
         } else {
-            $this->info('Reusing npm dependencies');
+            $this->line('');
+            $this->warn('After configuring the database access, you still need to run `php artisan twill:install`');
         }
-
-        $this->info('Building the ckeditor');
-        $this->runProcess(['npm', 'run', 'ckeditor:build']);
-
-        $this->info('Building the twill frontend');
-        $this->call('twill:build');
-
-        $this->info('Building the public frontend');
-        $this->runProcess(['npm', 'run', 'prod']);
     }
 
     /**

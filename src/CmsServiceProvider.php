@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Code4Romania\Cms;
 
+use Code4Romania\Cms\Commands\Build;
 use Code4Romania\Cms\Commands\Install;
 use Code4Romania\Cms\Helpers\SettingsHelper;
 use Illuminate\Database\Eloquent\Relations\Relation;
@@ -159,6 +160,7 @@ class CmsServiceProvider extends ServiceProvider
     {
         $this->commands([
             Install::class,
+            Build::class,
         ]);
     }
 
