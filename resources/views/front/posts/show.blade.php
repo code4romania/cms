@@ -22,9 +22,9 @@
                     @svg('icons/category', 'flex-shrink-0 h-5 mr-2 text-primary-600')
                     <span>
                         @foreach ($item->present()->categories as $category)
-                            <a href="{{ $category['url'] }}" class="hover:underline">
+                            <a href="{{ $category['url'] }}" class="inline-block hover:underline">
                                 {{ $category['title'] }}
-                            </a>
+                            </a>{{ $loop->last ? '': ', ' }}
                         @endforeach
                     </span>
                 </div>
