@@ -6,20 +6,20 @@
 
         <aside class="mb-6 text-base">
             <div class="inline-flex items-center my-2 mr-6">
-                @svg('icons/calendar', 'flex-shrink-0 h-5 mr-2 text-primary-600')
+                {{ svg('icons/calendar', 'flex-shrink-0 h-5 mr-2 text-primary-600') }}
                 <span>{{ $item->present()->publishDate }}</span>
             </div>
 
             @if ($item->author)
                 <div class="inline-flex items-center my-2 mr-6">
-                    @svg('icons/author', 'flex-shrink-0 h-5 mr-2 text-primary-600')
+                    {{ svg('icons/author', 'flex-shrink-0 h-5 mr-2 text-primary-600') }}
                     <span>{{ $item->author }}</span>
                 </div>
             @endif
 
             @if ($item->categories->count())
                 <div class="inline-flex items-center my-2 mr-6">
-                    @svg('icons/category', 'flex-shrink-0 h-5 mr-2 text-primary-600')
+                    {{ svg('icons/category', 'flex-shrink-0 h-5 mr-2 text-primary-600') }}
                     <span>
                         @foreach ($item->present()->categories as $category)
                             <a href="{{ $category['url'] }}" class="inline-block hover:underline">

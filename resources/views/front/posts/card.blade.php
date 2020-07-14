@@ -9,7 +9,7 @@
                     class="absolute inset-0 flex items-center justify-center w-full"
                 />
             @else
-                @svg('logo-sm-gray', 'absolute inset-0 flex items-center justify-center w-full h-full p-10 lg:p-20')
+                {{ svg('logo-sm-gray', 'absolute inset-0 flex items-center justify-center w-full h-full p-10 lg:p-20') }}
             @endif
         </div>
         <div class="px-8 py-6 leading-normal">

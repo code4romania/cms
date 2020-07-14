@@ -1,7 +1,7 @@
 <nav class="lg:shadow-none" x-data="{ open: false }" :class="{ 'shadow-lg': open }">
     <div class="container flex flex-wrap items-center justify-between py-5">
         <a href="{{ route('front.pages.index') }}" class="inline-block">
-            @svg('logo', 'block h-10 w-auto')
+            {{ svg('logo', 'block h-10 w-auto') }}
         </a>
 
         <div class="flex justify-end col-span-1 lg:hidden">

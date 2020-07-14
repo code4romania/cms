@@ -7,6 +7,7 @@ namespace Code4Romania\Cms\Tests;
 use A17\Twill\RouteServiceProvider;
 use A17\Twill\TwillServiceProvider;
 use Artesaos\SEOTools\Providers\SEOToolsServiceProvider;
+use BladeUI\Icons\BladeIconsServiceProvider;
 use Code4Romania\Cms\CmsServiceProvider;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -33,6 +34,7 @@ class TestCase extends BaseTestCase
             TwillServiceProvider::class,
             NestedSetServiceProvider::class,
             SEOToolsServiceProvider::class,
+            BladeIconsServiceProvider::class,
         ];
     }
 
@@ -83,6 +85,28 @@ class TestCase extends BaseTestCase
     {
         putenv(LaravelLocalization::ENV_ROUTE_KEY);
         parent::tearDown();
+    }
+
+    /**
+     * Define environment setup.
+     *
+     * @param  \Illuminate\Foundation\Application  $app
+     *
+     * @return void
+     */
+    protected function resolveApplicationConfiguration($app)
+    {
+        parent::resolveApplicationConfiguration($app);
+
+        $app['config']->set('blade-icons', [
+            'sets' => [
+                'default' => [
+                    'path'   => '../../../../resources/assets/svg',
+                    'prefix' => 'icon',
+                    'class'  => 'fill-current',
+                ],
+            ],
+        ]);
     }
 
     protected function getAvailableLocales(): Collection

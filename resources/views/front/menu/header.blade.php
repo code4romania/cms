@@ -16,7 +16,7 @@
                 <div x-data="{ open: false }" x-on:click.away="open = false">
                     <button class="{{ $baseButton }} hidden lg:flex lg:items-center" x-on:click="open = !open">
                         <span>{{ $item['label'] }}</span>
-                        @svg('icons/dropdown', '-mr-1 ml-1 h-5 w-5')
+                        {{ svg('icons/dropdown', '-mr-1 ml-1 h-5 w-5') }}
                     </button>
 
                     <x-link

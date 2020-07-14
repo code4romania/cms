@@ -13,6 +13,8 @@ class CityLabControllerTest extends TestCase
     /** @test */
     public function it_fetches_the_city_labs_list()
     {
+        $this->withoutExceptionHandling();
+        // dd(config('blade-icons'));
         $cityLabs = factory(CityLab::class, 3)
             ->state('published')
             ->create();

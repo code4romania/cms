@@ -31,6 +31,7 @@ class CmsServiceProvider extends ServiceProvider
         'cms.php',
         'cms',
         'deploy.php',
+        'htmlmin.php',
         'seotools.php',
         'twill.php',
         'twill-navigation.php',

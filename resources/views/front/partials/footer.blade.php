@@ -6,7 +6,7 @@
             <h2>{{ __('footer.projectby') }}</h2>
 
             <a href="https://code4.ro/en/">
-                @svg('logo-gray', 'h-8 my-4')
+                {{ svg('logo-gray', 'h-8 my-4') }}
             </a>
 
             <p>{{ __('footer.tagline') }}</p>
@@ -17,7 +17,9 @@
                         href="{{ $url }}"
                         class="mx-2 text-gray-500 hover:text-primary-500 focus:text-primary-500 focus:outline-none"
                         target="_blank"
-                    >@svg("icons/{$network}", 'block h-5 fill-current')</a>
+                    >
+                        {{ svg("icons/$network", 'block h-5 fill-current') }}
+                    </a>
                 @endforeach
             </div>
         </div>
