@@ -9,12 +9,12 @@
 
 const path = require('path');
 const webpack = require('webpack');
-const { bundler, styles } = require('@ckeditor/ckeditor5-dev-utils');
+const { styles } = require('@ckeditor/ckeditor5-dev-utils');
 const CKEditorWebpackPlugin = require('@ckeditor/ckeditor5-dev-webpack-plugin');
 
 module.exports = (env, config) => ({
-    mode: 'production',
-    devtool: process.env.NODE_ENV === 'production' ? 'none' : 'source-map',
+    mode: 'development',
+    devtool: 'none',
     performance: { hints: false },
 
     entry: path.resolve(__dirname, 'src', 'ckeditor.js'),
