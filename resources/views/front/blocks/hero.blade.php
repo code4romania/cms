@@ -5,7 +5,7 @@
             <h2 class="mb-6">{{ $block->translatedInput('subtitle') }}</h2>
         </div>
 
-        <div class="my-10 leading-relaxed rich-content lg:text-xl">
+        <div class="my-10 leading-relaxed ck-content lg:text-xl">
             {!! $block->translatedInput('content') !!}
         </div>
 
