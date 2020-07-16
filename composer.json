@@ -16,10 +16,10 @@
     "prefer-stable": true,
     "require": {
         "php": "^7.4",
-        "area17/twill": "2.x-dev",
+        "area17/twill": "^2.1",
         "artesaos/seotools": "^0.18",
         "blade-ui-kit/blade-icons": "^0.4.0",
-        "htmlmin/htmlmin": "^7.0",
+        "htmlmin/htmlmin": "dev-master",
         "kalnoy/nestedset": "^5.0",
         "laravel/framework": "^7.13",
         "lasserafn/php-initial-avatar-generator": "^4.1",

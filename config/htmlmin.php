@@ -27,7 +27,7 @@ return [
     |
     */
 
-    'blade' => true,
+    'blade' => false,
 
     /*
     |--------------------------------------------------------------------------
@@ -57,6 +57,7 @@ return [
     */
 
     'ignore' => [
+        'resources/views/admin',
         'resources/views/emails',
         'resources/views/html',
         'resources/views/notifications',
@@ -65,6 +66,7 @@ return [
         'resources/views/vendor/html',
         'resources/views/vendor/notifications',
         'resources/views/vendor/markdown',
+        'resources/views/vendor/twill',
     ],
 
 ];
