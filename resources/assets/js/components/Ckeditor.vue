@@ -17,7 +17,7 @@
 <script>
     // eslint-disable
     import CKEditor from '@ckeditor/ckeditor5-vue';
-    import Editor from './ckeditor.js';
+    import Editor from './dist/ckeditor.js';
 
     import debounce from 'lodash/debounce';
 

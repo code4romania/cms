@@ -24,7 +24,7 @@ module.exports = (env, config) => ({
         library: 'Editor',
 
         path: path.resolve(__dirname, '..', 'js', 'components'),
-        filename: 'ckeditor.js',
+        filename: 'dist/ckeditor.js',
         libraryTarget: 'umd',
         libraryExport: 'default',
     },
