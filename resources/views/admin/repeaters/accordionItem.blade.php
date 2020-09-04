@@ -1,6 +1,6 @@
 @twillRepeaterTitle('Accordion Item')
 @twillRepeaterTrigger('Add accordion item')
-@twillRepeaterGroup('twill')
+@twillRepeaterGroup('app')
 
 @formField('input', [
     'name'           => 'header',

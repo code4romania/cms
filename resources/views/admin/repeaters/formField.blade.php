@@ -1,6 +1,6 @@
 @twillRepeaterTitle('Form field')
 @twillRepeaterTrigger('Add form field')
-@twillRepeaterGroup('twill')
+@twillRepeaterGroup('app')
 
 @formField('input', [
     'name'           => 'label',

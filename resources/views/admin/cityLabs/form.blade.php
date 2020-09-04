@@ -18,15 +18,15 @@
 
 @section('fieldsets')
     <a17-fieldset title="{{ __('admin.field.summary') }}" id="summary">
+        @formField('medias', [
+            'name'  => 'image',
+            'label' => __('admin.field.image'),
+        ])
+
         @include('admin.utils.ckeditor', [
             'name'       => 'description',
             'label'      => __('admin.field.description'),
             'translated' => true,
-        ])
-
-        @formField('medias', [
-            'name'  => 'image',
-            'label' => __('admin.field.image'),
         ])
     </a17-fieldset>
 

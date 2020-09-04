@@ -2,7 +2,7 @@
 @twillBlockIcon('info')
 @twillBlockGroup('menu')
 
-@include('admin.repeaters.subMenuItem')
+@include('admin.utils.menu-item-template')
 
 @formField('repeater', [
     'type' => 'subMenuItem',
