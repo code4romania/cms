@@ -105,6 +105,10 @@ class Menu extends BaseModel
                 ->withActiveTranslations()
                 ->find($target);
 
+            if (is_null($item)) {
+                return null;
+            }
+
             if (is_null($routeName)) {
                 $routeName = 'front.' . Str::plural($modelName) . '.show';
             }
