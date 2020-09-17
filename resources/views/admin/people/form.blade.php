@@ -11,18 +11,6 @@
 ])
 
 @section('contentFields')
-    @formField('input', [
-        'name'           => 'title',
-        'label'          => __('admin.field.title'),
-        'translated'     => true,
-    ])
-
-    @include('admin.utils.ckeditor', [
-        'name'       => 'description',
-        'label'      => __('admin.field.description'),
-        'translated' => true,
-    ])
-
     @foreach (['github', 'linkedin'] as $network)
         @formField('input', [
             'name'       => $network,
@@ -37,6 +25,18 @@
         'name'        => 'cityLab',
         'label'       => __('admin.cityLab'),
         'max'         => 1,
+    ])
+
+    @formField('input', [
+        'name'           => 'title',
+        'label'          => __('admin.field.title'),
+        'translated'     => true,
+    ])
+
+    @include('admin.utils.ckeditor', [
+        'name'       => 'description',
+        'label'      => __('admin.field.description'),
+        'translated' => true,
     ])
 @endsection
 
