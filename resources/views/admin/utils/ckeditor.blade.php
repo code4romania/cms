@@ -26,7 +26,7 @@
             @if ($default) initialValue: '{{ $default }}', hasDefaultStore: true, @endif
             inStore: 'value'
         }"
-    />
+    ></a17-locale>
 @else
     <a17-ckeditor
         label="{{ $label }}"
@@ -40,7 +40,7 @@
             :has-default-store="true"
         @endif
         in-store="value"
-    />
+    ></a17-ckeditor>
 @endif
 
 @unless($renderForBlocks || $renderForModal)
