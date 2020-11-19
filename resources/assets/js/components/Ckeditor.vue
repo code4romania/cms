@@ -10,6 +10,7 @@
         :name="name"
         :required="required"
     >
+        <input :name="name" type="hidden" v-model="value" />
         <ckeditor :editor="editor" :disabled="disabled" v-model="value" />
     </a17-inputframe>
 </template>
@@ -51,7 +52,7 @@
             };
         },
         watch: {
-            value: debounce(function() {
+            value: debounce(function () {
                 this.saveIntoStore();
             }, 300),
         },
