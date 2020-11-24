@@ -12,6 +12,7 @@
             <span class="inline font-semibold text-black">{{ __('form.field.email') }}</span>
 
             @include('front.form.input', [
+                'id'         => 'email',
                 'type'       => 'email',
                 'name'       => 'email',
                 'attributes' => 'required',
