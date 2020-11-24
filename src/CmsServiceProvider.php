@@ -27,6 +27,7 @@ class CmsServiceProvider extends ServiceProvider
 
     /** @var array */
     public static $configFiles = [
+        'analytics.php',
         'blade-icons.php',
         'cms.php',
         'cms',
