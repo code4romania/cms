@@ -61,7 +61,7 @@ return [
             'artisan:view:clear',
             'artisan:cache:clear',
             'artisan:config:cache',
-            'artisan:route:cache',
+            // 'artisan:route:cache', // this currently breaks page loading
             'artisan:migrate',
         ],
 
@@ -98,7 +98,7 @@ return [
         'php_fpm_service'     => 'php7.4-fpm',
         'writable_use_sudo'   => true,
         'writable_chmod_mode' => '0775',
-        'composer_options'    => '--verbose --prefer-dist --no-progress --no-interaction --no-dev --optimize-autoloader',
+        'composer_options'    => 'install --verbose --prefer-dist --no-progress --no-interaction --no-dev --optimize-autoloader',
     ],
 
     /*
