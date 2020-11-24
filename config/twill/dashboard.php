@@ -2,6 +2,11 @@
 
 return [
 
+    'analytics' => [
+        'enabled'                          => boolval(env('ANALYTICS_VIEW_ID')),
+        'service_account_credentials_json' => storage_path('app/analytics/service-account-credentials.json'),
+    ],
+
     'modules' => [
         /**
          * @param array $module Array containing the module config params.
