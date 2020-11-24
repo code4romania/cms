@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'default' => 'mixed',
+    'default' => 'basic',
 
     /*
     |--------------------------------------------------------------------------
@@ -29,22 +29,7 @@ return [
     */
 
     'strategies' => [
-        'mixed' => [
-            'hook:start',
-            'deploy:prepare',
-            'deploy:lock',
-            'deploy:release',
-            'deploy:update_code',
-            'deploy:shared',
-            'deploy:vendors',
-            'hook:build',
-            'deploy:writable',
-            'hook:ready',
-            'deploy:symlink',
-            'deploy:unlock',
-            'cleanup',
-            'hook:done',
-        ],
+        //
     ],
 
     /*
@@ -76,6 +61,7 @@ return [
             'artisan:view:clear',
             'artisan:cache:clear',
             'artisan:config:cache',
+            'artisan:route:cache',
             'artisan:migrate',
         ],
 
@@ -112,6 +98,7 @@ return [
         'php_fpm_service'     => 'php7.4-fpm',
         'writable_use_sudo'   => true,
         'writable_chmod_mode' => '0775',
+        'composer_options'    => '--verbose --prefer-dist --no-progress --no-interaction --no-dev --optimize-autoloader',
     ],
 
     /*
