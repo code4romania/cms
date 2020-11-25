@@ -70,7 +70,7 @@ class RouteServiceProvider extends ServiceProvider
 
         Route::group([
             'namespace' => $this->namespace . '\Front',
-            'domain' => config('app.url'),
+            // 'domain' => config('app.url'),
             'as' => 'front.',
             'prefix' => LaravelLocalization::setLocale(),
             'middleware' => [
