@@ -14,7 +14,7 @@
         <li class="relative py-2 lg:ml-6">
             @if ($item['children'])
                 <div x-data="{ open: false }" x-on:click.away="open = false">
-                    <button class="{{ $baseButton }} hidden lg:flex lg:items-center" x-on:click="open = !open">
+                    <button class="{{ $baseButton }} hidden font-light lg:flex lg:items-center" x-on:click="open = !open">
                         <span>{{ $item['label'] }}</span>
                         {{ svg('icons/dropdown', '-mr-1 ml-1 h-5 w-5') }}
                     </button>
@@ -60,6 +60,7 @@
         </li>
     @endforeach
 
+    {{--
     @foreach ($alternateUrls as $locale => $url)
         <li class="py-2 lg:ml-6">
             <a
@@ -70,4 +71,5 @@
             >{{ strtoupper($locale) }}</a>
         </li>
     @endforeach
+    --}}
 </ul>
