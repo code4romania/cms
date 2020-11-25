@@ -19,13 +19,11 @@
                         {{ svg('icons/dropdown', '-mr-1 ml-1 h-5 w-5') }}
                     </button>
 
-                    {{--
                     <x-link
                         class="{{ $baseButton }} flex lg:hidden"
                         href="{{ $item['url'] }}"
                         newtab="{{ $item['newtab'] }}"
                     >{{ $item['label'] }}</x-link>
-                    --}}
 
                     <div class="pl-5 lg:shadow-xs lg:pl-0 lg:absolute lg:right-0 lg:mt-2 lg:w-48 lg:origin-top-right lg:bg-white" :class="{ 'lg:hidden' : !open }" x-cloak>
                         <ul class="lg:shadow-lg">
