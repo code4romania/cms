@@ -31,6 +31,7 @@ return [
         'description'       => 'Description',
         'frontPage'         => 'Front page',
         'header'            => 'Header',
+        'html'              => 'HTML',
         'image'             => 'Image',
         'imagePosition'     => 'Image position',
         'images'            => 'Images',
