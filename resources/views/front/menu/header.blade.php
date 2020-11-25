@@ -25,7 +25,7 @@
                         newtab="{{ $item['newtab'] }}"
                     >{{ $item['label'] }}</x-link>
 
-                    <div class="pl-5 lg:shadow-xs lg:pl-0 lg:absolute lg:right-0 lg:mt-2 lg:w-48 lg:origin-top-right lg:bg-white" :class="{ 'lg:hidden' : !open }" cloak>
+                    <div class="pl-5 lg:shadow-xs lg:pl-0 lg:absolute lg:right-0 lg:mt-2 lg:w-48 lg:origin-top-right lg:bg-white" :class="{ 'lg:hidden' : !open }" x-cloak>
                         <ul class="lg:shadow-lg">
                             @if (!is_null($item['url']))
                                 <li>
