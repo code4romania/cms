@@ -6,7 +6,7 @@
 @endphp
 
 <ul id="header-menu" class="relative z-50 items-center justify-end w-full col-span-4 lg:w-auto lg:flex lg:col-span-9 lg:col-start-4"
-    :class="{ 'hidden' : !open }" x-on:click.away="open = false">
+    :class="{ 'hidden' : !open }" x-on:click.away="open = false" x-cloak>
 
     @foreach (Code4Romania\Cms\Models\Menu::getLocation('header') as $item)
         @continue(empty($item['label']))
@@ -25,7 +25,7 @@
                         newtab="{{ $item['newtab'] }}"
                     >{{ $item['label'] }}</x-link>
 
-                    <div class="pl-5 lg:shadow-xs lg:pl-0 lg:absolute lg:right-0 lg:mt-2 lg:w-48 lg:origin-top-right lg:bg-white" :class="{ 'lg:hidden' : !open }">
+                    <div class="pl-5 lg:shadow-xs lg:pl-0 lg:absolute lg:right-0 lg:mt-2 lg:w-48 lg:origin-top-right lg:bg-white" :class="{ 'lg:hidden' : !open }" cloak>
                         <ul class="lg:shadow-lg">
                             @if (!is_null($item['url']))
                                 <li>
