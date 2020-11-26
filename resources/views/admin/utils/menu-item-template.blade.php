@@ -1,3 +1,31 @@
+@formField('select', [
+    'name'     => 'style',
+    'label'    => __('admin.field.style'),
+    'required' => true,
+    'default'  => 'link',
+    'options'  => collect(['link', 'button'])
+        ->map(fn($type) => [ 'value' => $type, 'label' => __("admin.menu.style.{$type}") ])
+        ->toArray(),
+])
+
+@component('twill::partials.form.utils._connected_fields', [
+    'fieldName'       => 'style',
+    'fieldValues'     => 'button',
+    'renderForBlocks' => true,
+    'keepAlive'       => false,
+])
+
+    @formField('select', [
+        'name'       => 'color',
+        'label'      => __('admin.field.buttonColor'),
+        'required'   => true,
+        'default'    => 'primary',
+        'options'    => collect(config('cms.colors'))
+            ->map(fn($key) => [ 'value' => $key, 'label' => ucfirst($key) ])
+            ->toArray(),
+    ])
+@endcomponent
+
 @formField('input', [
     'name'           => 'label',
     'label'          => __('admin.field.label'),
@@ -8,7 +36,7 @@
     'name'       => 'type',
     'label'      => __('admin.field.type'),
     'required'   => true,
-    'default'    => false,
+    'default'    => 'page',
     'options'    => collect(config('cms.menu.itemTypes'))
         ->map(fn($type) => [ 'value' => $type, 'label' => __("admin.menu.type.{$type}") ])
         ->toArray()

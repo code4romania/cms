@@ -50,6 +50,7 @@ return [
         'showHeader'        => 'Show header',
         'siteDescription'   => 'Site description',
         'siteTitle'         => 'Site title',
+        'style'             => 'Style',
         'subtitle'          => 'Subtitle',
         'summary'           => 'Summary',
         'text'              => 'Text',
@@ -94,6 +95,10 @@ return [
             'category' => 'Category',
             'blog'     => 'Blog',
         ],
+        'style' => [
+            'link'   => 'Link',
+            'button' => 'Button',
+        ]
     ],
 
 

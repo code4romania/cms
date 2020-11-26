@@ -82,6 +82,8 @@ class MenuTest extends TestCase
                 'label'     => $externalMenuItem->translatedInput('label'),
                 'newtab'    => false,
                 'url'       => $externalMenuItem->input('target'),
+                'style'     => null,
+                'color'     => null,
                 'children'  => [
                     [
                         'id'        => $subMenuItem->id,
@@ -90,6 +92,8 @@ class MenuTest extends TestCase
                         'label'     => $subMenuItem->translatedInput('label'),
                         'newtab'    => true,
                         'url'       => $subMenuItem->input('target'),
+                        'style'     => null,
+                        'color'     => null,
                         'children'  => [],
                     ],
                 ],
@@ -101,6 +105,8 @@ class MenuTest extends TestCase
                 'label'     => $pageMenuItem->translatedInput('label'),
                 'newtab'    => false,
                 'url'       => route('front.pages.show', $page->slug),
+                'style'     => null,
+                'color'     => null,
                 'children'  => [],
             ],
             [
@@ -110,6 +116,8 @@ class MenuTest extends TestCase
                 'label'     => $blogMenuItem->translatedInput('label'),
                 'newtab'    => false,
                 'url'       => route('front.posts.index'),
+                'style'     => null,
+                'color'     => null,
                 'children'  => [
                     [
                         'id'        => $categoryMenuItem->id,
@@ -118,6 +126,8 @@ class MenuTest extends TestCase
                         'label'     => $categoryMenuItem->translatedInput('label'),
                         'newtab'    => false,
                         'url'       => route('front.categories.show', $category->slug),
+                        'style'     => null,
+                        'color'     => null,
                         'children'  => [],
                     ],
                 ],
@@ -129,6 +139,8 @@ class MenuTest extends TestCase
                 'label'     => $invalidMenuItem->translatedInput('label'),
                 'newtab'    => false,
                 'url'       => null,
+                'style'     => null,
+                'color'     => null,
                 'children'  => [],
             ],
         ];

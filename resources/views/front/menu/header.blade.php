@@ -50,6 +50,11 @@
                         </ul>
                     </div>
                 </div>
+            @elseif ($item['style'] === 'button')
+                <x-button
+                    :href="$item['url']"
+                    :color="$item['color']"
+                >{{ $item['label'] }}</x-button>
             @else
                 <x-link
                     class="{{ $baseButton }}"

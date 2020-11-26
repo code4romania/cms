@@ -57,6 +57,8 @@ class Menu extends BaseModel
                 'parent_id' => $item->parent_id,
                 'type'      => $item->input('type'),
                 'label'     => $item->translatedInput('label'),
+                'style'     => $item->input('style'),
+                'color'     => $item->input('color'),
                 'url'       => self::getItemUrl($item),
                 'newtab'    => $item->checkbox('newtab'),
                 'children'  => [],
@@ -98,8 +100,12 @@ class Menu extends BaseModel
         }
     }
 
-    public static function getModelUrl(string $modelName, $target, ?string $routeName = null): ?string
+    public static function getModelUrl(?string $modelName, $target, ?string $routeName = null): ?string
     {
+        if (!$modelName) {
+            return null;
+        }
+
         try {
             $item = app('Code4Romania\Cms\Models\\' . ucfirst($modelName))
                 ->withActiveTranslations()
