@@ -60,7 +60,6 @@
         </li>
     @endforeach
 
-    {{--
     @foreach ($alternateUrls as $locale => $url)
         <li class="py-2 lg:ml-6">
             <a
@@ -71,5 +70,4 @@
             >{{ strtoupper($locale) }}</a>
         </li>
     @endforeach
-    --}}
 </ul>
