@@ -14,7 +14,7 @@ class CreatePartnersTables extends Migration
             createDefaultTableFields($table);
 
             $table->string('name', 200)->nullable();
-            $table->string('website', 100)->nullable();
+            $table->string('website', 500)->nullable();
 
             $table->integer('position')->unsigned()->nullable();
         });
