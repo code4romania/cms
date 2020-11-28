@@ -13,7 +13,7 @@
     'label'      => __('admin.field.columns'),
     'default'    => 4,
     'unpack'     => true,
-    'options'    => collect([2, 3, 4])->map(function($i) {
+    'options'    => collect(range(2, 6))->map(function($i) {
         return [
             'value' => $i,
             'label' => $i,

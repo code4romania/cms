@@ -12,6 +12,14 @@
             $columns = 'sm:grid-cols-2 lg:grid-cols-4';
             break;
 
+        case 5:
+            $columns = 'sm:grid-cols-2 lg:grid-cols-5';
+            break;
+
+        case 6:
+            $columns = 'sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6';
+            break;
+
         default:
             $columns = null;
             break;
