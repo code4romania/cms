@@ -6,7 +6,7 @@
                     :lqip="$item->lowQualityImagePlaceholder('image')"
                     :src="$item->image('image')"
                     :alt="$item->imageAltText('image')"
-                    class="absolute inset-0 flex items-center justify-center w-full"
+                    class="absolute inset-0 flex items-center justify-center w-full overflow-hidden"
                 />
             @else
                 {{ svg('logo-sm-gray', 'absolute inset-0 flex items-center justify-center w-full h-full p-10 lg:p-20') }}
