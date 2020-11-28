@@ -61,6 +61,11 @@ class PersonController extends ModuleController
         'cityLab' => 'cityLab',
     ];
 
+    /** @var array<string> */
+    protected $defaultFilters = [
+        'search' => '%name',
+    ];
+
     /** @param Request $request */
     protected function indexData($request): array
     {
