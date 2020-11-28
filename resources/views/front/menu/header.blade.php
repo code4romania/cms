@@ -57,7 +57,7 @@
                 >{{ $item['label'] }}</x-button>
             @else
                 <x-link
-                    class="{{ $baseButton }}"
+                    class="{{ $baseButton }} flex"
                     href="{{ $item['url'] }}"
                     newtab="{{ $item['newtab'] }}"
                 >{{ $item['label'] }}</x-link>
@@ -65,14 +65,44 @@
         </li>
     @endforeach
 
-    @foreach ($alternateUrls as $locale => $url)
-        <li class="py-2 lg:ml-6">
-            <a
-                class="{{ $baseButton }} flex"
-                title="{{ config("translatable.languages.$locale") }}"
-                hreflang="{{ $locale }}"
-                href="{{ $url }}"
-            >{{ strtoupper($locale) }}</a>
+
+    @if ($alternateUrls)
+        <li class="relative py-2 lg:ml-6">
+            @if (count($alternateUrls) === 1)
+                @foreach ($alternateUrls as $locale => $url)
+                    <a
+                        class="inline-flex p-2 rounded hover:bg-gray-100 focus:bg-gray-200 focus:outline-none"
+                        title="{{ config("translatable.languages.$locale") }}"
+                        hreflang="{{ $locale }}"
+                        href="{{ $url }}"
+                    >{{ strtoupper($locale) }}</a>
+                @endforeach
+            @else
+                <div x-data="{ open: false }" x-on:click.away="open = false">
+                    <button class="{{ $baseButton }} hidden font-light lg:flex lg:items-center" x-on:click="open = !open">
+                        {{ svg('icons/global', 'w-5 h-5 text-gray-900') }}
+                        {{ svg('icons/dropdown', '-mr-1 ml-1 h-5 w-5') }}
+                    </button>
+
+                    <div class="flex lg:hidden">
+                        {{ svg('icons/global', 'w-5 h-5 text-gray-900') }}
+                    </div>
+
+                    <div class="pl-5 lg:shadow-xs lg:pl-0 lg:absolute lg:right-0 lg:mt-2 lg:w-48 lg:origin-top-right lg:bg-white" :class="{ 'lg:hidden' : !open }" x-cloak>
+                        <ul class="lg:shadow-lg">
+                            @foreach ($alternateUrls as $locale => $url)
+                                <li>
+                                    <a
+                                        class="{{ $baseButton }} flex"
+                                        hreflang="{{ $locale }}"
+                                        href="{{ $url }}"
+                                    >{{ config("translatable.languages.$locale") }}</a>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+            @endif
         </li>
-    @endforeach
+    @endif
 </ul>
