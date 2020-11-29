@@ -47,6 +47,7 @@ class RouteServiceProvider extends ServiceProvider
         }
 
         Route::group([
+            'namespace' => $this->namespace . '\Admin',
             'domain' => config('twill.admin_app_url'),
             'as' => 'admin.',
             'middleware' => [
