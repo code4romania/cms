@@ -19,6 +19,9 @@ class Post extends BaseModel
 {
     use HasBlocks, HasTranslation, HasSlug, HasMedias, HasRevisions;
 
+    /** @var int */
+    protected $perPage = 10;
+
     /** @var array<string> */
     protected $with = [
         'categories',
