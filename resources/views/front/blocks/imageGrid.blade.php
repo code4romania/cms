@@ -28,8 +28,8 @@
         @foreach ($block->imageObjects('image') as $media)
         <x-figure
             :src="$block->image('image', 'default', [], false, false, $media)"
-            :alt="$block->imageAltText('image')"
-            :caption="$block->imageCaption('image')"
+            :alt="$block->imageAltText('image', $media)"
+            :caption="$block->imageCaption('image', $media)"
         />
         @endforeach
     </div>
