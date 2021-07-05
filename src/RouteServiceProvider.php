@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace Code4Romania\Cms;
 
-use Code4Romania\Cms\Http\Middleware\RedirectTrailingSlash;
+use Code4Romania\Cms\Http\Middleware\Authenticate;
 use Code4Romania\Cms\Http\Middleware\DefaultSeoConfig;
+use Code4Romania\Cms\Http\Middleware\RedirectTrailingSlash;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -29,6 +30,7 @@ class RouteServiceProvider extends ServiceProvider
     {
         Route::aliasMiddleware('redirectTrailingSlash', RedirectTrailingSlash::class);
         Route::aliasMiddleware('defaultSeoConfig', DefaultSeoConfig::class);
+        Route::aliasMiddleware('twill_auth', Authenticate::class);
     }
 
     public function map(): void

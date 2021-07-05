@@ -59,15 +59,13 @@ class PageControllerTest extends TestCase
         $page = factory(Page::class)->create();
 
         $this->actingAs($admin, 'twill_users')
-            ->visit(route('front.pages.preview', ['slug' => $page->slug]))
+            ->get(route('front.pages.preview', ['slug' => $page->slug]))
             ->assertResponseOk();
     }
 
     /** @test */
     public function it_returns_an_error_for_page_previews_for_guests()
     {
-        $this->withoutExceptionHandling();
-
         $page = factory(Page::class)->create();
 
         $this->get(route('front.pages.preview', ['slug' => $page->slug]))
