@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Code4Romania\Cms\Traits;
 
+use Artesaos\SEOTools\Facades\OpenGraph;
 use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Support\Str;
 
@@ -70,13 +71,13 @@ trait WithSeoTags
             return;
         }
 
-        if (!empty($routeArg) || !empty($routeArgValue)) {
-            SEOTools::setCanonical(route($routeName, [
-                $routeArg => $routeArgValue,
-            ]));
-        } else {
-            SEOTools::setCanonical(route($routeName));
-        }
+        $url = !empty($routeArg) && !empty($routeArgValue)
+            ? route($routeName, [ $routeArg => $routeArgValue ])
+            : route($routeName);
+
+        SEOTools::setCanonical($url);
+
+        OpenGraph::setUrl($url);
     }
 
     public function setImage(?string $image): void
