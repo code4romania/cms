@@ -16,21 +16,20 @@
     "prefer-stable": true,
     "require": {
         "php": "^7.4",
-        "area17/twill": "^2.1",
-        "artesaos/seotools": "^0.19",
+        "area17/twill": "^2.4",
+        "artesaos/seotools": "^0.20.1",
         "blade-ui-kit/blade-icons": "^0.5.1",
         "embed/embed": "^4.3",
         "htmlmin/htmlmin": "v8.0",
-        "kalnoy/nestedset": "^5.0",
+        "kalnoy/nestedset": "^6.0",
         "laravel/framework": "^7.27",
         "lasserafn/php-initial-avatar-generator": "^4.1",
         "lorisleiva/laravel-deployer": "^0.3",
         "mcamara/laravel-localization": "^1.5",
-        "nztim/mailchimp": "^3.11"
+        "nyholm/psr7": "^1.4",
+        "nztim/mailchimp": "^4.3"
     },
     "require-dev": {
-        "nunomaduro/larastan": "^0.6",
-        "nunomaduro/phpinsights": "^1.14",
         "orchestra/testbench-browser-kit": "^5.0",
         "phpunit/phpunit": "^9.0"
     },
