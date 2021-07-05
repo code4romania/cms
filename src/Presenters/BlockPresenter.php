@@ -8,8 +8,9 @@ use Code4Romania\Cms\Models\CityLab;
 use Code4Romania\Cms\Models\Form;
 use Code4Romania\Cms\Models\Partner;
 use Code4Romania\Cms\Models\Person;
-use Embed\Adapters\Adapter;
-use Leewillis77\CachedEmbed\CachedEmbed;
+use Embed\Embed;
+use Embed\Extractor;
+use Illuminate\Support\Facades\Cache;
 
 /**
  * Presenter for frontend block components
@@ -35,14 +36,25 @@ class BlockPresenter extends Presenter
     /**
      * Block: embed
      */
-    public function embed(): ?Adapter
+    public function embed(): ?Extractor
     {
+        $url = $this->model->input('url');
+
+        if (!$url) {
+            return null;
+        }
+
         try {
-            return CachedEmbed::create(
-                $this->model->input('url'),
-                config('cms.embeds.args'),
-                config('cms.embeds.expiry')
-            );
+            return Cache::remember('embed-' . $url, config('cms.embeds.expiry'), function () use ($url) {
+                // Grab the embed data.
+                $data = (new Embed)->get($url);
+
+                // Pre-load image attribute in the object to save work later.
+                // Otherwise we have to redo the image extraction every time, rather than just once before caching.
+                $data->image;
+
+                return $data;
+            });
         } catch (\Exception $exception) {
             return null;
         }
@@ -53,7 +65,7 @@ class BlockPresenter extends Presenter
      */
     public function embedCode(): ?string
     {
-        return $this->embed()->code ?? null;
+        return $this->embed()->code->html ?? null;
     }
 
     /**
@@ -61,7 +73,7 @@ class BlockPresenter extends Presenter
      */
     public function embedAspectRatio(): ?string
     {
-        $embed = $this->embed();
+        $embed = $this->embed()->code ?? null;
         $closest = $ratio = null;
 
         if (is_null($embed) || is_null($embed->width) || is_null($embed->height)) {

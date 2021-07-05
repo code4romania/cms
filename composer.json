@@ -19,11 +19,11 @@
         "area17/twill": "^2.1",
         "artesaos/seotools": "^0.19",
         "blade-ui-kit/blade-icons": "^0.5.1",
+        "embed/embed": "^4.3",
         "htmlmin/htmlmin": "v8.0",
         "kalnoy/nestedset": "^5.0",
         "laravel/framework": "^7.27",
         "lasserafn/php-initial-avatar-generator": "^4.1",
-        "leewillis77/cached-embed": "^0.8",
         "lorisleiva/laravel-deployer": "^0.3",
         "mcamara/laravel-localization": "^1.5",
         "nztim/mailchimp": "^3.11"
