@@ -47,6 +47,7 @@ class PostController extends Controller
             'routeName'   => 'front.posts.show',
             'routeArg'    => 'slug',
             'slug'        => $slug,
+            'image'       => $item->image('image', 'default', [], true),
         ]);
 
         return view('front.posts.show')->with([

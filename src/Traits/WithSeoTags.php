@@ -22,6 +22,7 @@ trait WithSeoTags
             'description' => '',
             'routeName'   => '',
             'routeArg'    => '',
+            'image'       => '',
         ], $params);
 
         $this->currentPage = $params['page'] ?? 1;
@@ -31,6 +32,8 @@ trait WithSeoTags
         $this->setDescription($params['description']);
 
         $this->setCanonical($params['routeName'], $params['routeArg'], $params[$params['routeArg']] ?? '');
+
+        $this->setImage($params['image']);
     }
 
     public function setTitle(?string $title = ''): void
@@ -74,5 +77,14 @@ trait WithSeoTags
         } else {
             SEOTools::setCanonical(route($routeName));
         }
+    }
+
+    public function setImage(?string $image): void
+    {
+        if (!$image) {
+            return;
+        }
+
+        SEOTools::addImages($image);
     }
 }
