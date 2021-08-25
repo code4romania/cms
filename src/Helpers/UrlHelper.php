@@ -14,7 +14,7 @@ class UrlHelper
     {
         $parts = parse_url($url);
 
-        if (!isset($parts['scheme'])) {
+        if (!isset($parts['scheme']) || !isset($parts['host'])) {
             return false;
         }
 

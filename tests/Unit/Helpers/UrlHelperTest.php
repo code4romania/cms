@@ -20,6 +20,7 @@ class UrlHelperTest extends TestCase
 
         $this->assertFalse(UrlHelper::isExternal(url('/absolute')));
         $this->assertFalse(UrlHelper::isExternal('/relative'));
+        $this->assertFalse(UrlHelper::isExternal('mailto:test@example.com'));
     }
 
     /** @test */
