@@ -1,4 +1,5 @@
 {
+    "abandoned": true,
     "name": "code4romania/cms",
     "description": "Preconfigured Twill CMS with a modular layout",
     "homepage": "https://github.com/code4romania/cms",
